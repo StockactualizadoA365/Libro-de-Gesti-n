@@ -19,7 +19,6 @@
       
       <!-- LOGO Y TÍTULO -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
-        <!-- Logo SVG Entel -->
         <div class="bg-[#002EFF] p-2 rounded-xl flex items-center justify-center shadow-md">
           <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
@@ -48,17 +47,25 @@
           <i data-lucide="smartphone" class="w-4 h-4"></i>
           <span>Planes Móviles</span>
         </button>
+        <button onclick="switchTab('herramientas')" id="tab-herramientas" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="wrench" class="w-4 h-4"></i>
+          <span>Herramientas</span>
+        </button>
+        <button onclick="switchTab('deudas')" id="tab-deudas" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+          <span>Validación Deudas</span>
+        </button>
+        <button onclick="switchTab('delivery')" id="tab-delivery" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="truck" class="w-4 h-4"></i>
+          <span>Delivery & Tiendas</span>
+        </button>
         <button onclick="switchTab('fibra')" id="tab-fibra" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
           <i data-lucide="wifi" class="w-4 h-4"></i>
-          <span>Fibra & Hogar</span>
+          <span>Fibra Hogar</span>
         </button>
-        <button onclick="switchTab('scripts')" id="tab-scripts" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
-          <i data-lucide="shield-check" class="w-4 h-4"></i>
-          <span>Speech & Biometría</span>
-        </button>
-        <button onclick="switchTab('comparativo')" id="tab-comparativo" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
-          <i data-lucide="scale" class="w-4 h-4"></i>
-          <span>Competencia</span>
+        <button onclick="switchTab('procesos')" id="tab-procesos" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="info" class="w-4 h-4"></i>
+          <span>Procesos</span>
         </button>
       </nav>
     </div>
@@ -75,7 +82,7 @@
         <div class="space-y-3 max-w-2xl text-center md:text-left">
           <span class="bg-white/20 text-white font-bold text-xs px-3 py-1 rounded-full border border-white/20">Portal Comercial de Ejecutivos</span>
           <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Bienvenido al Libro de Gestión Móvil Entel</h2>
-          <p class="text-blue-100 text-xs md:text-sm leading-relaxed">Accede rápidamente a las herramientas de venta, simulador de facturación proporcional, catálogo de ofertas móviles/hogar y argumentarios comerciales.</p>
+          <p class="text-blue-100 text-xs md:text-sm leading-relaxed">Accede rápidamente a las herramientas de venta, simulador de facturación proporcional, catálogo de ofertas móviles/hogar y procesos de atención.</p>
         </div>
         <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 text-center min-w-[200px]">
           <span class="text-xs text-blue-200 block uppercase font-bold">Versión del Sistema</span>
@@ -84,393 +91,83 @@
         </div>
       </div>
 
-      <!-- RECUADROS DIRECTORIOS (TARJETAS PRINCIPALES) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- RECUADROS DIRECTORIOS GRANDES -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         <!-- Recuadro 1: Calculadora Proporcional -->
-        <div onclick="switchTab('calculadora')" class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-6 -mt-6 transition-all group-hover:bg-[#002EFF]/10"></div>
-          <div class="p-3 bg-blue-600 text-white rounded-xl w-fit mb-4 shadow-md group-hover:bg-[#002EFF]">
-            <i data-lucide="calculator" class="w-6 h-6"></i>
-          </div>
-          <h3 class="font-bold text-slate-900 text-base group-hover:text-[#002EFF] transition-colors">Calculadora Proporcional</h3>
-          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Calcula al instante el proporcional del primer ciclo de facturación y genera la explicación para el cliente.</p>
-          <div class="mt-4 flex items-center text-xs font-bold text-[#002EFF]">
-            <span>Ingresar a Calculadora</span>
-            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-          </div>
-        </div>
-
-        <!-- Recuadro 2: Planes Móviles -->
-        <div onclick="switchTab('planes')" class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-6 -mt-6 transition-all group-hover:bg-[#002EFF]/10"></div>
-          <div class="p-3 bg-blue-600 text-white rounded-xl w-fit mb-4 shadow-md group-hover:bg-[#002EFF]">
-            <i data-lucide="smartphone" class="w-6 h-6"></i>
-          </div>
-          <h3 class="font-bold text-slate-900 text-base group-hover:text-[#002EFF] transition-colors">Planes Móviles & Roaming</h3>
-          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Consulta la oferta vigente de portabilidad, líneas nuevas, segundas líneas y tarifa especial para adulto mayor.</p>
-          <div class="mt-4 flex items-center text-xs font-bold text-[#002EFF]">
-            <span>Ver Catálogo Móvil</span>
-            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-          </div>
-        </div>
-
-        <!-- Recuadro 3: Fibra Óptica -->
-        <div onclick="switchTab('fibra')" class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -mr-6 -mt-6 transition-all group-hover:bg-emerald-500/10"></div>
-          <div class="p-3 bg-emerald-600 text-white rounded-xl w-fit mb-4 shadow-md">
-            <i data-lucide="wifi" class="w-6 h-6"></i>
-          </div>
-          <h3 class="font-bold text-slate-900 text-base group-hover:text-emerald-600 transition-colors">Fibra Óptica & Hogar</h3>
-          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Tabla comparativa de velocidades de fibra, costo fijo masivo y ofertas con descuento del mes 1 al 12.</p>
-          <div class="mt-4 flex items-center text-xs font-bold text-emerald-600">
-            <span>Ver Oferta Hogar</span>
-            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-          </div>
-        </div>
-
-        <!-- Recuadro 4: Speech & Biometría -->
-        <div onclick="switchTab('scripts')" class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-24 h-24 bg-amber-50 rounded-bl-full -mr-6 -mt-6 transition-all group-hover:bg-amber-500/10"></div>
-          <div class="p-3 bg-amber-600 text-white rounded-xl w-fit mb-4 shadow-md">
-            <i data-lucide="shield-check" class="w-6 h-6"></i>
-          </div>
-          <h3 class="font-bold text-slate-900 text-base group-hover:text-amber-600 transition-colors">Speech & Biometría Facial</h3>
-          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Lectura obligatoria de validación biométrica facial para resguardo de seguridad en cierres de venta.</p>
-          <div class="mt-4 flex items-center text-xs font-bold text-amber-600">
-            <span>Abrir Argumentario</span>
-            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-          </div>
-        </div>
-
-        <!-- Recuadro 5: Competencia -->
-        <div onclick="switchTab('comparativo')" class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1 relative overflow-hidden md:col-span-2">
-          <div class="absolute top-0 right-0 w-24 h-24 bg-slate-100 rounded-bl-full -mr-6 -mt-6"></div>
-          <div class="p-3 bg-slate-800 text-white rounded-xl w-fit mb-4 shadow-md">
-            <i data-lucide="scale" class="w-6 h-6"></i>
-          </div>
-          <h3 class="font-bold text-slate-900 text-base group-hover:text-slate-800 transition-colors">Matriz de Objetaciones & Competencia</h3>
-          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Comparativa detallada de atributos técnicos frente a operadores (Movistar, WOM, Claro) para rebatir objeciones.</p>
-          <div class="mt-4 flex items-center text-xs font-bold text-slate-800">
-            <span>Ver Matriz Comparativa</span>
-            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECCIÓN: CALCULADORA PROPORCIONAL -->
-    <section id="sec-calculadora" class="tab-content space-y-4">
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-2xl mx-auto space-y-4">
-        <div class="flex items-center space-x-2.5 border-b border-slate-100 pb-3">
-          <div class="p-2 bg-blue-50 text-[#002EFF] rounded-lg">
-            <i data-lucide="calculator" class="w-5 h-5"></i>
-          </div>
+        <div onclick="switchTab('calculadora')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-[#002EFF]/10"></div>
           <div>
-            <h2 class="text-base font-bold text-slate-900">Calculadora de Cobro Proporcional</h2>
-            <p class="text-xs text-slate-500">Estimación rápida para el primer cobro del cliente en su primera boleta</p>
+            <div class="p-4 bg-[#002EFF] text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="calculator" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-[#002EFF] transition-colors">🧮 Calculadora Proporcional</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Calcula de forma exacta el monto proporcional del primer ciclo de facturación y genera la explicación lista para enviar al cliente.</p>
+          </div>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-[#002EFF] tracking-wide uppercase">
+            <span>Acceder a Calculadora</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <!-- Recuadro 2: Planes Móviles & Contratos -->
+        <div onclick="switchTab('planes')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-[#002EFF]/10"></div>
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Cargo Fijo Mensual ($)</label>
-            <input type="number" id="calcBase" value="13990" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+            <div class="p-4 bg-blue-600 text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="smartphone" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-[#002EFF] transition-colors">📱 Planes Móviles & Contratos</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Consulta la oferta comercial de portabilidad, líneas nuevas, segundas líneas, adulto mayor y cláusulas contractuales.</p>
           </div>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-[#002EFF] tracking-wide uppercase">
+            <span>Ver Planes y Contratos</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- Recuadro 3: Herramientas y aplicaciones -->
+        <div onclick="switchTab('herramientas')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-indigo-500/10"></div>
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Día de Activación del Servicio</label>
-            <input type="number" id="calcDia" value="12" min="1" max="31" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-center text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+            <div class="p-4 bg-indigo-600 text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="wrench" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-indigo-600 transition-colors">🛠️ Herramientas y aplicaciones</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Acceso a plataformas corporativas, validadores externos, cotizadores de equipos y aplicativos de gestión diaria.</p>
+          </div>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-indigo-600 tracking-wide uppercase">
+            <span>Abrir Herramientas</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <!-- Recuadro 4: Validación y acreditación de deudas -->
+        <div onclick="switchTab('deudas')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-amber-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-amber-500/10"></div>
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Días del Mes de Facturación</label>
-            <select id="calcDiasMes" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
-              <option value="30">30 Días</option>
-              <option value="31">31 Días</option>
-              <option value="28">28 Días</option>
-            </select>
+            <div class="p-4 bg-amber-600 text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="shield-check" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-amber-600 transition-colors">🛡️ Validación y acreditación de deudas</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Procedimientos para verificación de evaluación crediticia, evaluación de morosidad y acreditación de pagos.</p>
           </div>
-          <div class="flex items-end">
-            <button onclick="calcularProporcional()" class="w-full bg-[#002EFF] hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition-all shadow-sm">
-              Calcular Proporcional
-            </button>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-amber-600 tracking-wide uppercase">
+            <span>Consultar Deudas</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
           </div>
         </div>
 
-        <div id="calcResult" class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-xs mt-4">
-          <div class="flex justify-between items-center border-b border-slate-200 pb-2">
-            <span class="text-slate-500">Días Proporcionales:</span>
-            <span id="resDias" class="font-bold text-slate-900">19 días</span>
-          </div>
-          <div class="flex justify-between items-center border-b border-slate-200 pb-2">
-            <span class="text-slate-500">Valor Proporcional:</span>
-            <span id="resProp" class="font-bold text-slate-900">$8.860</span>
-          </div>
-          <div class="flex justify-between items-center text-sm pt-1">
-            <span class="font-bold text-slate-900">Total Estimado 1ª Boleta:</span>
-            <span id="resTotal" class="font-extrabold text-[#002EFF] text-base">$22.850</span>
-          </div>
-          <button onclick="copiarCalculo()" class="w-full mt-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2 rounded-lg transition-all flex items-center justify-center gap-1.5">
-            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Explicación para Cliente
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECCIÓN: PLANES MÓVILES -->
-    <section id="sec-planes" class="tab-content space-y-4">
-      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div>
-          <h2 class="text-base font-bold text-slate-900">Planes Móviles Vigentes</h2>
-          <p class="text-xs text-slate-500">Oferta comercial para portabilidad, líneas nuevas y perfilados</p>
-        </div>
-        <div class="flex items-center gap-2 w-full md:w-auto">
-          <select id="filterPerfil" onchange="filterPlanes()" class="text-xs bg-slate-50 border border-slate-200 rounded-lg p-2.5 font-medium text-slate-700">
-            <option value="todos">Todos los Perfiles</option>
-            <option value="migracion">Portabilidad / Migración</option>
-            <option value="nuevas">Líneas Nuevas</option>
-            <option value="adulto">Adulto Mayor</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="containerPlanes">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 plan-card" data-perfil="migracion">
-          <div class="flex justify-between items-start">
-            <span class="bg-blue-50 text-[#002EFF] font-bold text-[10px] px-2.5 py-1 rounded-md border border-blue-100">PORTABILIDAD</span>
-            <span class="text-xs font-extrabold text-slate-900">$13.990 <span class="text-[10px] text-slate-400 font-normal">/mes</span></span>
-          </div>
+        <!-- Recuadro 5: Delivery y tiendas -->
+        <div onclick="switchTab('delivery')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-purple-500/10"></div>
           <div>
-            <h3 class="font-bold text-slate-900 text-sm">Plan 400 Gigas</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Minutos libres + Redes Sociales</p>
+            <div class="p-4 bg-purple-600 text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="truck" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-purple-600 transition-colors">⚖️ Delivery y tiendas</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Coberturas de despachos a domicilio, tiempos de entrega, canal presencial y directorio de sucursales a nivel nacional.</p>
           </div>
-          <div class="pt-2 border-t border-slate-100 text-xs space-y-1.5 text-slate-600">
-            <p class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> 400 GB de alta velocidad</p>
-            <p class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Roaming básico incluido</p>
-            <p class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Requiere Biometría Facial</p>
-          </div>
-          <button onclick="copyText('Plan Portabilidad 400 Gigas $13.990 con Minutos Libres')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs py-2 rounded-xl transition-all flex items-center justify-center gap-1.5 mt-2">
-            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Oferta
-          </button>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 plan-card" data-perfil="migracion">
-          <div class="flex justify-between items-start">
-            <span class="bg-blue-50 text-[#002EFF] font-bold text-[10px] px-2.5 py-1 rounded-md border border-blue-100">PORTABILIDAD</span>
-            <span class="text-xs font-extrabold text-slate-900">$19.990 <span class="text-[10px] text-slate-400 font-normal">/mes</span></span>
-          </div>
-          <div>
-            <h3 class="font-bold text-slate-900 text-sm">Plan 1000 Gigas</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Ultra alta capacidad de navegación</p>
-          </div>
-          <div class="pt-2 border-t border-slate-100 text-xs space-y-1.5 text-slate-600">
-            <p class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> 1000 GB en red 5G</p>
-            <p class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Minutos Libres ilimitados</p>
-            <p class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Hotspot habilitado</p>
-          </div>
-          <button onclick="copyText('Plan Portabilidad 1000 Gigas $19.990')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs py-2 rounded-xl transition-all flex items-center justify-center gap-1.5 mt-2">
-            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Oferta
-          </button>
-        </div>
-
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 plan-card" data-perfil="adulto">
-          <div class="flex justify-between items-start">
-            <span class="bg-amber-50 text-amber-800 font-bold text-[10px] px-2.5 py-1 rounded-md border border-amber-200">ADULTO MAYOR</span>
-            <span class="text-xs font-extrabold text-slate-900">$4.990 <span class="text-[10px] text-slate-400 font-normal">/mes</span></span>
-          </div>
-          <div>
-            <h3 class="font-bold text-slate-900 text-sm">Plan Senior Especial</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Comunicación directa y sencilla</p>
-          </div>
-          <div class="pt-2 border-t border-slate-100 text-xs space-y-1.5 text-slate-600">
-            <p class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Minutos Libres a todo destino</p>
-            <p class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> WhatsApp Gratis</p>
-            <p class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> Tarifa fija sin sorpresas</p>
-          </div>
-          <button onclick="copyText('Plan Adulto Mayor $4.990 con Minutos Libres y WhatsApp')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs py-2 rounded-xl transition-all flex items-center justify-center gap-1.5 mt-2">
-            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Oferta
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECCIÓN: FIBRA HOGAR -->
-    <section id="sec-fibra" class="tab-content space-y-4">
-      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-        <h2 class="text-base font-bold text-slate-900">Planes Fibra Óptica & Packs TV Hogar</h2>
-        <p class="text-xs text-slate-500">Descuentos de campaña válidos por 12 meses</p>
-      </div>
-
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
-        <table class="w-full text-left text-xs">
-          <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase">
-            <tr>
-              <th class="p-3">Plan / Producto</th>
-              <th class="p-3 text-center">Velocidad</th>
-              <th class="p-3 text-center">Equipos / TV</th>
-              <th class="p-3 text-center">Precio Lista</th>
-              <th class="p-3 text-center">Oferta Promo (Mes 1-12)</th>
-              <th class="p-3 text-center">Acción</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
-            <tr class="hover:bg-slate-50">
-              <td class="p-3 font-bold text-slate-900">Internet Fibra 800 Megas</td>
-              <td class="p-3 text-center">800 Mbps Simétricos</td>
-              <td class="p-3 text-center">Wi-Fi Dual Band</td>
-              <td class="p-3 text-center text-slate-400 line-through">$21.990</td>
-              <td class="p-3 text-center font-bold text-emerald-700 text-sm">$14.990</td>
-              <td class="p-3 text-center">
-                <button onclick="copyText('Fibra 800 Megas por $14.990 promocional')" class="p-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 font-semibold text-[11px]">Copiar</button>
-              </td>
-            </tr>
-            <tr class="hover:bg-slate-50">
-              <td class="p-3 font-bold text-slate-900">Internet Fibra Giga (1000 Megas)</td>
-              <td class="p-3 text-center">1000 Mbps Simétricos</td>
-              <td class="p-3 text-center">Wi-Fi 6 Extender</td>
-              <td class="p-3 text-center text-slate-400 line-through">$26.990</td>
-              <td class="p-3 text-center font-bold text-emerald-700 text-sm">$18.990</td>
-              <td class="p-3 text-center">
-                <button onclick="copyText('Fibra Giga 1000 Megas por $18.990 promocional')" class="p-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 font-semibold text-[11px]">Copiar</button>
-              </td>
-            </tr>
-            <tr class="hover:bg-slate-50">
-              <td class="p-3 font-bold text-slate-900">Pack TV Full + Fibra 800</td>
-              <td class="p-3 text-center">800 Mbps</td>
-              <td class="p-3 text-center">120 Canales + Decodificador IP</td>
-              <td class="p-3 text-center text-slate-400 line-through">$34.990</td>
-              <td class="p-3 text-center font-bold text-emerald-700 text-sm">$25.990</td>
-              <td class="p-3 text-center">
-                <button onclick="copyText('Pack TV Full + Fibra 800 por $25.990 promocional')" class="p-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 font-semibold text-[11px]">Copiar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- SECCIÓN: SPEECH & BIOMETRÍA -->
-    <section id="sec-scripts" class="tab-content space-y-4">
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-        <div class="flex items-center space-x-2.5 border-b border-slate-100 pb-3">
-          <div class="p-2 bg-amber-50 text-amber-700 rounded-lg">
-            <i data-lucide="shield-alert" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h2 class="text-base font-bold text-slate-900">Script Obligatorio de Biometría Facial</h2>
-            <p class="text-xs text-slate-500">Lectura antes de enviar enlace de validación al WhatsApp del cliente</p>
-          </div>
-        </div>
-
-        <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-900 leading-relaxed font-medium space-y-2">
-          <p><em>"(Nombre del cliente), para finalizar la venta necesitamos validar tu identidad a través de biometría facial. Esto es para resguardar tu seguridad y así verificar que quien contrata los servicios eres tú."</em></p>
-          <p><em>"Debes tener tu cédula de identidad a mano de manera física. Te enviaré un link a tu WhatsApp con los pasos a seguir. De todas maneras, te agradecería poner en altavoz tu teléfono; yo estaré en línea para guiarte en caso de que necesites. ¿Me indicas tu número para enviarte el link?"</em></p>
-        </div>
-
-        <button onclick="copyText(`(Nombre del cliente), para finalizar la venta necesitamos validar tu identidad a través de biometría facial. Esto es para resguardar tu seguridad y así verificar que quien contrata los servicios eres tú. Debes tener tu cédula de identidad a mano de manera física. Te enviaré un link a tu WhatsApp con los pasos a seguir. De todas maneras, te agradecería poner en altavoz tu teléfono; yo estaré en línea para guiarte en caso de que necesites. ¿Me indicas tu número para enviarte el link?`)" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs px-4 py-2 rounded-xl transition-all flex items-center gap-1.5">
-          <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Script Completo
-        </button>
-      </div>
-    </section>
-
-    <!-- SECCIÓN: COMPARATIVO -->
-    <section id="sec-comparativo" class="tab-content space-y-4">
-      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-        <h2 class="text-base font-bold text-slate-900">Matriz de Argumentación Comercial</h2>
-        <p class="text-xs text-slate-500">Diferenciadores frente a la competencia</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
-          <span class="text-[10px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">vs Movistar</span>
-          <h3 class="font-bold text-slate-900 text-sm">Cobertura y Roaming Integrado</h3>
-          <p class="text-xs text-slate-600">Cohesión de señal sin caídas de red en tramos de carretera y planes con cuotas transparentes de Roaming.</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
-          <span class="text-[10px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">vs WOM</span>
-          <h3 class="font-bold text-slate-900 text-sm">Velocidad y Latencia 5G</h3>
-          <p class="text-xs text-slate-600">Mayor infraestructura de antenas dedicadas, evitando saturación de señal en horas pico.</p>
-        </div>
-        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
-          <span class="text-[10px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">vs Claro</span>
-          <h3 class="font-bold text-slate-900 text-sm">Fibra Simétrica Real</h3>
-          <p class="text-xs text-slate-600">Garantía de misma velocidad de subida y bajada sin tecnología híbrida HFC ni cables coaxiales.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
-      calcularProporcional();
-    });
-
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-[#002EFF]', 'text-white', 'shadow-sm');
-        btn.classList.add('text-slate-300');
-      });
-
-      const targetSec = document.getElementById(`sec-${tabId}`);
-      if(targetSec) targetSec.classList.add('active');
-      
-      const activeBtn = document.getElementById(`tab-${tabId}`);
-      if(activeBtn) {
-        activeBtn.classList.add('bg-[#002EFF]', 'text-white', 'shadow-sm');
-        activeBtn.classList.remove('text-slate-300');
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function filterPlanes() {
-      const perfil = document.getElementById('filterPerfil').value;
-      const cards = document.querySelectorAll('.plan-card');
-
-      cards.forEach(card => {
-        const cardPerfil = card.getAttribute('data-perfil');
-        if (perfil === 'todos' || cardPerfil === perfil) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    }
-
-    function calcularProporcional() {
-      const base = parseFloat(document.getElementById('calcBase').value) || 0;
-      const dia = parseInt(document.getElementById('calcDia').value) || 1;
-      const diasMes = parseInt(document.getElementById('calcDiasMes').value) || 30;
-
-      const diasRestantes = Math.max(0, diasMes - dia + 1);
-      const valorDia = base / diasMes;
-      const proporcional = Math.round(valorDia * diasRestantes);
-      const totalPrimeraBoleta = proporcional + base;
-
-      document.getElementById('resDias').innerText = `${diasRestantes} días`;
-      document.getElementById('resProp').innerText = `$${proporcional.toLocaleString('es-CL')}`;
-      document.getElementById('resTotal').innerText = `$${totalPrimeraBoleta.toLocaleString('es-CL')}`;
-
-      document.getElementById('calcResult').classList.remove('hidden');
-    }
-
-    function copiarCalculo() {
-      const prop = document.getElementById('resProp').innerText;
-      const total = document.getElementById('resTotal').innerText;
-      const txt = `Estimado cliente, su primer cobro incluirá el proporcional de días utilizados (${prop}) más su primer mes de cargo fijo, sumando un total estimado de ${total} en su primera boleta.`;
-      copyText(txt);
-    }
-
-    function copyText(val) {
-      navigator.clipboard.writeText(val);
-      alert("Texto copiado al portapapeles.");
-    }
-  </script>
-</body>
-</html>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-purple-600 tracking-wide uppercase">
+            <span>Ver Delivery y Tiendas</span>
+            <i data-lucide="arrow-right" class="w-4 h
