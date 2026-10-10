@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toolkit Comercial Entel - Libro de Gestión Online</title>
+  <title>Libro de Gestión Móvil Entel - V.48</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
@@ -13,53 +13,158 @@
 </head>
 <body class="bg-slate-100 min-h-screen text-slate-800 font-sans pb-20">
 
-  <!-- ENCABEZADO -->
-  <header class="bg-slate-900 text-white shadow-md border-b border-slate-800 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col md:flex-row justify-between items-center gap-3">
-      <div class="flex items-center space-x-3">
-        <div class="bg-blue-600 p-2 rounded-lg">
-          <i data-lucide="book-open-check" class="w-6 h-6 text-white"></i>
+  <!-- ENCABEZADO CON BRANDING ENTEL -->
+  <header class="bg-[#0b132b] text-white shadow-lg border-b border-blue-900/50 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
+      
+      <!-- LOGO Y TÍTULO -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+        <!-- Logo SVG Entel -->
+        <div class="bg-[#002EFF] p-2 rounded-xl flex items-center justify-center shadow-md">
+          <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
         </div>
         <div>
-          <h1 class="font-bold text-base md:text-lg tracking-tight">Toolkit Comercial Entel <span class="text-xs bg-blue-500/30 text-blue-300 border border-blue-400/30 px-2 py-0.5 rounded-full ml-1">V.48</span></h1>
-          <p class="text-xs text-slate-400">Libro de Gestión Online Móvil & Hogar</p>
+          <div class="flex items-center gap-2">
+            <h1 class="font-extrabold text-lg md:text-xl tracking-tight text-white">Libro de Gestión Móvil Entel</h1>
+            <span class="text-[10px] bg-orange-500 text-white font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">V.48</span>
+          </div>
+          <p class="text-xs text-blue-200/70">Plataforma Unificada de Ventas & Consultas</p>
         </div>
       </div>
       
-      <!-- NAVEGACIÓN -->
-      <nav class="flex space-x-1 bg-slate-800 p-1 rounded-xl text-xs w-full md:w-auto overflow-x-auto">
-        <button onclick="switchTab('calculadora')" id="tab-calculadora" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold bg-blue-600 text-white shadow-sm transition-all flex items-center gap-1.5 whitespace-nowrap">
+      <!-- NAVEGACIÓN PRINCIPAL -->
+      <nav class="flex space-x-1 bg-slate-900/80 p-1.5 rounded-xl text-xs w-full md:w-auto overflow-x-auto border border-slate-800">
+        <button onclick="switchTab('home')" id="tab-home" class="tab-btn px-3 py-1.5 rounded-lg font-semibold bg-[#002EFF] text-white shadow-sm transition-all flex items-center gap-1.5 whitespace-nowrap">
+          <i data-lucide="layout-grid" class="w-4 h-4"></i>
+          <span>Inicio</span>
+        </button>
+        <button onclick="switchTab('calculadora')" id="tab-calculadora" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
           <i data-lucide="calculator" class="w-4 h-4"></i>
-          <span>Calculadora Proporcional</span>
+          <span>Calculadora</span>
         </button>
-        <button onclick="switchTab('planes')" id="tab-planes" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
+        <button onclick="switchTab('planes')" id="tab-planes" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
           <i data-lucide="smartphone" class="w-4 h-4"></i>
-          <span>Planes Móviles & Roaming</span>
+          <span>Planes Móviles</span>
         </button>
-        <button onclick="switchTab('fibra')" id="tab-fibra" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
+        <button onclick="switchTab('fibra')" id="tab-fibra" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
           <i data-lucide="wifi" class="w-4 h-4"></i>
-          <span>Fibra Óptica & Hogar</span>
+          <span>Fibra & Hogar</span>
         </button>
-        <button onclick="switchTab('scripts')" id="tab-scripts" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
+        <button onclick="switchTab('scripts')" id="tab-scripts" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
           <i data-lucide="shield-check" class="w-4 h-4"></i>
           <span>Speech & Biometría</span>
         </button>
-        <button onclick="switchTab('comparativo')" id="tab-comparativo" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
+        <button onclick="switchTab('comparativo')" id="tab-comparativo" class="tab-btn px-3 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1.5 whitespace-nowrap">
           <i data-lucide="scale" class="w-4 h-4"></i>
-          <span>Matriz Competencia</span>
+          <span>Competencia</span>
         </button>
       </nav>
     </div>
   </header>
 
-  <!-- CONTENIDO -->
+  <!-- CONTENIDO PRINCIPAL -->
   <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
 
-    <!-- SECCIÓN 1: CALCULADORA PROPORCIONAL -->
-    <section id="sec-calculadora" class="tab-content active space-y-4">
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm max-w-2xl mx-auto space-y-4">
+    <!-- PORTAL DE INICIO (HOME) -->
+    <section id="sec-home" class="tab-content active space-y-6">
+      
+      <!-- HERO DE BIENVENIDA -->
+      <div class="bg-gradient-to-r from-[#002EFF] to-blue-900 rounded-3xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="space-y-3 max-w-2xl text-center md:text-left">
+          <span class="bg-white/20 text-white font-bold text-xs px-3 py-1 rounded-full border border-white/20">Portal Comercial de Ejecutivos</span>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Bienvenido al Libro de Gestión Móvil Entel</h2>
+          <p class="text-blue-100 text-xs md:text-sm leading-relaxed">Accede rápidamente a las herramientas de venta, simulador de facturación proporcional, catálogo de ofertas móviles/hogar y argumentarios comerciales.</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 text-center min-w-[200px]">
+          <span class="text-xs text-blue-200 block uppercase font-bold">Versión del Sistema</span>
+          <span class="text-2xl font-black text-white">V.48 Online</span>
+          <span class="text-[11px] text-emerald-300 block mt-1 font-medium">● Oferta Comercial Vigente</span>
+        </div>
+      </div>
+
+      <!-- RECUADROS DIRECTORIOS (TARJETAS PRINCIPALES) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        <!-- Recuadro 1: Calculadora Proporcional -->
+        <div onclick="switchTab('calculadora')" class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-6 -mt-6 transition-all group-hover:bg-[#002EFF]/10"></div>
+          <div class="p-3 bg-blue-600 text-white rounded-xl w-fit mb-4 shadow-md group-hover:bg-[#002EFF]">
+            <i data-lucide="calculator" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-[#002EFF] transition-colors">Calculadora Proporcional</h3>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Calcula al instante el proporcional del primer ciclo de facturación y genera la explicación para el cliente.</p>
+          <div class="mt-4 flex items-center text-xs font-bold text-[#002EFF]">
+            <span>Ingresar a Calculadora</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- Recuadro 2: Planes Móviles -->
+        <div onclick="switchTab('planes')" class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-6 -mt-6 transition-all group-hover:bg-[#002EFF]/10"></div>
+          <div class="p-3 bg-blue-600 text-white rounded-xl w-fit mb-4 shadow-md group-hover:bg-[#002EFF]">
+            <i data-lucide="smartphone" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-[#002EFF] transition-colors">Planes Móviles & Roaming</h3>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Consulta la oferta vigente de portabilidad, líneas nuevas, segundas líneas y tarifa especial para adulto mayor.</p>
+          <div class="mt-4 flex items-center text-xs font-bold text-[#002EFF]">
+            <span>Ver Catálogo Móvil</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- Recuadro 3: Fibra Óptica -->
+        <div onclick="switchTab('fibra')" class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -mr-6 -mt-6 transition-all group-hover:bg-emerald-500/10"></div>
+          <div class="p-3 bg-emerald-600 text-white rounded-xl w-fit mb-4 shadow-md">
+            <i data-lucide="wifi" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-emerald-600 transition-colors">Fibra Óptica & Hogar</h3>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Tabla comparativa de velocidades de fibra, costo fijo masivo y ofertas con descuento del mes 1 al 12.</p>
+          <div class="mt-4 flex items-center text-xs font-bold text-emerald-600">
+            <span>Ver Oferta Hogar</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- Recuadro 4: Speech & Biometría -->
+        <div onclick="switchTab('scripts')" class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-amber-50 rounded-bl-full -mr-6 -mt-6 transition-all group-hover:bg-amber-500/10"></div>
+          <div class="p-3 bg-amber-600 text-white rounded-xl w-fit mb-4 shadow-md">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-amber-600 transition-colors">Speech & Biometría Facial</h3>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Lectura obligatoria de validación biométrica facial para resguardo de seguridad en cierres de venta.</p>
+          <div class="mt-4 flex items-center text-xs font-bold text-amber-600">
+            <span>Abrir Argumentario</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- Recuadro 5: Competencia -->
+        <div onclick="switchTab('comparativo')" class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1 relative overflow-hidden md:col-span-2">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-slate-100 rounded-bl-full -mr-6 -mt-6"></div>
+          <div class="p-3 bg-slate-800 text-white rounded-xl w-fit mb-4 shadow-md">
+            <i data-lucide="scale" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-slate-900 text-base group-hover:text-slate-800 transition-colors">Matriz de Objetaciones & Competencia</h3>
+          <p class="text-xs text-slate-500 mt-1 leading-relaxed">Comparativa detallada de atributos técnicos frente a operadores (Movistar, WOM, Claro) para rebatir objeciones.</p>
+          <div class="mt-4 flex items-center text-xs font-bold text-slate-800">
+            <span>Ver Matriz Comparativa</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN: CALCULADORA PROPORCIONAL -->
+    <section id="sec-calculadora" class="tab-content space-y-4">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-2xl mx-auto space-y-4">
         <div class="flex items-center space-x-2.5 border-b border-slate-100 pb-3">
-          <div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
+          <div class="p-2 bg-blue-50 text-[#002EFF] rounded-lg">
             <i data-lucide="calculator" class="w-5 h-5"></i>
           </div>
           <div>
@@ -71,25 +176,25 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
           <div>
             <label class="block font-semibold text-slate-700 mb-1">Cargo Fijo Mensual ($)</label>
-            <input type="number" id="calcBase" value="13990" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <input type="number" id="calcBase" value="13990" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
           </div>
           <div>
             <label class="block font-semibold text-slate-700 mb-1">Día de Activación del Servicio</label>
-            <input type="number" id="calcDia" value="12" min="1" max="31" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-center text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <input type="number" id="calcDia" value="12" min="1" max="31" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-center text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
           <div>
             <label class="block font-semibold text-slate-700 mb-1">Días del Mes de Facturación</label>
-            <select id="calcDiasMes" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <select id="calcDiasMes" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
               <option value="30">30 Días</option>
               <option value="31">31 Días</option>
               <option value="28">28 Días</option>
             </select>
           </div>
           <div class="flex items-end">
-            <button onclick="calcularProporcional()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition-all shadow-sm">
+            <button onclick="calcularProporcional()" class="w-full bg-[#002EFF] hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition-all shadow-sm">
               Calcular Proporcional
             </button>
           </div>
@@ -106,7 +211,7 @@
           </div>
           <div class="flex justify-between items-center text-sm pt-1">
             <span class="font-bold text-slate-900">Total Estimado 1ª Boleta:</span>
-            <span id="resTotal" class="font-extrabold text-blue-600 text-base">$22.850</span>
+            <span id="resTotal" class="font-extrabold text-[#002EFF] text-base">$22.850</span>
           </div>
           <button onclick="copiarCalculo()" class="w-full mt-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2 rounded-lg transition-all flex items-center justify-center gap-1.5">
             <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Explicación para Cliente
@@ -115,7 +220,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 2: PLANES MÓVILES -->
+    <!-- SECCIÓN: PLANES MÓVILES -->
     <section id="sec-planes" class="tab-content space-y-4">
       <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
         <div>
@@ -135,7 +240,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="containerPlanes">
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 plan-card" data-perfil="migracion">
           <div class="flex justify-between items-start">
-            <span class="bg-blue-50 text-blue-700 font-bold text-[10px] px-2.5 py-1 rounded-md border border-blue-100">PORTABILIDAD</span>
+            <span class="bg-blue-50 text-[#002EFF] font-bold text-[10px] px-2.5 py-1 rounded-md border border-blue-100">PORTABILIDAD</span>
             <span class="text-xs font-extrabold text-slate-900">$13.990 <span class="text-[10px] text-slate-400 font-normal">/mes</span></span>
           </div>
           <div>
@@ -154,7 +259,7 @@
 
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 plan-card" data-perfil="migracion">
           <div class="flex justify-between items-start">
-            <span class="bg-blue-50 text-blue-700 font-bold text-[10px] px-2.5 py-1 rounded-md border border-blue-100">PORTABILIDAD</span>
+            <span class="bg-blue-50 text-[#002EFF] font-bold text-[10px] px-2.5 py-1 rounded-md border border-blue-100">PORTABILIDAD</span>
             <span class="text-xs font-extrabold text-slate-900">$19.990 <span class="text-[10px] text-slate-400 font-normal">/mes</span></span>
           </div>
           <div>
@@ -192,7 +297,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: FIBRA HOGAR -->
+    <!-- SECCIÓN: FIBRA HOGAR -->
     <section id="sec-fibra" class="tab-content space-y-4">
       <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
         <h2 class="text-base font-bold text-slate-900">Planes Fibra Óptica & Packs TV Hogar</h2>
@@ -247,9 +352,9 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 4: SPEECH & BIOMETRÍA -->
+    <!-- SECCIÓN: SPEECH & BIOMETRÍA -->
     <section id="sec-scripts" class="tab-content space-y-4">
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
         <div class="flex items-center space-x-2.5 border-b border-slate-100 pb-3">
           <div class="p-2 bg-amber-50 text-amber-700 rounded-lg">
             <i data-lucide="shield-alert" class="w-5 h-5"></i>
@@ -271,7 +376,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 5: COMPARATIVO -->
+    <!-- SECCIÓN: COMPARATIVO -->
     <section id="sec-comparativo" class="tab-content space-y-4">
       <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
         <h2 class="text-base font-bold text-slate-900">Matriz de Argumentación Comercial</h2>
@@ -308,7 +413,7 @@
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+        btn.classList.remove('bg-[#002EFF]', 'text-white', 'shadow-sm');
         btn.classList.add('text-slate-300');
       });
 
@@ -317,9 +422,11 @@
       
       const activeBtn = document.getElementById(`tab-${tabId}`);
       if(activeBtn) {
-        activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+        activeBtn.classList.add('bg-[#002EFF]', 'text-white', 'shadow-sm');
         activeBtn.classList.remove('text-slate-300');
       }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function filterPlanes() {
