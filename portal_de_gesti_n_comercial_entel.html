@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Gestión Comercial & Toolkit Móvil / Hogar | Entel</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Tailwind Custom Colors Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            entel: {
+              50: '#eef6ff',
+              100: '#e0edff',
+              500: '#005cff',
+              600: '#004ee0',
+              700: '#003db8',
+              800: '#0a192f',
+              900: '#071120',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .active-nav-tab {
+      background-color: #0f172a !important;
+      color: #ffffff !important;
+      border-bottom: 2px solid #005cff;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/90 min-h-screen text-slate-800 font-sans pb-20 select-none">
+
+  <header class="bg-slate-900 text-white sticky top-0 z-40 border-b border-slate-800 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+      <!-- Logo & Portal Title -->
+      <div class="flex items-center space-x-3 w-full md:w-auto justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="bg-blue-600 p-2.5 rounded-xl shadow-inner text-white flex items-center justify-center">
+            <i data-lucide="phone-call" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h1 class="text-base font-bold tracking-tight text-white flex items-center gap-2">
+              Toolkit Comercial Entel
+              <span class="text-[10px] bg-blue-500/20 text-blue-400 border border-blue-500/30 font-semibold px-2 py-0.5 rounded-md">V.48</span>
+            </h1>
+            <p class="text-xs text-slate-400">Libro de Gestión Online Móvil & Hogar</p>
+          </div>
+        </div>
+        <button onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white p-1">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- Quick Global Search Bar -->
+      <div class="relative w-full md:w-80">
+        <input type="text" id="globalSearchInput" oninput="handleGlobalSearch()" placeholder="Buscar plan, gigas, precio o script..." 
+               class="w-full text-xs bg-slate-800/90 border border-slate-700 rounded-xl px-3.5 py-2 pl-9 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div id="navContainer" class="bg-slate-950/90 border-t border-slate-800/60 overflow-x-auto">
+      <div class="max-w-7xl mx-auto px-4 flex space-x-1 py-1 text-xs font-medium whitespace-nowrap">
+        <button onclick="switchTab('calculator')" id="btn-tab-calculator" class="nav-btn active-nav-tab px-3.5 py-2 rounded-lg flex items-center space-x-2 transition-all hover:bg-slate-800 text-slate-300">
+          <i data-lucide="calculator" class="w-4 h-4 text-blue-400"></i>
+          <span>Calculadora Proporcional</span>
+        </button>
+        <button onclick="switchTab('mobile')" id="btn-tab-mobile" class="nav-btn px-3.5 py-2 rounded-lg flex items-center space-x-2 transition-all hover:bg-slate-800 text-slate-300">
+          <i data-lucide="smartphone" class="w-4 h-4 text-emerald-400"></i>
+          <span>Planes Móviles & Roaming</span>
+        </button>
+        <button onclick="switchTab('home')" id="btn-tab-home" class="nav-btn px-3.5 py-2 rounded-lg flex items-center space-x-2 transition-all hover:bg-slate-800 text-slate-300">
+          <i data-lucide="wifi" class="w-4 h-4 text-indigo-400"></i>
+          <span>Fibra Óptica & Hogar</span>
+        </button>
+        <button onclick="switchTab('scripts')" id="btn-tab-scripts" class="nav-btn px-3.5 py-2 rounded-lg flex items-center space-x-2 transition-all hover:bg-slate-800 text-slate-300">
+          <i data-lucide="file-text" class="w-4 h-4 text-amber-400"></i>
+          <span>Speech & Biometría</span>
+        </button>
+        <button onclick="switchTab('battlecard')" id="btn-tab-battlecard" class="nav-btn px-3.5 py-2 rounded-lg flex items-center space-x-2 transition-all hover:bg-slate-800 text-slate-300">
+          <i data-lucide="swords" class="w-4 h-4 text-rose-400"></i>
+          <span>Matriz Competencia</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 pt-6 space-y-6">
+
+    <!-- Key Metrics Ribbon -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3">
