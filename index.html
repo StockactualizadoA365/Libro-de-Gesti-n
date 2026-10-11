@@ -103,7 +103,7 @@
               <i data-lucide="calculator" class="w-8 h-8"></i>
             </div>
             <h3 class="font-black text-slate-900 text-xl group-hover:text-[#002EFF] transition-colors">🧮 Calculadora Proporcional</h3>
-            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Simulador exacto de planes, líneas adicionales, descuentos, ciclo de facturación y proporcional.</p>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Simulador exacto de planes, líneas adicionales (Te Sumo), descuentos y ciclo de facturación.</p>
           </div>
           <div class="mt-6 flex items-center text-xs font-extrabold text-[#002EFF] tracking-wide uppercase">
             <span>Acceder a Calculadora</span>
@@ -220,29 +220,38 @@
           </div>
           <div>
             <h2 class="text-lg font-bold text-slate-900">🧮 Calculadora de Cobro Proporcional</h2>
-            <p class="text-xs text-slate-500">Estimación de planes, descuentos y proporcional según el ciclo de facturación</p>
+            <p class="text-xs text-slate-500">Estimación de planes, líneas adicionales (Te Sumo), descuentos y proporcional</p>
           </div>
         </div>
 
         <!-- FORMULARIO DE ENTRADA -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs font-semibold">
           
+          <!-- 0. Modo de Venta (Línea Adicional Exclusiva / Plan Normal) -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Modalidad de Venta</label>
+            <select id="calcSoloAdicional" onchange="calcularProporcional()" class="w-full p-3 bg-blue-50 border-2 border-blue-300 rounded-xl font-extrabold text-[#002EFF] text-sm focus:outline-none">
+              <option value="no" selected>Plan Principal + Adicionales</option>
+              <option value="si">Solo Venta de Línea Adicional (Te Sumo)</option>
+            </select>
+          </div>
+
           <!-- 1. Selecciona el Plan -->
           <div>
             <label class="block text-slate-700 mb-1.5">Selecciona el Plan ($)</label>
             <select id="calcPlan" onchange="calcularProporcional()" class="w-full p-3 bg-yellow-300/80 border-2 border-yellow-400 rounded-xl font-extrabold text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
               <option value="12990">$ 12,990</option>
               <option value="13990">$ 13,990</option>
-              <option value="15990">$ 15,990</option>
-              <option value="16990" selected>$ 16,990</option>
-              <option value="17990">$ 17,990</option>
-              <option value="19990">$ 19,990</option>
-              <option value="20990">$ 20,990</option>
-              <option value="21990">$ 21,990</option>
-              <option value="22990">$ 22,990</option>
-              <option value="23990">$ 23,990</option>
-              <option value="29990">$ 29,990</option>
-              <option value="39990">$ 39,990</option>
+              <option value="15990">$ 15,990 (Te Sumo $10.990)</option>
+              <option value="16990" selected>$ 16,990 (Te Sumo $10.990)</option>
+              <option value="17990">$ 17,990 (Te Sumo $10.990)</option>
+              <option value="19990">$ 19,990 (Te Sumo $11.990)</option>
+              <option value="20990">$ 20,990 (Te Sumo $11.990)</option>
+              <option value="21990">$ 21,990 (Te Sumo $11.990)</option>
+              <option value="22990">$ 22,990 (Te Sumo $11.990)</option>
+              <option value="23990">$ 23,990 (Te Sumo $11.990)</option>
+              <option value="29990">$ 29,990 (Te Sumo $11.990)</option>
+              <option value="39990">$ 39,990 (Te Sumo $11.990)</option>
             </select>
           </div>
 
@@ -301,7 +310,7 @@
               <tr class="bg-sky-500 text-white font-bold uppercase tracking-wider">
                 <th class="p-3 border-r border-sky-400/50">Concepto</th>
                 <th class="p-3 border-r border-sky-400/50">Línea Principal</th>
-                <th class="p-3 border-r border-sky-400/50">Línea(s) Adicional(es)</th>
+                <th class="p-3 border-r border-sky-400/50">Línea(s) Adicional(es) (Te Sumo)</th>
                 <th class="p-3">Total</th>
               </tr>
             </thead>
@@ -358,7 +367,7 @@
           <div class="bg-slate-900/90 border border-slate-700/60 p-4 rounded-2xl space-y-2">
             <span class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider block">💬 Speech Sugerido para el Cliente:</span>
             <p id="speechBoxText" class="text-slate-200 text-xs leading-relaxed italic">
-              "Estimado cliente, usted por sus 2 líneas pagará un total de $ 27,980, donde el primer mes pagará $ 19,026 pesos (monto proporcional), desde el segundo mes hasta el 6to mes pagará $ 23,783 pesos, y a partir de la 7ma boleta en adelante pagará $ 27,980 pesos."
+              "Estimado cliente, usted por sus líneas pagará un total de $ 27,980, donde el primer mes pagará $ 19,026 pesos (monto proporcional), desde el segundo mes hasta el 6to mes pagará $ 23,783 pesos, y a partir de la 7ma boleta en adelante pagará $ 27,980 pesos."
             </p>
           </div>
 
@@ -672,11 +681,23 @@
       const pctDscto = parseFloat(document.getElementById('calcDscto').value) || 0;
       const ciclo = parseInt(document.getElementById('calcCiclo').value) || 53;
       const diaAct = parseInt(document.getElementById('calcDiaAct').value) || 22;
+      const soloAdicional = document.getElementById('calcSoloAdicional').value === 'si';
 
-      const PRECIO_LINEA_ADIC = 10990;
+      // Regla de "Te Sumo" para la Línea Adicional
+      let precioLineaAdic = 10990;
+      if (planBase >= 19990) {
+        precioLineaAdic = 11990;
+      }
 
-      const cargoPrin = planBase;
-      const cargoAdic = cantLineas * PRECIO_LINEA_ADIC;
+      let cargoPrin = planBase;
+      let cargoAdic = cantLineas * precioLineaAdic;
+
+      if (soloAdicional) {
+        // Si es venta exclusiva de línea adicional (Te Sumo)
+        cargoPrin = 0;
+        cargoAdic = Math.max(1, cantLineas) * precioLineaAdic;
+      }
+
       const cargoTotal = cargoPrin + cargoAdic;
 
       const dsctoPrin = Math.round(cargoPrin * pctDscto);
@@ -687,6 +708,7 @@
       const pagoAdic = cargoAdic - dsctoAdic;
       const pagoTotal = pagoPrin + pagoAdic;
 
+      // Actualizar Tabla Desglose
       document.getElementById('rowCargoPrin').innerText = `$ ${cargoPrin.toLocaleString('es-CL')}`;
       document.getElementById('rowCargoAdic').innerText = `$ ${cargoAdic.toLocaleString('es-CL')}`;
       document.getElementById('rowCargoTotal').innerText = `$ ${cargoTotal.toLocaleString('es-CL')}`;
@@ -717,9 +739,9 @@
       document.getElementById('resVal2da6ta').innerText = `$ ${pagoTotal.toLocaleString('es-CL')}`;
       document.getElementById('resVal7ma').innerText = `$ ${cargoTotal.toLocaleString('es-CL')}`;
 
-      // Actualizar Texto del Speech Dinámico
-      const cantLineasTotal = cantLineas + 1;
-      const txtSpeech = `Estimado cliente, usted por sus ${cantLineasTotal} líneas pagará un total de $ ${cargoTotal.toLocaleString('es-CL')}, donde el primer mes pagará $ ${valorProporcional.toLocaleString('es-CL')} pesos (monto proporcional), desde el segundo mes hasta el 6to mes pagará $ ${pagoTotal.toLocaleString('es-CL')} pesos, y a partir de la 7ma boleta en adelante pagará $ ${cargoTotal.toLocaleString('es-CL')} pesos.`;
+      // Actualizar Speech
+      const totalLineasDesc = soloAdicional ? cantLineas : (cantLineas + 1);
+      const txtSpeech = `Estimado cliente, usted por sus ${totalLineasDesc} líneas pagará un total de $ ${cargoTotal.toLocaleString('es-CL')}, donde el primer mes pagará $ ${valorProporcional.toLocaleString('es-CL')} pesos (monto proporcional), desde el segundo mes hasta el 6to mes pagará $ ${pagoTotal.toLocaleString('es-CL')} pesos, y a partir de la 7ma boleta en adelante pagará $ ${cargoTotal.toLocaleString('es-CL')} pesos.`;
       
       document.getElementById('speechBoxText').innerText = `"${txtSpeech}"`;
     }
