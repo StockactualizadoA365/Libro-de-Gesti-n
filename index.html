@@ -8,7 +8,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    .tab-content.active { display: block !important; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
@@ -288,7 +288,7 @@
           <div>
             <label class="block text-slate-700 mb-1.5">Fecha / Día de Activación</label>
             <select id="calcDiaAct" onchange="calcularProporcional()" class="w-full p-3 bg-yellow-300/80 border-2 border-yellow-400 rounded-xl font-extrabold text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
-              <!-- Días 1-31 -->
+              <!-- Días 1 al 31 -->
             </select>
           </div>
 
@@ -328,7 +328,7 @@
           </table>
         </div>
 
-        <!-- RECUADRO DE RESULTADOS CON LOS TRES TRAMOS -->
+        <!-- RECUADRO DE RESULTADOS CON TRES TRAMOS Y SPEECH INCLUIDO -->
         <div id="calcResult" class="bg-[#0b132b] text-white p-6 rounded-3xl space-y-4 text-xs shadow-xl border border-slate-800">
           
           <div class="flex justify-between items-center border-b border-slate-800/80 pb-3">
@@ -349,13 +349,21 @@
           </div>
 
           <!-- 3. Valor desde la 7ma en adelante -->
-          <div class="flex justify-between items-center pb-2">
+          <div class="flex justify-between items-center border-b border-slate-800/80 pb-3">
             <span class="text-slate-300 font-semibold">Valor desde la 7ma en adelante:</span>
             <span id="resVal7ma" class="font-extrabold text-blue-400 text-base">$ 27,980</span>
           </div>
 
+          <!-- BLOQUE DE SPEECH COMERCIAL VISIBLE DENTRO DEL RECUADRO -->
+          <div class="bg-slate-900/90 border border-slate-700/60 p-4 rounded-2xl space-y-2">
+            <span class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider block">💬 Speech Sugerido para el Cliente:</span>
+            <p id="speechBoxText" class="text-slate-200 text-xs leading-relaxed italic">
+              "Estimado cliente, usted por sus 2 líneas pagará un total de $ 27,980, donde el primer mes pagará $ 19,026 pesos (monto proporcional), desde el segundo mes hasta el 6to mes pagará $ 23,783 pesos, y a partir de la 7ma boleta en adelante pagará $ 27,980 pesos."
+            </p>
+          </div>
+
           <!-- BOTÓN PARA COPIAR SPEECH -->
-          <button onclick="copiarCalculo()" class="w-full mt-2 bg-[#002EFF] hover:bg-blue-600 text-white font-extrabold py-3 rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
+          <button onclick="copiarCalculo()" class="w-full bg-[#002EFF] hover:bg-blue-600 text-white font-extrabold py-3 rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer">
             <i data-lucide="copy" class="w-4 h-4"></i> Copiar Explicación para Cliente
           </button>
         </div>
@@ -604,6 +612,7 @@
 
     function initSelectDias() {
       const selectDia = document.getElementById('calcDiaAct');
+      if (!selectDia) return;
       selectDia.innerHTML = '';
       for (let i = 1; i <= 31; i++) {
         const opt = document.createElement('option');
@@ -630,7 +639,9 @@
       });
 
       const targetSec = document.getElementById(`sec-${tabId}`);
-      if(targetSec) targetSec.classList.add('active');
+      if(targetSec) {
+        targetSec.classList.add('active');
+      }
       
       const activeBtn = document.getElementById(`tab-${tabId}`);
       if(activeBtn) {
@@ -664,7 +675,6 @@
 
       const PRECIO_LINEA_ADIC = 10990;
 
-      // Desglose de cargos
       const cargoPrin = planBase;
       const cargoAdic = cantLineas * PRECIO_LINEA_ADIC;
       const cargoTotal = cargoPrin + cargoAdic;
@@ -677,7 +687,6 @@
       const pagoAdic = cargoAdic - dsctoAdic;
       const pagoTotal = pagoPrin + pagoAdic;
 
-      // Actualizar Tabla de Desglose
       document.getElementById('rowCargoPrin').innerText = `$ ${cargoPrin.toLocaleString('es-CL')}`;
       document.getElementById('rowCargoAdic').innerText = `$ ${cargoAdic.toLocaleString('es-CL')}`;
       document.getElementById('rowCargoTotal').innerText = `$ ${cargoTotal.toLocaleString('es-CL')}`;
@@ -690,7 +699,6 @@
       document.getElementById('rowPagoAdic').innerText = `$ ${pagoAdic.toLocaleString('es-CL')}`;
       document.getElementById('rowPagoTotal').innerText = `$ ${pagoTotal.toLocaleString('es-CL')}`;
 
-      // Cálculo de días según Ciclo de facturación
       let diasConsumidos = 24;
       if (ciclo === 50 || ciclo === 51) {
         diasConsumidos = Math.max(1, 30 - diaAct + 1);
@@ -704,26 +712,26 @@
 
       const valorProporcional = Math.round((pagoTotal / 30) * diasConsumidos);
 
-      // Mostrar resultados en los tres tramos solicitados
       document.getElementById('resDiasActivos').innerText = `${diasConsumidos} días (Ciclo ${ciclo})`;
       document.getElementById('resVal1era').innerText = `$ ${valorProporcional.toLocaleString('es-CL')}`;
       document.getElementById('resVal2da6ta').innerText = `$ ${pagoTotal.toLocaleString('es-CL')}`;
       document.getElementById('resVal7ma').innerText = `$ ${cargoTotal.toLocaleString('es-CL')}`;
+
+      // Actualizar Texto del Speech Dinámico
+      const cantLineasTotal = cantLineas + 1;
+      const txtSpeech = `Estimado cliente, usted por sus ${cantLineasTotal} líneas pagará un total de $ ${cargoTotal.toLocaleString('es-CL')}, donde el primer mes pagará $ ${valorProporcional.toLocaleString('es-CL')} pesos (monto proporcional), desde el segundo mes hasta el 6to mes pagará $ ${pagoTotal.toLocaleString('es-CL')} pesos, y a partir de la 7ma boleta en adelante pagará $ ${cargoTotal.toLocaleString('es-CL')} pesos.`;
+      
+      document.getElementById('speechBoxText').innerText = `"${txtSpeech}"`;
     }
 
     function copiarCalculo() {
-      const cantLineasTotal = parseInt(document.getElementById('calcLineas').value) + 1;
-      const val1era = document.getElementById('resVal1era').innerText;
-      const val2da6ta = document.getElementById('resVal2da6ta').innerText;
-      const val7ma = document.getElementById('resVal7ma').innerText;
-      
-      const txt = `Estimado cliente, usted por sus ${cantLineasTotal} líneas pagará un total de ${val7ma}, donde el primer mes pagará ${val1era} pesos (monto proporcional), desde el segundo mes hasta el 6to mes pagará ${val2da6ta} pesos, y a partir de la 7ma boleta en adelante pagará ${val7ma} pesos.`;
-      copyText(txt);
+      const speechText = document.getElementById('speechBoxText').innerText.replace(/^"|"$/g, '');
+      copyText(speechText);
     }
 
     function copyText(val) {
       navigator.clipboard.writeText(val);
-      alert("Texto copiado al portapapeles.");
+      alert("Explicación copiada al portapapeles con éxito.");
     }
   </script>
 </body>
