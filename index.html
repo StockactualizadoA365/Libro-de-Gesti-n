@@ -511,7 +511,7 @@
           </div>
         </div>
 
-        <!-- 3. PLAN 800 GIGAS -->
+        <!-- 3. PLAN 800 GIGAS ($16.990) -->
         <div class="bg-white rounded-3xl border-2 border-sky-300 shadow-md p-6 space-y-4 plan-card flex flex-col justify-between" data-perfil="800">
           <div class="space-y-3">
             <div class="bg-sky-500 text-white p-3 rounded-2xl flex justify-between items-center shadow-sm">
@@ -548,7 +548,7 @@
             <button onclick="copyText('Plan 800 GB - Cargo general $16.990 / Oferta con 30% dscto a $11.893 x 6 meses - 800GB + Minutos Libres + Te Sumo $10.990')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5">
               <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
             </button>
-            <button onclick="verContrato('Plan 800 GB $16.990')" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 uppercase shadow-md">
+            <button onclick="verContratoPlan16990()" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 uppercase shadow-md">
               <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
             </button>
           </div>
@@ -1287,6 +1287,350 @@
     </div>
   </div>
 
+  <!-- MODAL SECUENCIAL OFICIAL PLAN GIGAS $16.990 (800 GB) -->
+  <div id="modalContrato16990" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full p-6 md:p-8 space-y-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex justify-between items-center border-b border-slate-200 pb-4 sticky top-0 bg-white z-10">
+        <div>
+          <span class="bg-sky-600 text-white font-black text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider">Contrato Secuencial Oficial</span>
+          <h3 class="font-black text-slate-900 text-lg md:text-xl mt-1">Plan Gigas $ 16.990 — Orden Secuencial de Preventa</h3>
+        </div>
+        <button onclick="cerrarModalContrato16990()" class="text-slate-400 hover:text-slate-700 font-black text-2xl p-2">&times;</button>
+      </div>
+
+      <div class="space-y-6 text-xs text-slate-800 leading-relaxed font-normal">
+        
+        <!-- BLOQUE 1: VALIDACIÓN BIOMÉTRICA / OFRECIMIENTOS / ESIM -->
+        <div class="border border-red-500 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-red-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            VALIDACIÓN BIOMÉTRICA ((OBLIGATORIO - SE DEBE INDICAR EN PRE VENTA)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>(Nombre del cliente), para finalizar la venta necesitamos validar tu identidad a través de biometría facial. Esto es para resguardar tu seguridad y así verificar que quien contrata los servicios eres tú. Debes tener tu cédula de identidad a mano de manera física. Te enviaré un link a tu WhatsApp con los pasos a seguir. De todas maneras, te agradecería poner en altavoz tu teléfono. Yo estaré en línea para guiarte en caso de que necesites. ¿Me indicas tu número para enviarte el link?</p>
+          </div>
+
+          <div class="bg-red-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-red-400">
+            OFRECIMIENTO DE EQUIPO (OBLIGATORIO -LEER EN CASO NO SE HAYA OFRECIDO EN LA PREVENTA) (NO APLICA DE PREPAGO A SUSCRIPCIÓN)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Adicionalmente al plan contratado tenemos disponible equipos en promoción para que puedas adquirirlo pagando mediante tu tarjeta de crédito de casas comerciales VISA O MASTERCARD hasta 12 meses sin interés, con los bancos SCOTIABANK, BCI, ITAÚ Y BANCO BICE 24 meses sin interés y SANTANDER más BANCODE CHILE hasta 18 meses sin interés, ¿Estaría interesado?</p>
+          </div>
+
+          <div class="bg-red-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-red-400">
+            OFRECIMIENTO HOGAR (OBLIGATORIO -LEER EN CASO NO SE HAYA OFRECIDO EN LA PREVENTA)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Antes de continuar, tenemos una excelente noticia para nuestros clientes móviles, ofreciéndote una promoción con descuento por 12 meses en todos nuestros servicios fibra hogar, que incluyen internet y televisión ¿Quieres que verifique la factibilidad de tu dirección y obtener este beneficio? Esperar respuesta de cliente.</p>
+          </div>
+
+          <div class="bg-red-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-red-400">
+            ESIM (VALIDACIÓN OBLIGATORIA)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Debes confirmar explícitamente que el equipo del cliente es compatible con tecnología eSIM. Esta validación debe realizarse antes de contratar el servicio.</p>
+            <p>Si el equipo no se encuentra en el listado oficial y no tiene el EID (*#06#), no es posible asignarle una eSIM. Debe cumplir con ambas condiciones. En caso contrario, se debe enviar un chip físico.</p>
+          </div>
+        </div>
+
+        <!-- BLOQUE 2: LECTURA OBLIGATORIA PLAN GIGAS 16.990 -->
+        <div class="border border-amber-800 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-[#8B4513] text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            LECTURA OBLIGATORIA - Plan Gigas 16.990
+          </div>
+          <div class="bg-[#A0522D] text-white font-bold p-2 text-center text-xs">
+            VELOCIDAD DE RED
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>La velocidad promedio depende de la zona en la que te encuentre, con cobertura 3.5G, 4G y 5G compatibles para cada red, considerando condiciones y limitaciones geográficas que puedan afectar la señal de la red. En www.entel.cl/4G/ puedes revisar detalles de la cobertura por dirección y en www.entel.cl/5G/ puedes encontrar información de cobertura y equipos compatibles con la nueva tecnología 5G.</p>
+          </div>
+
+          <div class="bg-[#A0522D] text-white font-bold p-2 text-center text-xs border-t border-amber-800">
+            ORGANISMO ADMINISTRADOR DE LA PORTABILIDAD (OAP)-(OBLIGATORIO SE LEE EL TITULO)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>XXXXX (nombre del cliente), Antes de continuar, Autoriza a realizar la portabilidad hacia Entel del número móvil 9XXXX desde la compañía XXXX y hacer uso de sus datos personales para este efecto ¿Para ello solicito que me diga de forma clara "si autorizo" ¿Ud. autoriza?</p>
+          </div>
+        </div>
+
+        <!-- BLOQUE 3: VALIDACIÓN DE DATOS Y HORARIOS -->
+        <div class="border border-amber-600 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            VALIDACIÓN DE DATOS
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Esta conversación está siendo grabada por su seguridad y respaldo, por lo mismo, necesito que pueda indicarme los siguientes datos:</p>
+            <ul class="list-disc list-inside space-y-1 font-semibold text-slate-900 pt-1">
+              <li>Indícame tu nombre completo</li>
+              <li>Otórgame tu RUT</li>
+              <li>Facilítame tu número de Cédula de Identidad</li>
+              <li>Facilítame tu fecha de nacimiento</li>
+              <li>Facilítame la dirección de despacho (Cliente debe indicar nombre de Calle, Avenida o Pasaje, Comuna y Región) Referencias</li>
+              <li>Mencióname tu correo electrónico? (omitir si cliente indicó en la preventa que no tiene dirección email).</li>
+              <li>Me podría indicar su dirección postal? (Cliente debe indicar nombre de Calle, Avenida o Pasaje, Comuna y Región)</li>
+              <li>Necesito pedirte un segundo número de contacto, sólo con el objetivo de lograr la comunicación por parte del Delivery en el caso que tu ubicación no sea encontrada y no podamos contactarnos contigo</li>
+              <li>Facilítame el número de IMEI (marcar: *#06#) | (No validar en caso se haya validado en preventa)</li>
+            </ul>
+          </div>
+
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-amber-500">
+            VALIDACIÓN DE HORARIO DE PORTABILIDAD
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Te informo lo siguiente respecto al proceso de portabilidad:</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Existe la posibilidad de que, durante la Ventana de Cambio, que ocurre entre las 03:00 y 05:00 de la madrugada, en día hábil, el o los números involucrados podrían no tener servicio</li>
+              <li>Que tu equipo de teléfono debe estar desbloqueado para que pueda ser utilizado en las redes de Entel.</li>
+              <li>El plazo para reversar esta solicitud de portabilidad será dentro del mismo día que el delivery entregue tu simcard Entel. Para ello debes acudir a una tienda Entel. Si cambias de opinión al momento de la entrega por parte del delivery, deberás firmar la autorización de consulta de datos y rechazar la entrega de simcard Entel.</li>
+              <li>Desde la fecha de ejecución de la portabilidad, debes permanecer como mínimo 120 días en la compañía que te portaste.</li>
+              <li>Es de tu exclusiva responsabilidad el respaldo de la información contenida en tu simcard actual.</li>
+              <li>No se debe dar de baja la línea o servicio en operador anterior hasta que no se concrete la portabilidad.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- BLOQUE 4: CONDICIONES COMERCIALES PLAN 16.990 Y DESCUENTO TE SUMO -->
+        <div class="border border-amber-600 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            CONDICIONES COMERCIALES
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p><strong>EN CASO DE PORTABILIDAD:</strong> Ahora vamos a confirmar la solicitud para portar su número 9******** hacia Entel, considerando: (SEGUIR LAS CONDICIONES COMERCIALES)</p>
+            <p><strong>EN CASO DE SEGUNDA LÍNEA:</strong> En estos momentos estás contratando un plan como línea nueva, considerando: (SEGUIR LAS CONDICIONES COMERCIALES)</p>
+            
+            <ul class="space-y-1.5 pt-2 font-medium">
+              <li>✓ Un plan de voz y datos cuyo cargo fijo mensual es de $ 16.990</li>
+              <li>✓ Este plan incluye una cuota controlada de datos de 1000 GB para todo lo demás.</li>
+              <li>✓ Las aplicaciones de WhatsApp, Facebook, Facebook Messenger, Twitter, Spotify, Apple Music, Instagram incluyen el envío y recepción de mensajes de texto, audios, fotos, videos, contactos y archivos, así como también la actualización de estado. Las llamadas de voz y video llamadas sobre IP (VoIP), así como La descarga de las aplicaciones antes mencionadas no están incluidas en el uso de WhatsApp ni de Facebook. Geolocalización (mapas) y acceso a enlaces externos en cualquiera de las aplicaciones mencionadas descuentan de la cuota de datos mensual del plan.</li>
+              <li>✓ Las aplicaciones mencionadas consideran sus usos y funcionalidades actuales. Sin embargo, su cantidad, disponibilidad, características bajo las cuales el cliente accede a ellas, calidad y contenidos, depende de terceros proveedores. En tales casos Entel podrá cambiar las condiciones de uso de las aplicaciones del plan.</li>
+              <li>✓ Para utilizar estas aplicaciones se requiere sistema operativo Android, IOS o Windows.</li>
+              <li>✓ Una vez consumida la cuota de datos del plan, el cliente podrá seguir utilizando internet Móvil comprando bolsas de datos</li>
+              <li>✓ Estos planes incluyen 400 mensajes de texto originados y terminados dentro de Chile, los mensajes adicionales tienen un valor de $50 cada uno. Los SMS incluidos no aplican para concursos, juegos u otros servicios especiales.</li>
+              <li>✓ El cargo fijo mensual incluye llamadas de voz originadas y terminadas dentro de Chile en una cantidad libre de minutos hasta 300 números distintos de destino en un mes o hasta alcanzar la cantidad de 1000 minutos a un mismo número telefónico en un mes. Una vez excedidos estos 300 números o la cantidad de minutos referida, las llamadas a números distintos de los primeros 300 o en exceso de dichos números, comenzarán a cobrarse a $99 el minuto.</li>
+              <li>✓ Este plan incluye 200 SMS satelitales</li>
+              <li>✓ El Saldo mínimo necesario para enviar SMS es de $7 pesos</li>
+              <li>✓ El valor de la Simcard es de $0.</li>
+            </ul>
+          </div>
+
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-amber-500">
+            DESCUENTO TE SUMO (LEER PÁRRAFO OBLIGATORIO ENCASO APLIQUE)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>✓ El descuento “Te Sumo” ofrece líneas adicionales a $10.990 para siempre. Este beneficio se mantendrá indefinidamente mientras se mantenga la condición que dio origen al descuento. Esto se aplicará para los planes Te Sumo contratados de igual valor, con un máximo de 4 descuentos.</p>
+            <p>✓ Si tienes descuentos vigentes asociados a la contratación de tu plan actual (por portabilidad o venta sin equipo, descuento exclusivo contratación Call Center, a través de nuestra página web o App Entel, descuentos de retención u otros), estos se mantendrán al adquirir la promoción, manteniendo también su vigencia.</p>
+            <p>✓ Al momento de contratar más de un plan compatible con la promoción Te Sumo el cliente accede inmediatamente a los descuentos detallados en éste. En caso de que el cliente decida cambiarse a otro plan fuera de la promoción Te Sumo o portar o dar de baja alguna de sus líneas, se cobrará el cargo fijo sin descuento proporcional a los días del mes facturado.</p>
+          </div>
+
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-amber-500">
+            DESCUENTO Y PREGUNTA DE ACEPTACIÓN (SOLO PLAN)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p><strong>Durante los próximos meses tendrás la siguiente promoción:</strong><br>
+            <strong>Debería decir:</strong> Un 30% de Dcto x 6 meses al cargo fijo quedando tu plan en $11.893 con IVA incluido</p>
+            <p class="font-bold pt-1">Por favor, necesito que me contestes con un claro SI ó NO</p>
+            <p class="font-bold text-slate-900">Bien sr. Xzz ¿Tiene clara la información que le acabo de otorgar sobre el plan y acepta sus condiciones comerciales?</p>
+          </div>
+        </div>
+
+        <!-- BLOQUE 5: VENTA DE EQUIPO / REACONDICIONADO / FACTURACIÓN -->
+        <div class="border border-blue-600 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-blue-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            EN CASO DE VENTA DE EQUIPO
+          </div>
+          <div class="p-4 bg-blue-50 font-medium space-y-2">
+            <p>Adicional, te llevas un equipo/accesorio marca XXX, modelo XXX, pagando un total de $XXX (informar según financiamiento).</p>
+            <p><strong>Financiamiento interno -</strong> El pago total del Equipo/Accesorio será de $XXXX, diferido en la boleta en XX cuotas de $XXXX cada una.</p>
+            <p><strong>Financiamiento mixto -</strong> El pago total del Equipo/Accesorio será de $XXXX, con una cuota inicial de $xxx, y el resto diferido en la boleta en XX cuotas de $XXXX</p>
+            <p><strong>Financiamiento Externo -</strong> El Equipo/Accesorio tiene un costo total de $XXX el cual será cancelado cuando el producto llegue a su domicilio, con tarjeta de crédito o débito, nuestro Delivery llevará consigo un POS inalámbrico, el cual usted podrá utilizar y pagar su Equipo/Accesorio en las cuotas que disponga.</p>
+          </div>
+
+          <div class="bg-blue-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-blue-500">
+            SOLO EN CASO DE EQUIPO REACONDICIONADO
+          </div>
+          <div class="p-4 bg-blue-50 font-medium space-y-2">
+            <p>El equipo que está adquiriendo es reacondicionado. Estos equipos provienen de anulaciones de compra, devoluciones de compra o cuyo empaque original sufrió algún desperfecto. Estos equipos son revisados bajo las más estrictas medidas técnicas definidas por los fabricantes de cada marca.Los equipos se entregan con la tapa de batería, batería y cargador y presentan una garantía de 12 meses desde la fecha de venta, con soporte en cualquier tienda Entel.</p>
+          </div>
+
+          <div class="bg-blue-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-blue-500">
+            DESCUENTO Y PREGUNTA DE ACEPTACIÓN (PLAN + EQUIPO)
+          </div>
+          <div class="p-4 bg-blue-50 font-medium space-y-2">
+            <p><strong>Durante los próximos meses tendrás la siguiente promoción:</strong><br>
+            <strong>Debería decir:</strong> Un 30% de Dcto x 6 meses al cargo fijo quedando tu plan en $11.893 con IVA incluido</p>
+            <p class="font-bold pt-1">Por favor, necesito que me contestes con un claro SI ó NO</p>
+            <p class="font-bold text-slate-900">Bien sr. Xzz ¿Tienes clara la información que te acabo de otorgar sobre los planes y equipo y aceptas sus condiciones comerciales?</p>
+          </div>
+
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-amber-500">
+            FACTURACIÓN
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-3">
+            <p><strong>En caso ya tenga un medio asignado. Indícarle el mismo (Correo o SMS)</strong></p>
+            <p><strong>Envío de boleta:</strong> Mencionarle que la factura se le enviará por mensaje de texto al número móvil xxxxxxxx (solo si el cliente solicita cambiar el medio de facturación a correo electrónico, se realizará el cambio), también podrá revisarla y pagarla en el sitio Mi Entel en www.entel.cl y en la App Entel, la que podrá descargar desde la play store en su teléfono android, o desde la App Store si es Iphone. Para más información de sitios de pago, puede visitar nuestro sitio www.entel.cl</p>
+            <p><strong>Proporcional:</strong> El monto que usted recibirá será por el proporcional del cargo fijo por $xxx aproximado. Indicar el ciclo de facturación de manera correcta.</p>
+            <p class="font-bold text-slate-900 pt-1">Respecto al ciclo de facturación de su boleta, su plan:</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Ciclo 50 (Cliente Antiguo): Inicia el 01 de cada mes y finaliza los 30 o 31 de cada mes. La emisión de su boleta será el 01 de cada mes y la fecha de vencimiento es del 21 y 25 del mismo mes de la emisión.</li>
+              <li>Ciclo 51 (Cliente Antiguo): Inicia el 01 de cada mes y finaliza los 30 o 31 de cada mes. La emisión de su boleta será el 15 de cada mes y la fecha de vencimiento es 05, 08, 13 y 15 del siguiente mes de la emisión.</li>
+              <li>Ciclo 52: Inicia los 8 y finaliza los 07 de cada mes. La emisión de su boleta será el 08 de cada mes y la fecha de vencimiento son los días 28 del mismo mes de emisión.</li>
+              <li>Ciclo 53: Inicia los 16 y finaliza los 15 de cada mes. La emisión de su boleta será el 16 de cada mes y la fecha de vencimiento son los días 06 del mes siguiente a la emisión.</li>
+              <li>Ciclo 54: Inicia los 23 y finaliza los 22 de cada mes. La emisión de su boleta será el 23 de cada mes y la fecha de vencimiento son los días 13 del mes siguiente a la emisión.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- BLOQUE 6: GESTIÓN E-SIM Y DELIVERY (EXPRESS / PROGRAMADO) -->
+        <div class="border border-purple-500 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-purple-700 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            GESTION E-SIM (LEER SOLO EN CASO DE E-SIM)
+          </div>
+          <div class="p-4 bg-purple-50 font-medium space-y-2">
+            <p>(Nombre del cliente), tu(s) línea(s) XXXXXXX , se estarán activando a través de Esim, el correo que me aparece en sistema es XXXXX (mencionar correo ingresado en sistemas), me confirmas si esta OK?. (Esperar respuesta del cliente)</p>
+            <p>(Nombre del cliente), Te estará llegando a tu correo confirmado un código QR para realizar la activación, recuerda que debe ser escaneado desde el dispositivo donde se activará la eSIM. En caso no reciba su código QR, debe revisar la carpeta "Spam" o "Correo no deseado". El remitente es atencionclientes@entel.cl.</p>
+          </div>
+
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-amber-500">
+            EXPRESS, EXPRESS PROGRAMADO, DELIVERY REGULAR (GESTIÓN DE DELIVERY)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>EL delivery te entregara la simcard en la dirección que me indicaste, Al momento de la visita, DEBES:</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Mostrar tu cédula de identidad (ÚNICAMENTE TITULAR), con el fin de validar la autenticidad del receptor con la foto que aparece en el documento y con el comprobante de Entrega (POD).</li>
+              <li>Se pedirá una foto de tu cédula de identidad ocultando el número de serie, en caso de negación, se deberá tomar foto de quien recibe (ÚNICAMENTE TITULAR) con el producto en su poder. (Nota Ejecutivo: Importante reforzar al cliente que debe tapar el número de serie en la foto).</li>
+              <li>Debes indicar tu RUT y firmar el “Comprobante de Entrega Delivery” POD.</li>
+            </ul>
+          </div>
+
+          <div class="bg-blue-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-blue-500">
+            DELIVERY EXPRESS (GESTIÓN DE ENTREGA)
+          </div>
+          <div class="p-4 bg-blue-50 font-medium space-y-2">
+            <p>(Nombre del cliente), te estaré enviando tu(s) producto(s) (mencionar producto), a través de Delivery Express para que recibas tu pedido rápido y seguro en máximo 2 horas (indicar rango horario) a la dirección XXXXXXXX (mencionar dirección ingresada en sistemas), además recuerda estar en ese horario en la dirección para recibir tu pedido y estar atento a tu teléfono en caso de que te llamen.</p>
+            <p class="font-bold text-slate-900">Recuerda que el proceso de ACTIVACIÓN se dará dentro de las 24 HORAS HABILES.</p>
+          </div>
+
+          <div class="bg-blue-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-blue-500">
+            DELIVERY EXPRESS PROGRAMADO (GESTIÓN DE ENTREGA)
+          </div>
+          <div class="p-4 bg-blue-50 font-medium space-y-2">
+            <p>(Nombre del cliente), te estaré enviando tu(s) producto(s) (mencionar producto) a través de Delivery Express agendado para que recibas tu pedido rápido y seguro durante el transcurso del día a la dirección XXXXXXXX (mencionar dirección ingresada en sistemas), recuerda que debes estar en el tramo horario de XX a XX para recibir el pedido y estar atento a tu teléfono en caso de que te llamen.</p>
+            <p class="font-bold text-slate-900">Recuerda que el proceso de ACTIVACIÓN se dará dentro de las 24 HORAS HABILES.</p>
+          </div>
+        </div>
+
+        <!-- BLOQUE 7: DELIVERY REGULAR CASOS 2, 3 Y SEGUIMIENTO -->
+        <div class="border border-emerald-600 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-emerald-700 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            DELIVERY REGULAR CASO 2. ( LÍNEA + EQUIPO CON FINANCIAMIENTO INTERNO O MIXTO)
+          </div>
+          <div class="p-4 bg-emerald-50 font-medium space-y-2">
+            <p><strong>EJECUTIVO: Al momento de la visita, el delivery acreditará tu identidad para realizar la entrega con:</strong></p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Mostrar la cédula de identidad de la persona que recibe (TITULAR), con el fin de validar la autenticidad del receptor con la foto que aparece en el documento y con el comprobante de Entrega (POD).</li>
+              <li>Será de manera obligatoria que el repartidor tome una fotografía de tu carnet tapando el número de serie para tener la evidencia de que recibe como titular, en caso del cliente negarse no se realizará la entrega de este. Nota Ejecutivo: Esto será aplicado sólo para la entrega de equipos. Importante reforzar al cliente que debe tapar el número de serie en la foto.</li>
+              <li>Debe indicar tu RUT y firmar el “Comprobante de Entrega Delivery” POD.</li>
+              <li>Tener la tarjeta de crédito o débito para pagar valor del equipo, en caso de ser con financiamiento interno debe pagar la cuota de inicial del equipo de $xxx con el medio de pago xxx (si es que aplica y según acuerdo de medio de pago definido en la venta)</li>
+              <li>Le informo que, por protocolo de seguridad de Entel, un área especializada, podría llamarlo para confirmar la compra de su equipo con cargo a boleta.</li>
+            </ul>
+          </div>
+
+          <div class="bg-emerald-700 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-emerald-600">
+            DELIVERY REGULAR CASO 3. ( LÍNEA + EQUIPO CON FINANCIAMIENTO EXTERNO)
+          </div>
+          <div class="p-4 bg-emerald-50 font-medium space-y-2">
+            <p><strong>EJECUTIVO: Al momento de la visita, el delivery acreditará tu identidad para realizar la entrega con:</strong></p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Mostrar la cédula de identidad de la persona que recibe (TITULAR), con el fin de validar la autenticidad del receptor con la foto que aparece en el documento y con el comprobante de Entrega (POD).</li>
+              <li>Será de manera obligatoria que el repartidor tome una fotografía de tu carnet tapando el número de serie para tener la evidencia de que recibe como titular, en caso del cliente negarse no se realizará la entrega de este. Nota Ejecutivo: Esto será aplicado sólo para la entrega de equipos. Importante reforzar al cliente que debe tapar el número de serie en la foto.</li>
+              <li>Debes indicar tu RUT y firmar el “Comprobante de Entrega Delivery” POD.</li>
+              <li>Tener la tarjeta de crédito o débito para pagar valor del equipo, en caso de ser con financiamiento interno debe pagar la cuota de inicial del equipo de $xxx con el medio de pago xxx (si es que aplica y según acuerdo de medio de pago definido en la venta).</li>
+            </ul>
+          </div>
+
+          <div class="bg-emerald-700 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-emerald-600">
+            DELIVERY REGULAR (GESTIÓN DE ENTREGA)
+          </div>
+          <div class="p-4 bg-emerald-50 font-medium space-y-2">
+            <p>(Nombre del cliente), te estaré enviando tu(s) producto(s) a la dirección XXXXXXXX (mencionar dirección ingresada en sistemas), recuerda que el horario de entrega es de 9 a 6hrs (sábados solo en Zona Metropolitana de 9:00am a 5:00pm), por lo tanto, ten presente que debes estar atento para recibir tu pedido. Recuerda que solo lo podrás recibir tú como titular.</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>El día de despacho, recibirás un SMS informando que tu(s) producto(s) va(n) en camino. Si necesitas comunicarte con nosotros, puedes seguir el link que va en ese mensaje, para que un ejecutivo del área de Despachos atienda tu consulta.</li>
+              <li>Para hacer seguimiento a la entrega de tu chip, puedes ingresar a la página web www.entel.cl y en la parte superior derecha entrar "Mi Entel" y seleccionar la opción "Sigue tu compra". Con tu RUT o número de orden de compra podrás seguir el estado de tu entrega.</li>
+              <li>Puedes acceder a tu contrato a través de la página web en Mi Entel (ingresando con tu móvil y RUT), en tu perfil en la opción "documentos".</li>
+            </ul>
+            <p class="font-bold text-slate-900 pt-1">Recuerda que el proceso de ACTIVACIÓN se dará dentro de 24 HORAS.</p>
+          </div>
+        </div>
+
+        <!-- BLOQUE 8: RETIRO EN TIENDA / ALERTA SAE / SUBTEL / DATOS / DESPEDIDA / ENCUESTA -->
+        <div class="border border-slate-700 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-[#002855] text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            EN CASO DE RETIRO EN TIENDA
+          </div>
+          <div class="p-4 bg-slate-50 font-medium space-y-2">
+            <p>(Nombre del cliente), tu compra estará disponible desde hoy y te comento que tienes prioridad al momento de retirarla. Es importante saber que tu compra estará disponible durante 5 días, de lo contrario será cancelada.</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Recuerda que debes ir a retirar a la tienda (nombre de la tienda) con dirección (indicar dirección y horario de atención).</li>
+              <li>Debes ir solo tú, el titular de la cuenta, ya que se entregará el producto con validación de identidad mediante Huella Digital y debes llevar tu carnet de identidad. Si va un tercero esta no será entregada.</li>
+              <li>Se estará notificando vía SMS y/o Mail y/o WhatsApp informando el nombre de la tienda de retiro, dirección y los días que le quedan para ir a retirar.</li>
+            </ul>
+            <p class="font-bold text-slate-900">Recuerde que el proceso de portabilidad se dará dentro de las 24 HORAS HABILES.</p>
+          </div>
+
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-amber-500">
+            ALERTA SAE / SUBTEL
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p><strong>ALERTA SAE:</strong> La alerta del Sistema de Alerta de Emergencia (SAE), puede ser recibida en los equipos que cumplan con los requisitos técnicos definidos por SUBTEL de acuerdo con la resolución 3.261 del año 2012 y sus modificaciones.</p>
+            <p><strong>SUBTEL:</strong> Le informamos que puede hacer uso de su derecho de dar de baja el servicio contratado llamando, sin costo adicional desde su móvil Entel, al número 103 o a tarifa del SLM, al número de red fija 600 3600 103. Además, le enviaremos una copia del contrato por el mismo medio que se le envía la facturación. Para más información puede llamar a los mismos números señalados anteriormente.</p>
+          </div>
+
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-amber-500">
+            TRATAMIENTO DE DATOS
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Antes de finalizar, te comento que en Entel estamos comprometidos con la protección de los datos personales de nuestros clientes, es por eso quiero comentarte que usaremos tus datos para mejorar tu experiencia, entregarte el servicio que estás contratando, y para otras finalidades que se detallan en la Política de Privacidad Clientes que puedes revisar en nuestro sitio web www.entel.cl/legales". Además, podrás revisar o descargar una copia de tu contrato desde la sección Mi Perfil/documentos.</p>
+            <p class="font-bold text-slate-900">Por favor, necesito que me contestes con un claro SI ó NO</p>
+            <p class="font-bold text-slate-900">¿Autorizas a Entel a usar y tratar tus datos para el envío de comunicaciones comerciales personalizadas y compartirlos con terceros con los que Entel tenga acuerdos?</p>
+            <p class="text-red-600 font-bold italic">Nota asesor/a: Si el cliente no está de acuerdo con la autorización, NO debes registrar consentimiento</p>
+          </div>
+
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-amber-500">
+            EN CASO DE CONTRATAR MULTILÍNEA - OBLIGATORIO
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Para activar y asociar la simcard a cada número móvil, con cada simcard instalada en el equipo deberás llamar 103, señalar opción móvil, luego indicar quiero conocer número móvil, y recibirás en línea a información del número asociado.</p>
+          </div>
+
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-amber-500">
+            DESPEDIDA
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>XXXXX (Nombre del cliente) te doy la bienvenida a Entel y te invito a ingresar a la App para que puedas ver los servicios contratados, disfrutar sus beneficios y pagar de forma fácil. Si tienes alguna consulta lo puedes resolver con nuestro chat Claudia, la encontraras al abrir la App en cualquier momento." En caso de reclamo con respecto al servicio contratado te puedes comunicar desde tu teléfono al 105 o desde red fija y otras compañías 600 3700 105".</p>
+          </div>
+
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px] border-t border-amber-500">
+            ENCUESTA
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Además, te informo que es probable que te contacten dentro de las 48 horas posterior a la activación para responder una breve encuesta sobre la atención del día de hoy, la escala de votación es del 1 al 5. Siendo 5 la nota más alta".</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-4 border-t border-slate-200 flex flex-col md:flex-row gap-3">
+        <button onclick="copyText('Contrato secuencial oficial Plan Gigas 16.990 - Entel')" class="w-full bg-sky-500 text-white font-extrabold text-xs py-3 rounded-2xl uppercase tracking-wider shadow-md hover:bg-sky-600 transition-all">
+          Copiar Referencia del Contrato Plan 16.990
+        </button>
+        <button onclick="cerrarModalContrato16990()" class="w-full md:w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-3 rounded-2xl">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       lucide.createIcons();
@@ -1383,6 +1727,14 @@
 
     function cerrarModalContratoAdultoMayor() {
       document.getElementById('modalContratoAdultoMayor').classList.add('hidden');
+    }
+
+    function verContratoPlan16990() {
+      document.getElementById('modalContrato16990').classList.remove('hidden');
+    }
+
+    function cerrarModalContrato16990() {
+      document.getElementById('modalContrato16990').classList.add('hidden');
     }
 
     function calcularProporcional() {
