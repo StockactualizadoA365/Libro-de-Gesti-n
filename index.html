@@ -1,746 +1,1287 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-slate-50">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libro de Gestión Móvil Entel - v48.0</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        entel: {
-                            blue: '#005cff',
-                            darkblue: '#002b80',
-                            orange: '#ff5e00',
-                            orangeHover: '#e05300',
-                            lightBg: '#f4f7fc'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .social-badge { transition: transform 0.2s; }
-        .social-badge:hover { transform: scale(1.1); }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
-        .custom-scrollbar::-webkit-scrollbar-shadow { background: #cbd5e1; border-radius: 4px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Libro de Gestión Móvil Entel - V.48</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .tab-content { display: none; }
+    .tab-content.active { display: block !important; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
 </head>
-<body class="h-full flex flex-col font-sans text-slate-800 bg-slate-100 antialiased selection:bg-blue-500 selection:text-white">
+<body class="bg-slate-100 min-h-screen text-slate-800 font-sans pb-20">
 
-    <header class="bg-gradient-to-r from-blue-900 via-entel-darkblue to-blue-950 text-white shadow-xl sticky top-0 z-40 border-b border-blue-800/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo & Title -->
-                <div class="flex items-center gap-4">
-                    <div class="bg-white px-3 py-2 rounded-2xl shadow-inner flex items-center justify-center">
-                        <span class="text-3xl font-black tracking-tighter text-entel-blue">entel</span>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-white">Libro de Gestión Móvil</h1>
-                            <span class="bg-entel-orange text-white text-xs font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">v48.0</span>
-                        </div>
-                        <p class="text-xs text-blue-200/80 font-medium hidden sm:block">Herramienta Integral para Ejecutivos de Ventas y Portabilidad</p>
-                    </div>
-                </div>
-
-                <!-- Global Quick Action Badge -->
-                <div class="hidden md:flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10">
-                    <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
-                    <span class="text-xs font-semibold text-blue-100">Canal Ejecutivo Activo</span>
-                </div>
-            </div>
-
-            <!-- Tab Navigation Links -->
-            <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto pb-3 custom-scrollbar text-sm font-semibold border-t border-blue-800/40 pt-2">
-                <button onclick="switchTab('planes')" id="tab-btn-planes" class="tab-nav-btn active flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200 bg-white/10 text-white shadow-sm border border-white/10">
-                    <i data-lucide="smartphone" class="w-4 h-4"></i>
-                    <span>Planes Móviles</span>
-                </button>
-                <button onclick="switchTab('calculadora')" id="tab-btn-calculadora" class="tab-nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200 text-blue-200 hover:bg-white/10 hover:text-white">
-                    <i data-lucide="calculator" class="w-4 h-4"></i>
-                    <span>Calculadora Proporcional</span>
-                </button>
-                <button onclick="switchTab('herramientas')" id="tab-btn-herramientas" class="tab-nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200 text-blue-200 hover:bg-white/10 hover:text-white">
-                    <i data-lucide="wrench" class="w-4 h-4"></i>
-                    <span>Herramientas & Consultas</span>
-                </button>
-                <button onclick="switchTab('deudas')" id="tab-btn-deudas" class="tab-nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200 text-blue-200 hover:bg-white/10 hover:text-white">
-                    <i data-lucide="shield-alert" class="w-4 h-4"></i>
-                    <span>Validación Deudas</span>
-                </button>
-                <button onclick="switchTab('delivery')" id="tab-btn-delivery" class="tab-nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200 text-blue-200 hover:bg-white/10 hover:text-white">
-                    <i data-lucide="truck" class="w-4 h-4"></i>
-                    <span>Delivery & Tiendas</span>
-                </button>
-                <button onclick="switchTab('hogar')" id="tab-btn-hogar" class="tab-nav-btn flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200 text-blue-200 hover:bg-white/10 hover:text-white">
-                    <i data-lucide="home" class="w-4 h-4"></i>
-                    <span>Oferta Hogar</span>
-                </button>
-            </nav>
+  <!-- ENCABEZADO SUPERIOR -->
+  <header class="bg-[#0b132b] text-white shadow-lg border-b border-blue-900/50 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3">
+      
+      <!-- LOGO Y TÍTULO DE LA PÁGINA -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+        <div class="bg-[#002EFF] p-2 rounded-xl flex items-center justify-center shadow-md">
+          <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
         </div>
-    </header>
-
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-
-        <!-- TAB 1: PLANES MOVILES (CARDS CAROUSEL/GRID) -->
-        <section id="tab-planes" class="tab-content block space-y-6">
-            <!-- Header Banner -->
-            <div class="bg-gradient-to-r from-blue-600 via-entel-blue to-indigo-700 rounded-3xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
-                <div class="relative z-10 max-w-2xl">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/20 text-white backdrop-blur-md mb-3">
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-yellow-300"></i> Portafolio Comercial Vigente
-                    </span>
-                    <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">Planes Móviles Libres y Ratios Comerciales</h2>
-                    <p class="text-blue-100 mt-2 text-sm sm:text-base font-normal">
-                        Selecciona el plan para revisar su desglose tarifario, promociones aplicables, oferta Te Sumo y generar el contrato con lectura obligatoria legal.
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <!-- CARD 1: Plan Gigas 13.990 (400GB) -->
-                <div class="bg-white rounded-3xl border-2 border-orange-500 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
-                    <div>
-                        <!-- Header Banner -->
-                        <div class="bg-gradient-to-r from-orange-500 to-entel-orange p-5 text-white flex justify-between items-start">
-                            <div>
-                                <span class="bg-white/20 text-white text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Destacado Móvil</span>
-                                <h3 class="text-2xl font-extrabold mt-1">Plan Gigas $13.990</h3>
-                                <p class="text-orange-100 text-xs font-medium">Capacidad: 200 GB + 200 GB Bono Juntos</p>
-                            </div>
-                            <div class="p-2 bg-white/20 rounded-2xl backdrop-blur-md">
-                                <i data-lucide="zap" class="w-6 h-6 text-yellow-300"></i>
-                            </div>
-                        </div>
-
-                        <div class="p-6 space-y-5">
-                            <!-- Prices Structure -->
-                            <div class="space-y-2">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Precio General</span>
-                                    <span class="text-3xl font-black text-slate-900">$ 13.990</span>
-                                </div>
-
-                                <!-- Promo Offer Box -->
-                                <div class="bg-emerald-50 border border-emerald-300 rounded-2xl p-3 flex items-center justify-between">
-                                    <div>
-                                        <div class="text-xs font-bold text-emerald-800 uppercase">Oferta 30% Dscto x 6 Meses</div>
-                                        <div class="text-xs text-emerald-600 font-semibold">Portabilidad Móvil</div>
-                                    </div>
-                                    <span class="text-xl font-black text-emerald-700">$ 9.793</span>
-                                </div>
-
-                                <!-- Te Sumo Info -->
-                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs text-slate-600 flex justify-between items-center">
-                                    <span>Línea Adicional <b>Te Sumo</b></span>
-                                    <span class="font-bold text-slate-900">$ 10.990 / mes</span>
-                                </div>
-                            </div>
-
-                            <!-- RR.SS Included -->
-                            <div>
-                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Redes Sociales Incluidas</span>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="p-2 bg-green-100 text-green-700 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp</span>
-                                    <span class="p-2 bg-pink-100 text-pink-600 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="instagram" class="w-3.5 h-3.5"></i> Instagram</span>
-                                    <span class="p-2 bg-blue-100 text-blue-600 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="facebook" class="w-3.5 h-3.5"></i> Facebook</span>
-                                    <span class="p-2 bg-red-100 text-red-600 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="music" class="w-3.5 h-3.5"></i> Apple Music</span>
-                                    <span class="p-2 bg-emerald-100 text-emerald-600 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="radio" class="w-3.5 h-3.5"></i> Spotify</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="p-6 bg-slate-50 border-t border-slate-100 flex gap-3">
-                        <button onclick="copyOffer('Plan Gigas $13.990 con 200GB + 200GB Bono Juntos por $9.793 por 6 meses')" class="flex-1 bg-white hover:bg-slate-100 text-slate-700 font-bold py-3 px-3 rounded-2xl border border-slate-300 text-xs flex items-center justify-center gap-1.5 transition">
-                            <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
-                        </button>
-                        <button onclick="openContractModal('13990')" class="flex-1 bg-entel-orange hover:bg-entel-orangeHover text-white font-black py-3 px-3 rounded-2xl text-xs flex items-center justify-center gap-1.5 shadow-md shadow-orange-500/20 transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
-                        </button>
-                    </div>
-                </div>
-
-                <!-- CARD 2: Plan Gigas 16.990 (800GB) -->
-                <div class="bg-white rounded-3xl border border-cyan-300 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
-                    <div>
-                        <div class="bg-gradient-to-r from-cyan-600 to-blue-600 p-5 text-white flex justify-between items-start">
-                            <div>
-                                <span class="bg-white/20 text-white text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Alta Capacidad</span>
-                                <h3 class="text-2xl font-extrabold mt-1">Plan Gigas $16.990</h3>
-                                <p class="text-cyan-100 text-xs font-medium">Capacidad: 400 GB + 400 GB Bono Juntos</p>
-                            </div>
-                            <div class="p-2 bg-white/20 rounded-2xl backdrop-blur-md">
-                                <i data-lucide="wifi" class="w-6 h-6 text-white"></i>
-                            </div>
-                        </div>
-
-                        <div class="p-6 space-y-5">
-                            <div class="space-y-2">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Precio General</span>
-                                    <span class="text-3xl font-black text-slate-900">$ 16.990</span>
-                                </div>
-                                <div class="bg-emerald-50 border border-emerald-300 rounded-2xl p-3 flex items-center justify-between">
-                                    <div>
-                                        <div class="text-xs font-bold text-emerald-800 uppercase">Oferta 30% Dscto x 6 Meses</div>
-                                        <div class="text-xs text-emerald-600 font-semibold">Portabilidad Móvil</div>
-                                    </div>
-                                    <span class="text-xl font-black text-emerald-700">$ 11.893</span>
-                                </div>
-                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs text-slate-600 flex justify-between items-center">
-                                    <span>Línea Adicional <b>Te Sumo</b></span>
-                                    <span class="font-bold text-slate-900">$ 11.990 / mes</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Redes Sociales Incluidas</span>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="p-2 bg-green-100 text-green-700 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp</span>
-                                    <span class="p-2 bg-pink-100 text-pink-600 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="instagram" class="w-3.5 h-3.5"></i> Instagram</span>
-                                    <span class="p-2 bg-blue-100 text-blue-600 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="facebook" class="w-3.5 h-3.5"></i> Facebook</span>
-                                    <span class="p-2 bg-slate-100 text-slate-800 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="twitter" class="w-3.5 h-3.5"></i> X / Twitter</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 bg-slate-50 border-t border-slate-100 flex gap-3">
-                        <button onclick="copyOffer('Plan Gigas $16.990 con 800GB por $11.893 por 6 meses')" class="flex-1 bg-white hover:bg-slate-100 text-slate-700 font-bold py-3 px-3 rounded-2xl border border-slate-300 text-xs flex items-center justify-center gap-1.5 transition">
-                            <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
-                        </button>
-                        <button onclick="openContractModal('generic', 'Plan Gigas $16.990', '$16.990', '800 GB')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-3 px-3 rounded-2xl text-xs flex items-center justify-center gap-1.5 shadow-md transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
-                        </button>
-                    </div>
-                </div>
-
-                <!-- CARD 3: Plan Gigas 19.990 (1000GB) -->
-                <div class="bg-white rounded-3xl border border-blue-400 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
-                    <div>
-                        <div class="bg-gradient-to-r from-blue-700 to-indigo-800 p-5 text-white flex justify-between items-start">
-                            <div>
-                                <span class="bg-white/20 text-white text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Top Ventas</span>
-                                <h3 class="text-2xl font-extrabold mt-1">Plan Gigas $19.990</h3>
-                                <p class="text-blue-100 text-xs font-medium">Capacidad: 1.000 GB Libres</p>
-                            </div>
-                            <div class="p-2 bg-white/20 rounded-2xl backdrop-blur-md">
-                                <i data-lucide="award" class="w-6 h-6 text-yellow-400"></i>
-                            </div>
-                        </div>
-
-                        <div class="p-6 space-y-5">
-                            <div class="space-y-2">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Precio General</span>
-                                    <span class="text-3xl font-black text-slate-900">$ 19.990</span>
-                                </div>
-                                <div class="bg-emerald-50 border border-emerald-300 rounded-2xl p-3 flex items-center justify-between">
-                                    <div>
-                                        <div class="text-xs font-bold text-emerald-800 uppercase">Oferta 30% Dscto x 6 Meses</div>
-                                        <div class="text-xs text-emerald-600 font-semibold">Portabilidad Móvil</div>
-                                    </div>
-                                    <span class="text-xl font-black text-emerald-700">$ 13.993</span>
-                                </div>
-                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs text-slate-600 flex justify-between items-center">
-                                    <span>Línea Adicional <b>Te Sumo</b></span>
-                                    <span class="font-bold text-slate-900">$ 11.990 / mes</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Redes Sociales Incluidas</span>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="p-2 bg-emerald-100 text-emerald-700 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="infinity" class="w-3.5 h-3.5"></i> RRSS Libres Total</span>
-                                    <span class="p-2 bg-purple-100 text-purple-700 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="globe" class="w-3.5 h-3.5"></i> Roaming LDI Incluido</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 bg-slate-50 border-t border-slate-100 flex gap-3">
-                        <button onclick="copyOffer('Plan Gigas $19.990 con 1000GB Libres por $13.993 por 6 meses')" class="flex-1 bg-white hover:bg-slate-100 text-slate-700 font-bold py-3 px-3 rounded-2xl border border-slate-300 text-xs flex items-center justify-center gap-1.5 transition">
-                            <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
-                        </button>
-                        <button onclick="openContractModal('generic', 'Plan Gigas $19.990', '$19.990', '1000 GB')" class="flex-1 bg-indigo-700 hover:bg-indigo-800 text-white font-black py-3 px-3 rounded-2xl text-xs flex items-center justify-center gap-1.5 shadow-md transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
-                        </button>
-                    </div>
-                </div>
-
-                <!-- CARD 4: Plan Libre $24.990 -->
-                <div class="bg-white rounded-3xl border border-indigo-300 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
-                    <div>
-                        <div class="bg-gradient-to-r from-indigo-600 to-purple-700 p-5 text-white flex justify-between items-start">
-                            <div>
-                                <span class="bg-white/20 text-white text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Sin Limites</span>
-                                <h3 class="text-2xl font-extrabold mt-1">Plan Libre $24.990</h3>
-                                <p class="text-indigo-100 text-xs font-medium">Gigas Libres sin restricción de velocidad</p>
-                            </div>
-                            <div class="p-2 bg-white/20 rounded-2xl backdrop-blur-md">
-                                <i data-lucide="shield-check" class="w-6 h-6 text-emerald-300"></i>
-                            </div>
-                        </div>
-
-                        <div class="p-6 space-y-5">
-                            <div class="space-y-2">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Precio General</span>
-                                    <span class="text-3xl font-black text-slate-900">$ 24.990</span>
-                                </div>
-                                <div class="bg-emerald-50 border border-emerald-300 rounded-2xl p-3 flex items-center justify-between">
-                                    <div>
-                                        <div class="text-xs font-bold text-emerald-800 uppercase">Oferta 30% Dscto x 6 Meses</div>
-                                        <div class="text-xs text-emerald-600 font-semibold">Portabilidad Móvil</div>
-                                    </div>
-                                    <span class="text-xl font-black text-emerald-700">$ 17.493</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">Beneficios Premium</span>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="p-2 bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Roaming América</span>
-                                    <span class="p-2 bg-indigo-100 text-indigo-700 rounded-xl font-bold text-xs flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> HD Streaming</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 bg-slate-50 border-t border-slate-100 flex gap-3">
-                        <button onclick="copyOffer('Plan Libre $24.990 Gigas Libres por $17.493 por 6 meses')" class="flex-1 bg-white hover:bg-slate-100 text-slate-700 font-bold py-3 px-3 rounded-2xl border border-slate-300 text-xs flex items-center justify-center gap-1.5 transition">
-                            <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
-                        </button>
-                        <button onclick="openContractModal('generic', 'Plan Libre $24.990', '$24.990', 'Gigas Libres')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-black py-3 px-3 rounded-2xl text-xs flex items-center justify-center gap-1.5 shadow-md transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
-                        </button>
-                    </div>
-                </div>
-
-                <!-- CARD 5: Plan Roaming 29.990 -->
-                <div class="bg-white rounded-3xl border border-emerald-400 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
-                    <div>
-                        <div class="bg-gradient-to-r from-emerald-600 to-teal-700 p-5 text-white flex justify-between items-start">
-                            <div>
-                                <span class="bg-white/20 text-white text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Viajero frecuente</span>
-                                <h3 class="text-2xl font-extrabold mt-1">Plan Roaming $29.990</h3>
-                                <p class="text-emerald-100 text-xs font-medium">Gigas Libres + Cuota Roaming Global</p>
-                            </div>
-                            <div class="p-2 bg-white/20 rounded-2xl backdrop-blur-md">
-                                <i data-lucide="plane" class="w-6 h-6 text-white"></i>
-                            </div>
-                        </div>
-
-                        <div class="p-6 space-y-5">
-                            <div class="space-y-2">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Precio General</span>
-                                    <span class="text-3xl font-black text-slate-900">$ 29.990</span>
-                                </div>
-                                <div class="bg-emerald-50 border border-emerald-300 rounded-2xl p-3 flex items-center justify-between">
-                                    <div>
-                                        <div class="text-xs font-bold text-emerald-800 uppercase">Oferta Preferencial</div>
-                                        <div class="text-xs text-emerald-600 font-semibold">Roaming Incluido 5GB</div>
-                                    </div>
-                                    <span class="text-xl font-black text-emerald-700">$ 20.993</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 bg-slate-50 border-t border-slate-100 flex gap-3">
-                        <button onclick="copyOffer('Plan Roaming $29.990')" class="flex-1 bg-white hover:bg-slate-100 text-slate-700 font-bold py-3 px-3 rounded-2xl border border-slate-300 text-xs flex items-center justify-center gap-1.5 transition">
-                            <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
-                        </button>
-                        <button onclick="openContractModal('generic', 'Plan Roaming $29.990', '$29.990', 'Gigas Libres + Roaming')" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 px-3 rounded-2xl text-xs flex items-center justify-center gap-1.5 shadow-md transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
-                        </button>
-                    </div>
-                </div>
-
-                <!-- CARD 6: Plan Adulto Mayor $4.990 -->
-                <div class="bg-white rounded-3xl border border-purple-300 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
-                    <div>
-                        <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-5 text-white flex justify-between items-start">
-                            <div>
-                                <span class="bg-white/20 text-white text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Senior / Especial</span>
-                                <h3 class="text-2xl font-extrabold mt-1">Adulto Mayor $4.990</h3>
-                                <p class="text-purple-100 text-xs font-medium">Plan Senior con Redes Sociales Libres</p>
-                            </div>
-                            <div class="p-2 bg-white/20 rounded-2xl backdrop-blur-md">
-                                <i data-lucide="heart" class="w-6 h-6 text-pink-200"></i>
-                            </div>
-                        </div>
-
-                        <div class="p-6 space-y-5">
-                            <div class="space-y-2">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Precio General</span>
-                                    <span class="text-3xl font-black text-slate-900">$ 4.990</span>
-                                </div>
-                                <div class="bg-emerald-50 border border-emerald-300 rounded-2xl p-3 flex items-center justify-between">
-                                    <div>
-                                        <div class="text-xs font-bold text-emerald-800 uppercase">Precio Tarifa Senior</div>
-                                        <div class="text-xs text-emerald-600 font-semibold">60 años o más</div>
-                                    </div>
-                                    <span class="text-xl font-black text-emerald-700">$ 4.990</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 bg-slate-50 border-t border-slate-100 flex gap-3">
-                        <button onclick="copyOffer('Plan Adulto Mayor $4.990')" class="flex-1 bg-white hover:bg-slate-100 text-slate-700 font-bold py-3 px-3 rounded-2xl border border-slate-300 text-xs flex items-center justify-center gap-1.5 transition">
-                            <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
-                        </button>
-                        <button onclick="openContractModal('generic', 'Plan Adulto Mayor $4.990', '$4.990', '15 GB + WhatsApp')" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-black py-3 px-3 rounded-2xl text-xs flex items-center justify-center gap-1.5 shadow-md transition">
-                            <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section id="tab-calculadora" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xl space-y-6">
-                <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
-                    <div class="p-3 bg-blue-100 text-entel-blue rounded-2xl">
-                        <i data-lucide="calculator" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-extrabold text-slate-900">Calculadora de Cobro Proporcional y Ciclos</h2>
-                        <p class="text-sm text-slate-500">Calcula la primera factura para evitar reclamos por prorrateo de días.</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Input Form -->
-                    <div class="space-y-4 md:col-span-1 bg-slate-50 p-5 rounded-2xl border border-slate-200">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Plan Principal</label>
-                            <select id="calc-plan" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none">
-                                <option value="13990">Plan Gigas $13.990</option>
-                                <option value="16990">Plan Gigas $16.990</option>
-                                <option value="19990">Plan Gigas $19.990</option>
-                                <option value="24990">Plan Libre $24.990</option>
-                                <option value="29990">Plan Roaming $29.990</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Línea Adicional Te Sumo</label>
-                            <select id="calc-tesumo" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none">
-                                <option value="0">Sin Línea Te Sumo</option>
-                                <option value="10990">Te Sumo $10.990</option>
-                                <option value="11990">Te Sumo $11.990</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Ciclo de Facturación</label>
-                            <select id="calc-ciclo" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none">
-                                <option value="50">Ciclo 50 (Corte el 1 de cada mes)</option>
-                                <option value="51">Ciclo 51 (Corte el 5 de cada mes)</option>
-                                <option value="52">Ciclo 52 (Corte el 10 de cada mes)</option>
-                                <option value="53">Ciclo 53 (Corte el 15 de cada mes)</option>
-                                <option value="54">Ciclo 54 (Corte el 22 de cada mes)</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Días Uso en primer mes (1 a 30)</label>
-                            <input type="number" id="calc-dias" value="15" min="1" max="30" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-blue-500 outline-none" oninput="calculateProportional()">
-                        </div>
-
-                        <button onclick="calculateProportional()" class="w-full bg-entel-blue hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition shadow-md">
-                            Calcular Proporcional
-                        </button>
-                    </div>
-
-                    <!-- Output Results -->
-                    <div class="md:col-span-2 space-y-4 flex flex-col justify-between">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="bg-blue-50 border border-blue-200 p-5 rounded-2xl">
-                                <span class="text-xs font-bold text-blue-600 uppercase">Monto Proporcional Estimado</span>
-                                <div id="res-proporcional" class="text-3xl font-black text-blue-900 mt-1">$ 6.995</div>
-                                <p class="text-xs text-blue-700 mt-1">Corresponde a los días activos del primer mes.</p>
-                            </div>
-                            <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl">
-                                <span class="text-xs font-bold text-emerald-600 uppercase">Primera Factura Total Estimada</span>
-                                <div id="res-primera-factura" class="text-3xl font-black text-emerald-900 mt-1">$ 20.985</div>
-                                <p class="text-xs text-emerald-700 mt-1">Proporcional + Siguiente Mes Adelantado.</p>
-                            </div>
-                        </div>
-
-                        <!-- Generated Speech Script -->
-                        <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-3 relative">
-                            <div class="flex justify-between items-center">
-                                <span class="text-xs font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
-                                    <i data-lucide="message-square" class="w-4 h-4"></i> Speech Explicativo para Cliente
-                                </span>
-                                <button onclick="copySpeech()" class="text-xs bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded-lg transition text-slate-200">
-                                    Copiar Speech
-                                </button>
-                            </div>
-                            <p id="speech-text" class="text-sm font-mono text-slate-300 leading-relaxed">
-                                "Estimado cliente, le informamos que su primera boleta incluirá el cobro proporcional por los días utilizados de este mes más el cargo fijo del mes entrante..."
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 3: HERRAMIENTAS Y CONSULTAS -->
-        <section id="tab-herramientas" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xl space-y-4">
-                <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="cpu" class="w-5 h-5 text-entel-orange"></i> Validación de Compatibilidad eSIM y EID
-                </h3>
-                <p class="text-sm text-slate-600">Verifica si el teléfono del cliente soporta eSIM ingresando el prefijo de su código EID (32 dígitos).</p>
-                <div class="flex gap-3 max-w-xl">
-                    <input type="text" placeholder="Ingrese los primeros 8 dígitos del EID..." class="flex-1 border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                    <button onclick="alert('EID Compatible con Red 5G Entel Chile.')" class="bg-slate-900 text-white font-bold px-5 py-3 rounded-xl hover:bg-slate-800 transition">
-                        Validar
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 4: DEUDAS Y MOROSIDAD -->
-        <section id="tab-deudas" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xl space-y-4">
-                <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="search" class="w-5 h-5 text-red-500"></i> Consulta de Morosidad y Castigo Financiero
-                </h3>
-                <p class="text-sm text-slate-600">Ingresa el RUT del cliente para comprobar bloqueo por deuda castigada o facturas vencidas.</p>
-                <div class="flex gap-3 max-w-xl">
-                    <input type="text" placeholder="12.345.678-K" class="flex-1 border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                    <button onclick="alert('RUT Sin Deudas Castigadas. Cliente Apto para Evaluación.')" class="bg-emerald-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-emerald-700 transition">
-                        Consultar RUT
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 5: DELIVERY & TIENDAS -->
-        <section id="tab-delivery" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xl space-y-4">
-                <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="map-pin" class="w-5 h-5 text-indigo-600"></i> Modalidades de Entrega de SIM y Equipos
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
-                        <h4 class="font-bold text-slate-800">Express (2 Horas)</h4>
-                        <p class="text-xs text-slate-500 mt-1">Disponible solo en Región Metropolitana para compras antes de las 15:00 hrs.</p>
-                    </div>
-                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
-                        <h4 class="font-bold text-slate-800">Programado (24h-48h)</h4>
-                        <p class="text-xs text-slate-500 mt-1">Despacho a regiones y zonas urbanas principales.</p>
-                    </div>
-                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
-                        <h4 class="font-bold text-slate-800">Retiro en Tienda</h4>
-                        <p class="text-xs text-slate-500 mt-1">Habilitado con validación biométrica presencial.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 6: OFERTA HOGAR -->
-        <section id="tab-hogar" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-xl space-y-4">
-                <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="wifi" class="w-5 h-5 text-blue-600"></i> Planes Fibra Hogar Entel
-                </h3>
-                <p class="text-sm text-slate-600">Oferta cruzada disponible para clientes móviles con hasta 30% de descuento en la tarifa mensual.</p>
-            </div>
-        </section>
-
-    </main>
-
-    <div id="modal-contract" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in duration-200">
-            
-            <!-- Modal Header -->
-            <div class="bg-gradient-to-r from-slate-900 to-entel-darkblue text-white p-5 flex justify-between items-center border-b border-slate-800">
-                <div class="flex items-center gap-3">
-                    <div class="p-2 bg-entel-orange rounded-xl">
-                        <i data-lucide="file-check-2" class="w-5 h-5 text-white"></i>
-                    </div>
-                    <div>
-                        <h3 id="modal-title" class="font-extrabold text-lg">Contrato Legal Obligatorio</h3>
-                        <p class="text-xs text-blue-200">Lectura completa según exigencia de la normativa SUBTEL y Auditoría</p>
-                    </div>
-                </div>
-                <button onclick="closeContractModal()" class="p-2 hover:bg-white/10 rounded-full transition text-slate-300 hover:text-white">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-
-            <!-- Modal Body (Legal Script Text) -->
-            <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-4 text-xs text-slate-700 font-mono leading-relaxed bg-slate-50 border-b border-slate-200" id="modal-body-text">
-                <!-- Script content injected dynamically -->
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="p-4 bg-white flex flex-col sm:flex-row justify-between items-center gap-3">
-                <div class="text-xs text-slate-500 flex items-center gap-1.5">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i> Texto verificado por la Gerencia de Calidad
-                </div>
-                <div class="flex gap-2 w-full sm:w-auto">
-                    <button onclick="copyContractModalText()" class="flex-1 sm:flex-none px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl font-bold transition flex items-center justify-center gap-2">
-                        <i data-lucide="copy" class="w-4 h-4"></i> Copiar Texto
-                    </button>
-                    <button onclick="closeContractModal()" class="flex-1 sm:flex-none px-6 py-2.5 bg-entel-blue hover:bg-blue-700 text-white rounded-xl font-bold transition">
-                        Entendido / Cerrar
-                    </button>
-                </div>
-            </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-extrabold text-lg md:text-xl tracking-tight text-white">Libro de Gestión Móvil Entel</h1>
+            <span class="text-[10px] bg-orange-500 text-white font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">V.48</span>
+          </div>
+          <p class="text-xs text-blue-200/70">Plataforma Unificada de Ventas & Consultas</p>
         </div>
+      </div>
+      
+      <!-- NAV SUPERIOR -->
+      <nav id="top-nav" class="hidden flex space-x-1 bg-slate-900/90 p-1.5 rounded-xl text-xs w-full md:w-auto overflow-x-auto no-scrollbar border border-slate-800">
+        <button onclick="switchTab('home')" id="tab-home" class="tab-btn px-2.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1 whitespace-nowrap">
+          <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+          <span>Inicio</span>
+        </button>
+        <button onclick="switchTab('calculadora')" id="tab-calculadora" class="tab-btn px-2.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1 whitespace-nowrap">
+          <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+          <span>Calculadora</span>
+        </button>
+        <button onclick="switchTab('planes')" id="tab-planes" class="tab-btn px-2.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1 whitespace-nowrap">
+          <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+          <span>Planes Móviles</span>
+        </button>
+        <button onclick="switchTab('herramientas')" id="tab-herramientas" class="tab-btn px-2.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1 whitespace-nowrap">
+          <i data-lucide="wrench" class="w-3.5 h-3.5"></i>
+          <span>Herramientas</span>
+        </button>
+        <button onclick="switchTab('deudas')" id="tab-deudas" class="tab-btn px-2.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1 whitespace-nowrap">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+          <span>Validación Deudas</span>
+        </button>
+        <button onclick="switchTab('delivery')" id="tab-delivery" class="tab-btn px-2.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1 whitespace-nowrap">
+          <i data-lucide="truck" class="w-3.5 h-3.5"></i>
+          <span>Delivery & Tiendas</span>
+        </button>
+        <button onclick="switchTab('fibra')" id="tab-fibra" class="tab-btn px-2.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1 whitespace-nowrap">
+          <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
+          <span>Fibra Hogar</span>
+        </button>
+        <button onclick="switchTab('procesos')" id="tab-procesos" class="tab-btn px-2.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1 whitespace-nowrap">
+          <i data-lucide="info" class="w-3.5 h-3.5"></i>
+          <span>Procesos</span>
+        </button>
+      </nav>
     </div>
+  </header>
 
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
 
-        // TAB SWITCHING SYSTEM
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-nav-btn').forEach(btn => {
-                btn.classList.remove('bg-white/10', 'text-white', 'shadow-sm', 'border', 'border-white/10');
-                btn.classList.add('text-blue-200');
-            });
+    <!-- PORTAL DE INICIO (HOME CENTRAL) -->
+    <section id="sec-home" class="tab-content active space-y-6">
+      
+      <div class="bg-gradient-to-r from-[#002EFF] to-blue-900 rounded-3xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="space-y-3 max-w-2xl text-center md:text-left">
+          <span class="bg-white/20 text-white font-bold text-xs px-3 py-1 rounded-full border border-white/20">Portal Comercial de Ejecutivos</span>
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Bienvenido al Libro de Gestión Móvil Entel</h2>
+          <p class="text-blue-100 text-xs md:text-sm leading-relaxed">Selecciona cualquiera de las áreas principales de consulta para ingresar a sus herramientas y documentación.</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 text-center min-w-[200px]">
+          <span class="text-xs text-blue-200 block uppercase font-bold">Versión del Sistema</span>
+          <span class="text-2xl font-black text-white">V.48 Online</span>
+          <span class="text-[11px] text-emerald-300 block mt-1 font-medium">● Oferta Comercial Vigente</span>
+        </div>
+      </div>
 
-            const selectedContent = document.getElementById(`tab-${tabId}`);
-            if(selectedContent) selectedContent.classList.remove('hidden');
+      <!-- RECUADROS DIRECTORIOS CENTRALES -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- 1. Calculadora Proporcional -->
+        <div onclick="switchTab('calculadora')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-[#002EFF]/10"></div>
+          <div>
+            <div class="p-4 bg-[#002EFF] text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="calculator" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-[#002EFF] transition-colors">🧮 Calculadora Proporcional</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Simulador exacto de planes, líneas adicionales (Te Sumo), descuentos y ciclo de facturación.</p>
+          </div>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-[#002EFF] tracking-wide uppercase">
+            <span>Acceder a Calculadora</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
+          </div>
+        </div>
 
-            const selectedBtn = document.getElementById(`tab-btn-${tabId}`);
-            if(selectedBtn) {
-                selectedBtn.classList.add('bg-white/10', 'text-white', 'shadow-sm', 'border', 'border-white/10');
-                selectedBtn.classList.remove('text-blue-200');
-            }
+        <!-- 2. Planes Móviles & Contratos -->
+        <div onclick="switchTab('planes')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-[#002EFF]/10"></div>
+          <div>
+            <div class="p-4 bg-blue-600 text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="smartphone" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-[#002EFF] transition-colors">📱 Planes Móviles & Contratos</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Consulta la oferta comercial de portabilidad, líneas nuevas, segundas líneas, adulto mayor y cláusulas contractuales.</p>
+          </div>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-[#002EFF] tracking-wide uppercase">
+            <span>Ver Planes y Contratos</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- 3. Herramientas y aplicaciones -->
+        <div onclick="switchTab('herramientas')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-indigo-500/10"></div>
+          <div>
+            <div class="p-4 bg-indigo-600 text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="wrench" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-indigo-600 transition-colors">🛠️ Herramientas y aplicaciones</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Acceso a plataformas corporativas, validadores externos, cotizadores de equipos y aplicativos de gestión diaria.</p>
+          </div>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-indigo-600 tracking-wide uppercase">
+            <span>Abrir Herramientas</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- 4. Validación y acreditación de deudas -->
+        <div onclick="switchTab('deudas')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-amber-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-amber-500/10"></div>
+          <div>
+            <div class="p-4 bg-amber-600 text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="shield-check" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-amber-600 transition-colors">🛡️ Validación y acreditación de deudas</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Procedimientos para verificación de evaluación crediticia, evaluación de morosidad y acreditación de pagos.</p>
+          </div>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-amber-600 tracking-wide uppercase">
+            <span>Consultar Deudas</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- 5. Delivery y tiendas -->
+        <div onclick="switchTab('delivery')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-purple-500/10"></div>
+          <div>
+            <div class="p-4 bg-purple-600 text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="truck" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-purple-600 transition-colors">⚖️ Delivery y tiendas</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Coberturas de despachos a domicilio, tiempos de entrega, canal presencial y directorio de sucursales a nivel nacional.</p>
+          </div>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-purple-600 tracking-wide uppercase">
+            <span>Ver Delivery y Tiendas</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- 6. Planes fibra hogar y contratos -->
+        <div onclick="switchTab('fibra')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full -mr-8 -mt-8 transition-all group-hover:bg-emerald-500/10"></div>
+          <div>
+            <div class="p-4 bg-emerald-600 text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="wifi" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-emerald-600 transition-colors">🌐 Planes fibra hogar y contratos</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Matriz de velocidades de Fibra Óptica, paquetes Dúo/Trio con TV, cargos de instalación y condiciones del servicio.</p>
+          </div>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-emerald-600 tracking-wide uppercase">
+            <span>Ver Fibra Hogar</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
+          </div>
+        </div>
+
+        <!-- 7. Información de procesos -->
+        <div onclick="switchTab('procesos')" class="group bg-white p-8 rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1.5 relative overflow-hidden flex flex-col justify-between min-h-[220px] md:col-span-2 lg:col-span-3">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-bl-full -mr-8 -mt-8"></div>
+          <div>
+            <div class="p-4 bg-slate-800 text-white rounded-2xl w-fit mb-4 shadow-lg group-hover:scale-105 transition-transform">
+              <i data-lucide="info" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-black text-slate-900 text-xl group-hover:text-slate-800 transition-colors">ℹ️ Información de procesos</h3>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Guía paso a paso de tipificaciones, flujo de posventa, portabilidad numérica y scripts de biometría obligatorios.</p>
+          </div>
+          <div class="mt-6 flex items-center text-xs font-extrabold text-slate-800 tracking-wide uppercase">
+            <span>Ver Guía de Procesos</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 group-hover:translate-x-2 transition-transform"></i>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN: CALCULADORA PROPORCIONAL -->
+    <section id="sec-calculadora" class="tab-content space-y-6">
+      <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 shadow-lg max-w-4xl mx-auto space-y-6">
+        
+        <div class="flex items-center space-x-3 border-b border-slate-100 pb-4">
+          <div class="p-3 bg-blue-50 text-[#002EFF] rounded-2xl shadow-sm">
+            <i data-lucide="calculator" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">🧮 Calculadora de Cobro Proporcional</h2>
+            <p class="text-xs text-slate-500">Estimación de planes, líneas adicionales (Te Sumo), descuentos y proporcional</p>
+          </div>
+        </div>
+
+        <!-- FORMULARIO DE ENTRADA -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs font-semibold">
+          
+          <!-- 0. Modo de Venta -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Modalidad de Venta</label>
+            <select id="calcSoloAdicional" onchange="calcularProporcional()" class="w-full p-3 bg-blue-50 border-2 border-blue-300 rounded-xl font-extrabold text-[#002EFF] text-sm focus:outline-none">
+              <option value="no" selected>Plan Principal + Adicionales</option>
+              <option value="si">Solo Venta de Línea Adicional (Te Sumo)</option>
+            </select>
+          </div>
+
+          <!-- 1. Selecciona el Plan -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Selecciona el Plan ($)</label>
+            <select id="calcPlan" onchange="calcularProporcional()" class="w-full p-3 bg-yellow-300/80 border-2 border-yellow-400 rounded-xl font-extrabold text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+              <option value="12990">$ 12,990</option>
+              <option value="13990">$ 13,990</option>
+              <option value="15990">$ 15,990 (Te Sumo $10.990)</option>
+              <option value="16990" selected>$ 16,990 (Te Sumo $10.990)</option>
+              <option value="17990">$ 17,990 (Te Sumo $10.990)</option>
+              <option value="19990">$ 19,990 (Te Sumo $11.990)</option>
+              <option value="20990">$ 20,990 (Te Sumo $11.990)</option>
+              <option value="21990">$ 21,990 (Te Sumo $11.990)</option>
+              <option value="22990">$ 22,990 (Te Sumo $11.990)</option>
+              <option value="23990">$ 23,990 (Te Sumo $11.990)</option>
+              <option value="29990">$ 29,990 (Te Sumo $11.990)</option>
+              <option value="39990">$ 39,990 (Te Sumo $11.990)</option>
+            </select>
+          </div>
+
+          <!-- 2. Cantidad de Líneas Adicionales -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Cantidad de líneas adicionales</label>
+            <select id="calcLineas" onchange="calcularProporcional()" class="w-full p-3 bg-yellow-300/80 border-2 border-yellow-400 rounded-xl font-extrabold text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+              <option value="0">0 Líneas Adicionales</option>
+              <option value="1" selected>1 Línea Adicional</option>
+              <option value="2">2 Líneas Adicionales</option>
+              <option value="3">3 Líneas Adicionales</option>
+              <option value="4">4 Líneas Adicionales</option>
+            </select>
+          </div>
+
+          <!-- 3. Porcentaje de Descuento -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Porcentaje de Descuento (%)</label>
+            <select id="calcDscto" onchange="calcularProporcional()" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+              <option value="0">Sin Descuento (0%)</option>
+              <option value="0.15">15% Descuento</option>
+              <option value="0.20">20% Descuento</option>
+              <option value="0.30" selected>30% Descuento</option>
+              <option value="0.38">38% Descuento</option>
+              <option value="0.50">50% Descuento</option>
+              <option value="0.75">75% Descuento</option>
+            </select>
+          </div>
+
+          <!-- 4. Ciclo de Facturación -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Ciclo de Facturación</label>
+            <select id="calcCiclo" onchange="calcularProporcional()" class="w-full p-3 bg-yellow-300/80 border-2 border-yellow-400 rounded-xl font-extrabold text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+              <option value="50">Ciclo 50 (Periodo 01 al 30/31)</option>
+              <option value="51">Ciclo 51 (Periodo 01 al 30/31)</option>
+              <option value="52">Ciclo 52 (Periodo 08 al 07)</option>
+              <option value="53" selected>Ciclo 53 (Periodo 16 al 15)</option>
+              <option value="54">Ciclo 54 (Periodo 23 al 22)</option>
+            </select>
+          </div>
+
+          <!-- 5. Fecha / Día de Activación -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Fecha / Día de Activación</label>
+            <select id="calcDiaAct" onchange="calcularProporcional()" class="w-full p-3 bg-yellow-300/80 border-2 border-yellow-400 rounded-xl font-extrabold text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+              <!-- Días 1 al 31 -->
+            </select>
+          </div>
+
+        </div>
+
+        <!-- TABLA DESGLOSE -->
+        <div class="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm bg-white">
+          <table class="w-full text-center text-xs">
+            <thead>
+              <tr class="bg-sky-500 text-white font-bold uppercase tracking-wider">
+                <th class="p-3 border-r border-sky-400/50">Concepto</th>
+                <th class="p-3 border-r border-sky-400/50">Línea Principal</th>
+                <th class="p-3 border-r border-sky-400/50">Línea(s) Adicional(es) (Te Sumo)</th>
+                <th class="p-3">Total</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 font-bold text-slate-800">
+              <tr class="bg-blue-50/50">
+                <td class="p-3 bg-sky-500 text-white font-bold text-left border-r border-sky-400/50">Cargo Fijo General</td>
+                <td id="rowCargoPrin" class="p-3 border-r border-slate-200">$ 16,990</td>
+                <td id="rowCargoAdic" class="p-3 border-r border-slate-200">$ 10,990</td>
+                <td id="rowCargoTotal" class="p-3 font-extrabold text-slate-900">$ 27,980</td>
+              </tr>
+              <tr>
+                <td class="p-3 bg-sky-500 text-white font-bold text-left border-r border-sky-400/50">Descuento</td>
+                <td id="rowDsctoPrin" class="p-3 border-r border-slate-200 text-emerald-600">$ 5,097</td>
+                <td id="rowDsctoAdic" class="p-3 border-r border-slate-200 text-emerald-600">$ 3,297</td>
+                <td id="rowDsctoTotal" class="p-3 font-extrabold text-emerald-600">$ 8,394</td>
+              </tr>
+              <tr class="bg-emerald-700 text-white font-bold text-sm">
+                <td class="p-3 bg-emerald-800 text-white font-bold text-left border-r border-emerald-600">Pago por Mes</td>
+                <td id="rowPagoPrin" class="p-3 border-r border-emerald-600">$ 11,893</td>
+                <td id="rowPagoAdic" class="p-3 border-r border-emerald-600">$ 7,693</td>
+                <td id="rowPagoTotal" class="p-3 font-extrabold text-white">$ 19,586</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RECUADRO DE RESULTADOS CON SPEECH -->
+        <div id="calcResult" class="bg-[#0b132b] text-white p-6 rounded-3xl space-y-4 text-xs shadow-xl border border-slate-800">
+          
+          <div class="flex justify-between items-center border-b border-slate-800/80 pb-3">
+            <span class="text-slate-400 font-medium">Días con Servicio Activo:</span>
+            <span id="resDiasActivos" class="font-extrabold text-yellow-400 text-sm">24 días (Ciclo 53)</span>
+          </div>
+
+          <div class="flex justify-between items-center border-b border-slate-800/80 pb-3">
+            <span class="text-slate-300 font-semibold">Valor proporcional 1era boleta:</span>
+            <span id="resVal1era" class="font-extrabold text-yellow-400 text-base">$ 15,669</span>
+          </div>
+
+          <div class="flex justify-between items-center border-b border-slate-800/80 pb-3">
+            <span class="text-slate-300 font-semibold">Valor desde la 2da hasta las 6ta boleta:</span>
+            <span id="resVal2da6ta" class="font-extrabold text-emerald-400 text-base">$ 19,586</span>
+          </div>
+
+          <div class="flex justify-between items-center border-b border-slate-800/80 pb-3">
+            <span class="text-slate-300 font-semibold">Valor desde la 7ma en adelante:</span>
+            <span id="resVal7ma" class="font-extrabold text-blue-400 text-base">$ 27,980</span>
+          </div>
+
+          <!-- BLOQUE DE SPEECH -->
+          <div class="bg-slate-900/90 border border-slate-700/60 p-4 rounded-2xl space-y-2">
+            <span class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider block">💬 Speech Sugerido para el Cliente:</span>
+            <p id="speechBoxText" class="text-slate-200 text-xs leading-relaxed italic">
+              "Estimado cliente, usted por sus líneas pagará un total de $ 27,980, donde el primer mes pagará $ 15,669 pesos (monto proporcional), desde el segundo mes hasta el 6to mes pagará $ 19,586 pesos, y a partir de la 7ma boleta en adelante pagará $ 27,980 pesos."
+            </p>
+          </div>
+
+          <button onclick="copiarCalculo()" class="w-full bg-[#002EFF] hover:bg-blue-600 text-white font-extrabold py-3 rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer">
+            <i data-lucide="copy" class="w-4 h-4"></i> Copiar Explicación para Cliente
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN: PLANES MÓVILES & CONTRATOS (PRECIO GENERAL ARRIBA + OFERTA ABAJO) -->
+    <section id="sec-planes" class="tab-content space-y-6">
+      
+      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+          <h2 class="text-lg font-extrabold text-slate-900">📱 Oferta Comercial de Planes Móviles</h2>
+          <p class="text-xs text-slate-500">Monto del Plan Base + Promociones de Descuento Vigentes</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">Filtrar:</span>
+          <select id="filterPerfil" onchange="filterPlanes()" class="text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-bold text-slate-700 focus:outline-none">
+            <option value="todos">Todos los Planes</option>
+            <option value="adulto">Adulto Mayor</option>
+            <option value="400">Plan 400 GB</option>
+            <option value="800">Plan 800 GB</option>
+            <option value="1000">Plan 1000 GB / Libres</option>
+            <option value="roaming">Planes Roaming Pro</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ÍCONOS VECTORIALES DE REDES SOCIALES LIBRES (RRSS) -->
+      <template id="rrss-template">
+        <div class="flex items-center gap-1.5 flex-wrap pt-1">
+          <div class="w-6 h-6 rounded-md bg-[#1877F2] text-white flex items-center justify-center shadow-sm" title="Facebook">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </div>
+          <div class="w-6 h-6 rounded-md bg-[#25D366] text-white flex items-center justify-center shadow-sm" title="WhatsApp">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          </div>
+          <div class="w-6 h-6 rounded-md bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex items-center justify-center shadow-sm" title="Instagram">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div class="w-6 h-6 rounded-md bg-gradient-to-r from-red-500 to-pink-500 text-white flex items-center justify-center shadow-sm" title="Apple Music">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          </div>
+          <div class="w-6 h-6 rounded-md bg-[#1DB954] text-white flex items-center justify-center shadow-sm" title="Spotify">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 C9.6 9.9 15 10.561 18.72 12.841c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.18-.1.2-1.02-.36-.18-.6.36-1.02 1.02-1.2 4.2-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.42-1.02.6-1.56.3z"/></svg>
+          </div>
+          <div class="w-6 h-6 rounded-md bg-black text-white flex items-center justify-center shadow-sm" title="X (Twitter)">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </div>
+          <div class="w-6 h-6 rounded-md bg-[#0084FF] text-white flex items-center justify-center shadow-sm" title="Messenger">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.614 4.469 8.654V24l4.088-2.242c1.092.302 2.252.464 3.443.464 6.627 0 12-4.975 12-11.111S18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26 6.559-6.963 3.13 3.259 5.889-3.259-6.56 6.964z"/></svg>
+          </div>
+        </div>
+      </template>
+
+      <!-- CONTENEDOR DE TARJETAS DE PLANES CON PRECIO BASE GRANDE Y OFERTA ABAJO -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="containerPlanes">
+        
+        <!-- 1. PLAN ADULTO MAYOR -->
+        <div class="bg-white rounded-3xl border-2 border-purple-200 shadow-md p-6 space-y-4 plan-card flex flex-col justify-between" data-perfil="adulto">
+          <div class="space-y-3">
+            <div class="bg-purple-700 text-white p-3 rounded-2xl flex justify-between items-center shadow-sm">
+              <span class="font-extrabold text-sm uppercase tracking-wider">Plan Adulto Mayor</span>
+              <span class="text-[11px] bg-white/20 px-2.5 py-0.5 rounded-full font-bold">Sin Dscto</span>
+            </div>
+            
+            <!-- PRECIO GENERAL Y TARIFA FIJA -->
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-3xl font-black text-slate-900">$ 4.990</span>
+                <span class="text-xs text-slate-500 font-bold">/ mes (Precio General)</span>
+              </div>
+              <div class="mt-1 bg-slate-100 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200">
+                <span>Tarifa fija sin variaciones</span>
+              </div>
+            </div>
+
+            <ul class="text-xs space-y-2 text-slate-700 font-medium border-t border-slate-100 pt-3">
+              <li class="flex items-center gap-2"><i data-lucide="wifi" class="w-4 h-4 text-purple-600"></i> <strong>Internet:</strong> 12 GB</li>
+              <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-purple-600"></i> <strong>Habla hasta:</strong> 300 Minutos ($99 min adic)</li>
+              <li class="flex items-center gap-2"><i data-lucide="message-square" class="w-4 h-4 text-purple-600"></i> <strong>SMS:</strong> 50</li>
+              <li class="flex items-center gap-2"><i data-lucide="satellite" class="w-4 h-4 text-purple-600"></i> <strong>Starlink:</strong> SMS satelitales 200</li>
+              <li class="pt-2">
+                <span class="font-bold text-slate-900 block mb-1">RR.SS Libres:</span>
+                <div class="flex items-center gap-1.5"><span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-md">WhatsApp Libre</span></div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 pt-4 border-t border-slate-100">
+            <button onclick="copyText('Plan Adulto Mayor $4.990 - 12GB + 300 Minutos + Starlink SMS 200')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
+            </button>
+            <button onclick="verContrato('Plan Adulto Mayor $4.990')" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 uppercase shadow-md">
+              <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. PLAN 400 GIGAS ($13.990) CON CONTRATO ÍNTEGRO TRANSCRITO -->
+        <div class="bg-white rounded-3xl border-2 border-orange-200 shadow-md p-6 space-y-4 plan-card flex flex-col justify-between" data-perfil="400">
+          <div class="space-y-3">
+            <div class="bg-orange-600 text-white p-3 rounded-2xl flex justify-between items-center shadow-sm">
+              <span class="font-extrabold text-sm uppercase tracking-wider">Línea Principal 400 GB</span>
+              <span class="text-[11px] bg-white/20 px-2.5 py-0.5 rounded-full font-bold">Sin Dscto</span>
+            </div>
+            
+            <!-- PRECIO GENERAL Y TARIFA FIJA -->
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-3xl font-black text-slate-900">$ 13.990</span>
+                <span class="text-xs text-slate-500 font-bold">/ mes (Precio General)</span>
+              </div>
+              <div class="mt-1 bg-slate-100 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200">
+                <span>Tarifa fija sin promo de descuento</span>
+              </div>
+            </div>
+
+            <ul class="text-xs space-y-2 text-slate-700 font-medium border-t border-slate-100 pt-3">
+              <li class="flex items-center gap-2"><i data-lucide="wifi" class="w-4 h-4 text-orange-600"></i> <strong>Internet:</strong> 400 GB</li>
+              <li class="flex items-center gap-2"><i data-lucide="layers" class="w-4 h-4 text-orange-600"></i> <strong>Multilínea:</strong> 20GB adicionales (Bono juntos)</li>
+              <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-orange-600"></i> <strong>Habla hasta:</strong> 1000 Minutos ($99 min adic)</li>
+              <li class="flex items-center gap-2"><i data-lucide="message-square" class="w-4 h-4 text-orange-600"></i> <strong>SMS:</strong> 400</li>
+              <li class="flex items-center gap-2"><i data-lucide="satellite" class="w-4 h-4 text-orange-600"></i> <strong>Starlink:</strong> SMS satelitales 200</li>
+              <li class="pt-1">
+                <span class="font-bold text-slate-900 block mb-1">RR.SS Libres:</span>
+                <div class="rrss-slot"></div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 pt-4 border-t border-slate-100">
+            <button onclick="copyText('Plan 400 GB $13.990 - 400GB + Multilínea 20GB + 1000 Minutos')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
+            </button>
+            <button onclick="verContratoPlan13990()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 uppercase shadow-md">
+              <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. PLAN 800 GIGAS -->
+        <div class="bg-white rounded-3xl border-2 border-sky-300 shadow-md p-6 space-y-4 plan-card flex flex-col justify-between" data-perfil="800">
+          <div class="space-y-3">
+            <div class="bg-sky-500 text-white p-3 rounded-2xl flex justify-between items-center shadow-sm">
+              <span class="font-extrabold text-sm uppercase tracking-wider">Línea Principal 800 GB</span>
+              <span class="text-[11px] bg-emerald-400 text-slate-900 px-2.5 py-0.5 rounded-full font-black">30% DSCTO</span>
+            </div>
+            
+            <!-- PRECIO GENERAL ARRIBA + OFERTA ABAJO -->
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-3xl font-black text-slate-900">$ 16.990</span>
+                <span class="text-xs text-slate-500 font-bold">/ mes (Precio General)</span>
+              </div>
+              <div class="mt-1.5 bg-emerald-50 border border-emerald-300 px-3 py-1.5 rounded-xl flex items-center justify-between text-xs text-emerald-900 font-bold">
+                <span>🔥 Oferta Promo (Mes 1 al 6):</span>
+                <span class="text-sm font-black text-emerald-700">$ 11.893</span>
+              </div>
+              <p class="text-[11px] text-slate-500 font-semibold mt-1">Te Sumo (Línea Adicional): <strong class="text-slate-800">$ 10.990</strong></p>
+            </div>
+
+            <ul class="text-xs space-y-2 text-slate-700 font-medium border-t border-slate-100 pt-3">
+              <li class="flex items-center gap-2"><i data-lucide="wifi" class="w-4 h-4 text-sky-500"></i> <strong>Internet:</strong> 800 GB</li>
+              <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-sky-500"></i> <strong>Habla hasta:</strong> MINUTOS LIBRES ($99 min adic)</li>
+              <li class="flex items-center gap-2"><i data-lucide="message-square" class="w-4 h-4 text-sky-500"></i> <strong>SMS:</strong> 400</li>
+              <li class="flex items-center gap-2"><i data-lucide="satellite" class="w-4 h-4 text-sky-500"></i> <strong>Starlink:</strong> SMS satelitales 200</li>
+              <li class="pt-1">
+                <span class="font-bold text-slate-900 block mb-1">RR.SS Libres:</span>
+                <div class="rrss-slot"></div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 pt-4 border-t border-slate-100">
+            <button onclick="copyText('Plan 800 GB - Cargo general $16.990 / Oferta con 30% dscto a $11.893 x 6 meses - 800GB + Minutos Libres + Te Sumo $10.990')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
+            </button>
+            <button onclick="verContrato('Plan 800 GB $16.990')" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 uppercase shadow-md">
+              <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. PLAN 1000 GIGAS -->
+        <div class="bg-white rounded-3xl border-2 border-blue-300 shadow-md p-6 space-y-4 plan-card flex flex-col justify-between" data-perfil="1000">
+          <div class="space-y-3">
+            <div class="bg-blue-600 text-white p-3 rounded-2xl flex justify-between items-center shadow-sm">
+              <span class="font-extrabold text-sm uppercase tracking-wider">Línea Principal 1000 GB</span>
+              <span class="text-[11px] bg-emerald-400 text-slate-900 px-2.5 py-0.5 rounded-full font-black">50% DSCTO</span>
+            </div>
+            
+            <!-- PRECIO GENERAL ARRIBA + OFERTA ABAJO -->
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-3xl font-black text-slate-900">$ 19.990</span>
+                <span class="text-xs text-slate-500 font-bold">/ mes (Precio General)</span>
+              </div>
+              <div class="mt-1.5 bg-emerald-50 border border-emerald-300 px-3 py-1.5 rounded-xl flex items-center justify-between text-xs text-emerald-900 font-bold">
+                <span>🔥 Oferta Promo (Mes 1 al 6):</span>
+                <span class="text-sm font-black text-emerald-700">$ 9.995</span>
+              </div>
+              <p class="text-[11px] text-slate-500 font-semibold mt-1">Te Sumo (Línea Adicional): <strong class="text-slate-800">$ 11.990</strong></p>
+            </div>
+
+            <ul class="text-xs space-y-2 text-slate-700 font-medium border-t border-slate-100 pt-3">
+              <li class="flex items-center gap-2"><i data-lucide="wifi" class="w-4 h-4 text-blue-600"></i> <strong>Internet:</strong> 1000 GB</li>
+              <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-blue-600"></i> <strong>Habla hasta:</strong> MINUTOS LIBRES</li>
+              <li class="flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-blue-600"></i> <strong>Roaming:</strong> WhatsApp libre</li>
+              <li class="flex items-center gap-2"><i data-lucide="plane" class="w-4 h-4 text-blue-600"></i> <strong>Millas LATAM:</strong> 2.000 (Abono 150 / Bono mes 12: 200)</li>
+              <li class="pt-1">
+                <span class="font-bold text-slate-900 block mb-1">RR.SS Libres:</span>
+                <div class="rrss-slot"></div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 pt-4 border-t border-slate-100">
+            <button onclick="copyText('Plan 1000 GB - Cargo general $19.990 / Oferta con 50% dscto a $9.995 x 6 meses - 1000GB + Minutos Libres + Millas LATAM')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
+            </button>
+            <button onclick="verContrato('Plan 1000 GB $19.990')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 uppercase shadow-md">
+              <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. PLAN $24.990 LIBRE -->
+        <div class="bg-white rounded-3xl border-2 border-indigo-200 shadow-md p-6 space-y-4 plan-card flex flex-col justify-between" data-perfil="1000">
+          <div class="space-y-3">
+            <div class="bg-indigo-600 text-white p-3 rounded-2xl flex justify-between items-center shadow-sm">
+              <span class="font-extrabold text-sm uppercase tracking-wider">Línea Libre $24.990</span>
+              <span class="text-[11px] bg-emerald-400 text-slate-900 px-2.5 py-0.5 rounded-full font-black">50% DSCTO</span>
+            </div>
+            
+            <!-- PRECIO GENERAL ARRIBA + OFERTA ABAJO -->
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-3xl font-black text-slate-900">$ 24.990</span>
+                <span class="text-xs text-slate-500 font-bold">/ mes (Precio General)</span>
+              </div>
+              <div class="mt-1.5 bg-emerald-50 border border-emerald-300 px-3 py-1.5 rounded-xl flex items-center justify-between text-xs text-emerald-900 font-bold">
+                <span>🔥 Oferta Promo (Mes 1 al 6):</span>
+                <span class="text-sm font-black text-emerald-700">$ 12.495</span>
+              </div>
+              <p class="text-[11px] text-slate-500 font-semibold mt-1">Te Sumo (Línea Adicional): <strong class="text-slate-800">$ 11.990</strong></p>
+            </div>
+
+            <ul class="text-xs space-y-2 text-slate-700 font-medium border-t border-slate-100 pt-3">
+              <li class="flex items-center gap-2"><i data-lucide="wifi" class="w-4 h-4 text-indigo-600"></i> <strong>Internet:</strong> GB LIBRES</li>
+              <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-indigo-600"></i> <strong>Habla hasta:</strong> MINUTOS LIBRES</li>
+              <li class="flex items-center gap-2"><i data-lucide="satellite" class="w-4 h-4 text-indigo-600"></i> <strong>Starlink:</strong> SMS 200 + Whatsapp + 500MB</li>
+              <li class="flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-indigo-600"></i> <strong>Roaming:</strong> 7GB + 20min + 20SMS</li>
+              <li class="flex items-center gap-2"><i data-lucide="plane" class="w-4 h-4 text-indigo-600"></i> <strong>Millas LATAM:</strong> 3.000</li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 pt-4 border-t border-slate-100">
+            <button onclick="copyText('Plan Gigas Libres - Cargo general $24.990 / Oferta con 50% dscto a $12.495 x 6 meses - GB Libres + Roaming 7GB')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
+            </button>
+            <button onclick="verContrato('Plan Libre $24.990')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 uppercase shadow-md">
+              <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
+            </button>
+          </div>
+        </div>
+
+        <!-- 6. PLAN ROAMING 29.990 -->
+        <div class="bg-white rounded-3xl border-2 border-emerald-300 shadow-md p-6 space-y-4 plan-card flex flex-col justify-between" data-perfil="roaming">
+          <div class="space-y-3">
+            <div class="bg-emerald-600 text-white p-3 rounded-2xl flex justify-between items-center shadow-sm">
+              <span class="font-extrabold text-sm uppercase tracking-wider">Roaming 29.990</span>
+              <span class="text-[11px] bg-emerald-300 text-slate-900 px-2.5 py-0.5 rounded-full font-black">50% DSCTO</span>
+            </div>
+            
+            <!-- PRECIO GENERAL ARRIBA + OFERTA ABAJO -->
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-3xl font-black text-slate-900">$ 29.990</span>
+                <span class="text-xs text-slate-500 font-bold">/ mes (Precio General)</span>
+              </div>
+              <div class="mt-1.5 bg-emerald-50 border border-emerald-300 px-3 py-1.5 rounded-xl flex items-center justify-between text-xs text-emerald-900 font-bold">
+                <span>🔥 Oferta Promo (Mes 1 al 6):</span>
+                <span class="text-sm font-black text-emerald-700">$ 14.995</span>
+              </div>
+              <p class="text-[11px] text-slate-500 font-semibold mt-1">Te Sumo (Línea Adicional): <strong class="text-slate-800">$ 11.990</strong></p>
+            </div>
+
+            <ul class="text-xs space-y-2 text-slate-700 font-medium border-t border-slate-100 pt-3">
+              <li class="flex items-center gap-2"><i data-lucide="wifi" class="w-4 h-4 text-emerald-600"></i> <strong>Internet:</strong> GB LIBRES</li>
+              <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-emerald-600"></i> <strong>Habla hasta:</strong> MINUTOS LIBRES</li>
+              <li class="flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-emerald-600"></i> <strong>Roaming:</strong> 10GB + 20min + 20SMS</li>
+              <li class="flex items-center gap-2"><i data-lucide="satellite" class="w-4 h-4 text-emerald-600"></i> <strong>Starlink:</strong> SMS 200 + Whatsapp + 1GB</li>
+              <li class="flex items-center gap-2"><i data-lucide="plane" class="w-4 h-4 text-emerald-600"></i> <strong>Millas LATAM:</strong> 5.000</li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 pt-4 border-t border-slate-100">
+            <button onclick="copyText('Plan Roaming - Cargo general $29.990 / Oferta con 50% dscto a $14.995 x 6 meses - GB Libres + Roaming 10GB')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
+            </button>
+            <button onclick="verContrato('Plan Roaming $29.990')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 uppercase shadow-md">
+              <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
+            </button>
+          </div>
+        </div>
+
+        <!-- 7. PLAN ROAMING PRO MAX 39.990 -->
+        <div class="bg-white rounded-3xl border-2 border-slate-800 shadow-md p-6 space-y-4 plan-card flex flex-col justify-between" data-perfil="roaming">
+          <div class="space-y-3">
+            <div class="bg-slate-900 text-white p-3 rounded-2xl flex justify-between items-center shadow-sm">
+              <span class="font-extrabold text-sm uppercase tracking-wider">Roaming Pro 39.990</span>
+              <span class="text-[11px] bg-emerald-400 text-slate-900 px-2.5 py-0.5 rounded-full font-black">50% DSCTO</span>
+            </div>
+            
+            <!-- PRECIO GENERAL ARRIBA + OFERTA ABAJO -->
+            <div>
+              <div class="flex items-baseline gap-1">
+                <span class="text-3xl font-black text-slate-900">$ 39.990</span>
+                <span class="text-xs text-slate-500 font-bold">/ mes (Precio General)</span>
+              </div>
+              <div class="mt-1.5 bg-emerald-50 border border-emerald-300 px-3 py-1.5 rounded-xl flex items-center justify-between text-xs text-emerald-900 font-bold">
+                <span>🔥 Oferta Promo (Mes 1 al 6):</span>
+                <span class="text-sm font-black text-emerald-700">$ 19.995</span>
+              </div>
+              <p class="text-[11px] text-slate-500 font-semibold mt-1">Te Sumo (Línea Adicional): <strong class="text-slate-800">$ 11.990</strong></p>
+            </div>
+
+            <ul class="text-xs space-y-2 text-slate-700 font-medium border-t border-slate-100 pt-3">
+              <li class="flex items-center gap-2"><i data-lucide="wifi" class="w-4 h-4 text-slate-900"></i> <strong>Internet:</strong> GB LIBRES</li>
+              <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-slate-900"></i> <strong>Habla hasta:</strong> MINUTOS LIBRES</li>
+              <li class="flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-slate-900"></i> <strong>Roaming:</strong> 30GB + 40min + 40SMS</li>
+              <li class="flex items-center gap-2"><i data-lucide="satellite" class="w-4 h-4 text-slate-900"></i> <strong>Starlink:</strong> SMS 200 + Whatsapp + 3GB</li>
+              <li class="flex items-center gap-2"><i data-lucide="plane" class="w-4 h-4 text-slate-900"></i> <strong>Millas LATAM:</strong> 8.000</li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 pt-4 border-t border-slate-100">
+            <button onclick="copyText('Plan Roaming Pro Max - Cargo general $39.990 / Oferta con 50% dscto a $19.995 x 6 meses - GB Libres + Roaming 30GB')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copiar Oferta
+            </button>
+            <button onclick="verContrato('Plan Roaming Pro Max $39.990')" class="w-full bg-slate-900 hover:bg-black text-white font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 uppercase shadow-md">
+              <i data-lucide="file-text" class="w-4 h-4"></i> CONTRATO
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN: HERRAMIENTAS Y APLICACIONES -->
+    <section id="sec-herramientas" class="tab-content space-y-4">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center space-x-2.5 border-b border-slate-100 pb-3">
+          <div class="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
+            <i data-lucide="wrench" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">🛠️ Herramientas y Aplicaciones</h2>
+            <p class="text-xs text-slate-500">Enlaces de acceso directo a plataformas de gestión operativa</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+            <h3 class="font-bold text-slate-900 mb-1">Plataforma de Consulta SieWeb / Auditorías</h3>
+            <p class="text-slate-500">Acceso a verificación de clientes, historial de consultas y auditorías online.</p>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+            <h3 class="font-bold text-slate-900 mb-1">Base de Transferencias & Requisitos</h3>
+            <p class="text-slate-500">Matriz de documentos requeridos para trámites presenciales e interurbanos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: VALIDACIÓN Y ACREDITACIÓN DE DEUDAS -->
+    <section id="sec-deudas" class="tab-content space-y-4">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center space-x-2.5 border-b border-slate-100 pb-3">
+          <div class="p-2 bg-amber-50 text-amber-700 rounded-lg">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">🛡️ Validación y Acreditación de Deudas</h2>
+            <p class="text-xs text-slate-500">Protocolo para evaluar mora, castigos comerciales y regularizaciones</p>
+          </div>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-900 space-y-2">
+          <p class="font-bold">Pasos para acreditación de pago:</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Solicitar comprobante oficial de pago o transferencia bancaria.</li>
+            <li>Verificar número de RUT / Cédula y código de transacción.</li>
+            <li>Ingresar solicitud de desbloqueo o liberación de evaluación crediticia.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: DELIVERY Y TIENDAS -->
+    <section id="sec-delivery" class="tab-content space-y-4">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center space-x-2.5 border-b border-slate-100 pb-3">
+          <div class="p-2 bg-purple-50 text-purple-600 rounded-lg">
+            <i data-lucide="truck" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">⚖️ Delivery y Tiendas</h2>
+            <p class="text-xs text-slate-500">Información de despacho a domicilio y atención en puntos físicos</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+            <h3 class="font-bold text-slate-900 mb-1">Despacho Express / Delivery</h3>
+            <p class="text-slate-500">Entregas dentro de 24 a 48 horas según región y cobertura geográfica.</p>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+            <h3 class="font-bold text-slate-900 mb-1">Retiro en Tienda Presencial</h3>
+            <p class="text-slate-500">Verificación de disponibilidad de chip/equipo en sucursales autorizadas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: PLANES FIBRA HOGAR Y CONTRATOS -->
+    <section id="sec-fibra" class="tab-content space-y-4">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-base font-bold text-slate-900">🌐 Planes Fibra Hogar y Contratos</h2>
+        <p class="text-xs text-slate-500">Descuentos de campaña válidos por 12 meses y cláusulas de instalación</p>
+      </div>
+
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase">
+            <tr>
+              <th class="p-3">Plan / Producto</th>
+              <th class="p-3 text-center">Velocidad</th>
+              <th class="p-3 text-center">Equipos / TV</th>
+              <th class="p-3 text-center">Precio Lista</th>
+              <th class="p-3 text-center">Oferta Promo (Mes 1-12)</th>
+              <th class="p-3 text-center">Acción</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-bold text-slate-900">Internet Fibra 800 Megas</td>
+              <td class="p-3 text-center">800 Mbps Simétricos</td>
+              <td class="p-3 text-center">Wi-Fi Dual Band</td>
+              <td class="p-3 text-center text-slate-400 line-through">$21.990</td>
+              <td class="p-3 text-center font-bold text-emerald-700 text-sm">$14.990</td>
+              <td class="p-3 text-center">
+                <button onclick="copyText('Fibra 800 Megas por $14.990 promocional')" class="p-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 font-semibold text-[11px]">Copiar</button>
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-bold text-slate-900">Internet Fibra Giga (1000 Megas)</td>
+              <td class="p-3 text-center">1000 Mbps Simétricos</td>
+              <td class="p-3 text-center">Wi-Fi 6 Extender</td>
+              <td class="p-3 text-center text-slate-400 line-through">$26.990</td>
+              <td class="p-3 text-center font-bold text-emerald-700 text-sm">$18.990</td>
+              <td class="p-3 text-center">
+                <button onclick="copyText('Fibra Giga 1000 Megas por $18.990 promocional')" class="p-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 font-semibold text-[11px]">Copiar</button>
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3 font-bold text-slate-900">Pack TV Full + Fibra 800</td>
+              <td class="p-3 text-center">800 Mbps</td>
+              <td class="p-3 text-center">120 Canales + Decodificador IP</td>
+              <td class="p-3 text-center text-slate-400 line-through">$34.990</td>
+              <td class="p-3 text-center font-bold text-emerald-700 text-sm">$25.990</td>
+              <td class="p-3 text-center">
+                <button onclick="copyText('Pack TV Full + Fibra 800 por $25.990 promocional')" class="p-1.5 bg-slate-100 hover:bg-slate-200 rounded-lg text-slate-700 font-semibold text-[11px]">Copiar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: INFORMACIÓN DE PROCESOS -->
+    <section id="sec-procesos" class="tab-content space-y-4">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center space-x-2.5 border-b border-slate-100 pb-3">
+          <div class="p-2 bg-slate-100 text-slate-800 rounded-lg">
+            <i data-lucide="info" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">ℹ️ Información de Procesos</h2>
+            <p class="text-xs text-slate-500">Guías de tipificación, speech obligatorio y procedimientos postventa</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl text-xs text-slate-800 space-y-3">
+          <p class="font-bold">Script Obligatorio de Biometría Facial:</p>
+          <blockquote class="italic bg-white p-3 rounded-lg border border-slate-200 text-slate-700">
+            "(Nombre del cliente), para finalizar la venta necesitamos validar tu identidad a través de biometría facial. Esto es para resguardar tu seguridad y así verificar que quien contrata los servicios eres tú. Debes tener tu cédula de identidad a mano de manera física. Te enviaré un link a tu WhatsApp con los pasos a seguir."
+          </blockquote>
+          <button onclick="copyText(`(Nombre del cliente), para finalizar la venta necesitamos validar tu identidad a través de biometría facial. Esto es para resguardar tu seguridad y así verificar que quien contrata los servicios eres tú. Debes tener tu cédula de identidad a mano de manera física. Te enviaré un link a tu WhatsApp con los pasos a seguir.`)" class="bg-slate-900 text-white px-3 py-1.5 rounded-lg text-xs font-semibold">
+            Copiar Script
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE VISUALIZACIÓN RÁPIDA DE CONTRATO GENERAL -->
+  <div id="modalContrato" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+        <h3 id="modalContratoTitulo" class="font-black text-slate-900 text-base">Contrato de Servicio</h3>
+        <button onclick="cerrarModalContrato()" class="text-slate-400 hover:text-slate-600 font-bold text-lg">&times;</button>
+      </div>
+      <div class="text-xs text-slate-600 space-y-3 max-h-80 overflow-y-auto leading-relaxed">
+        <p class="font-bold text-slate-800">Cláusulas Principales del Contrato Comercial:</p>
+        <ul class="list-disc list-inside space-y-1">
+          <li><strong>Permanencia:</strong> Servicio sin plazo fijo de permanencia mínima obligatoria.</li>
+          <li><strong>Descuentos:</strong> Los porcentajes de descuento aplican desde la boleta 2 a la 6 según la política vigente de portabilidad/migración.</li>
+          <li><strong>Ciclos de Facturación:</strong> Asignación según corte automático (50, 51, 52, 53 o 54). La primera boleta incluye el proporcional de uso.</li>
+          <li><strong>Líneas Adicionales (Te Sumo):</strong> Sujetas a evaluación de morosidad y límite máximo de líneas por RUT.</li>
+        </ul>
+      </div>
+      <div class="pt-2 flex gap-2">
+        <button onclick="copyText(document.getElementById('modalContratoTitulo').innerText + ' - Cláusulas de Contrato Móvil Vigentes')" class="w-full bg-[#002EFF] text-white font-bold text-xs py-2.5 rounded-xl uppercase tracking-wider">
+          Copiar Cláusulas
+        </button>
+        <button onclick="cerrarModalContrato()" class="w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 rounded-xl">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ESPECÍFICO CON EL CONTRATO ÍNTEGRO DEL PLAN 13.990 -->
+  <div id="modalContrato13990" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-4xl w-full p-6 md:p-8 space-y-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex justify-between items-center border-b border-slate-200 pb-4 sticky top-0 bg-white z-10">
+        <div>
+          <span class="bg-red-600 text-white font-black text-[10px] px-2.5 py-1 rounded-md uppercase tracking-wider">Lectura Obligatoria</span>
+          <h3 class="font-black text-slate-900 text-lg md:text-xl mt-1">Contrato y Lectura Obligatoria - Plan Gigas $ 13.990</h3>
+        </div>
+        <button onclick="cerrarModalContrato13990()" class="text-slate-400 hover:text-slate-700 font-black text-2xl p-2">&times;</button>
+      </div>
+
+      <div class="space-y-6 text-xs text-slate-800 leading-relaxed font-normal">
+        
+        <!-- Bloque 1: Validación Biométrica -->
+        <div class="border border-red-500 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-red-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            VALIDACIÓN BIOMÉTRICA ((OBLIGATORIO - SE DEBE INDICAR EN PRE VENTA)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>(Nombre del cliente), para finalizar la venta necesitamos validar tu identidad a través de biometría facial. Esto es para resguardar tu seguridad y así verificar que quien contrata los servicios eres tú. Debes tener tu cédula de identidad a mano de manera física. Te enviaré un link a tu WhatsApp con los pasos a seguir. De todas maneras, te agradecería poner en altavoz tu teléfono. Yo estaré en línea para guiarte en caso de que necesites. ¿Me indicas tu número para enviarte el link?</p>
+          </div>
+        </div>
+
+        <!-- Bloque 2: Ofrecimiento de Equipo -->
+        <div class="border border-red-500 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-red-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            OFRECIMIENTO DE EQUIPO (OBLIGATORIO - LEER EN CASO NO SE HAYA OFRECIDO EN LA PREVENTA) (NO APLICA DE PREPAGO A SUSCRIPCIÓN)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Adicionalmente al plan contratado tenemos disponible equipos en promoción para que puedas adquirirlo pagando mediante tu tarjeta de crédito de casas comerciales VISA O MASTERCARD hasta 12 meses sin interés, con los bancos SCOTIABANK, BCI, ITAÚ Y BANCO BICE 24 meses sin interés y SANTANDER más BANCODE CHILE hasta 18 meses sin interés, ¿Estaría interesado?</p>
+          </div>
+        </div>
+
+        <!-- Bloque 3: Ofrecimiento Hogar -->
+        <div class="border border-red-500 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-red-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            OFRECIMIENTO HOGAR (OBLIGATORIO - LEER EN CASO NO SE HAYA OFRECIDO EN LA PREVENTA)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Antes de continuar, tenemos una excelente noticia para nuestros clientes móviles, ofreciéndote una promoción con descuento por 12 meses en todos nuestros servicios fibra hogar, que incluyen internet y televisión ¿Quieres que verifique la factibilidad de tu dirección y obtener este beneficio? Esperar respuesta de cliente.</p>
+          </div>
+        </div>
+
+        <!-- Bloque 4: ESIM -->
+        <div class="border border-red-500 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-red-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            ESIM (VALIDACIÓN OBLIGATORIA)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Debes confirmar explícitamente que el equipo del cliente es compatible con tecnología eSIM. Esta validación debe realizarse antes de contratar el servicio.</p>
+            <p>Si el equipo no se encuentra en el listado oficial y no tiene el EID (*#06#), no es posible asignarle una eSIM. Debe cumplir con ambas condiciones. En caso contrario, se debe enviar un chip físico.</p>
+          </div>
+        </div>
+
+        <!-- Bloque 5: Lectura Obligatoria - Plan Gigas 13.990 -->
+        <div class="border border-amber-600 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-amber-700 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            LECTURA OBLIGATORIA - Plan Gigas 13.990
+          </div>
+          <div class="p-3 bg-amber-500 text-white font-bold text-center text-xs">
+            VELOCIDAD DE RED
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>La velocidad promedio depende de la zona en la que te encuentre, con cobertura 3.5G, 4G y 5G compatibles para cada red, considerando condiciones y limitaciones geográficas que puedan afectar la señal de la red. En www.entel.cl/4G/ puedes revisar detalles de la cobertura por dirección y en www.entel.cl/5G/ puedes encontrar información de cobertura y equipos compatibles con la nueva tecnología 5G.</p>
+          </div>
+          <div class="p-3 bg-amber-500 text-white font-bold text-center text-xs">
+            VALIDACIÓN DE DATOS
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Esta conversación está siendo grabada por su seguridad y respaldo, por lo mismo, necesito que pueda indicarme los siguientes datos:</p>
+            <ul class="list-disc list-inside space-y-1 font-semibold text-slate-900 pt-1">
+              <li>Indícame tu nombre completo</li>
+              <li>Otórgame tu RUT</li>
+              <li>Facilitame tu número de Cedula de Identidad</li>
+              <li>Facilitame tu fecha de nacimiento</li>
+              <li>Facilitame la dirección de despacho (Cliente debe indicar nombre de Calle, Avenida o Pasaje, Comuna y Región) Referencias</li>
+              <li>Mencióname tu correo electrónico? (omitir si cliente indicó en la preventa que no tiene dirección email).</li>
+              <li>Me podría indicar su dirección postal? (Cliente debe indicar nombre de Calle, Avenida o Pasaje, Comuna y Región)</li>
+              <li>Necesito pedirte un segundo número de contacto, sólo con el objetivo de lograr la comunicación por parte del Delivery en el caso que tu ubicación no sea encontrada y no podamos contactarnos contigo</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloque 6: Condiciones Comerciales -->
+        <div class="border border-amber-600 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-amber-700 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            CONDICIONES COMERCIALES
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>En estos En estos momentos estás contratando un plan como línea nueva, considerando: (SEGUIR LAS CONDICIONES COMERCIALES)</p>
+            <ul class="list-disc list-inside space-y-1.5 pt-2">
+              <li>Un plan de voz y datos cuyo cargo fijo mensual es de $ 13.990</li>
+              <li>Este plan incluye un saldo flexible de $13.990, este lo puedes ocupar para lo que quieras, hablando hasta 1000 minutos utilizando todo tu saldo en llamadas o navegando adicional utilizando todo tu saldo en comprar bolsa de datos. El saldo no es aplicable al uso de servicios desde o hacia fuera de Chile ni a los demás servicios sujetos a tarifas especiales</li>
+              <li>Este plan incluye una cuota controlada de datos de 200 GB para todo lo demás.</li>
+              <li>Las aplicaciones de WhatsApp, Facebook, Facebook Messenger, Twitter, Spotify, Apple Music, Instagram incluyen el envío y recepción de mensajes de texto, audios, fotos, videos, contactos y archivos, así como también la actualización de estado. Las llamadas de voz y video llamadas sobre IP (VoIP), así como La descarga de las aplicaciones antes mencionadas no están incluidas en el uso de WhatsApp ni de Facebook. Geolocalización (mapas) y acceso a enlaces externos en cualquiera de las aplicaciones mencionadas descuentan de la cuota de datos mensual del plan.</li>
+              <li>Las aplicaciones mencionadas consideran sus usos y funcionalidades actuales. Sin embargo, su cantidad, disponibilidad, características bajo las cuales el cliente accede a ellas, calidad y contenidos, depende de terceros proveedores. En tales casos Entel podrá cambiar las condiciones de uso de las aplicaciones del plan.</li>
+              <li>Para utilizar estas aplicaciones se requiere sistema operativo Android, IOS o Windows.</li>
+              <li>Una vez consumida la cuota de datos del plan, el cliente podrá seguir utilizando Internet Móvil comprando bolsas de datos desde $500 hasta que finalice el mes calendario. Deberá contar con saldo suficiente en el plan para comprar las bolsas de datos.</li>
+              <li>Estos planes incluyen 400 mensajes de texto originados y terminados dentro de Chile, los mensajes adicionales tienen un valor de $50 cada uno. Los SMS incluidos no aplican para concursos, juegos u otros servicios especiales.</li>
+              <li>Este plan incluye 200 SMS satelitales</li>
+              <li>El Saldo mínimo necesario para enviar SMS es de $7 pesos</li>
+              <li>El valor de la Simcard es de $0.</li>
+              <li>Las recargas que usted realice tienen una vigencia de 30 días corridos</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloque 7: Bono Juntos y Aceptación -->
+        <div class="border border-amber-600 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-amber-700 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            LECTURA OBLIGATORIA SOLO SI APLICA EL BENEFICIO DEL BONO JUNTOS
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <ul class="list-disc list-inside space-y-1">
+              <li>El bono se entrega de forma automática al finalizar contratación de 2da línea o superior</li>
+              <li>La renovación del bono será en cada reinicio del ciclo del plan del cliente (esto son los 4 ciclos existentes: 1/mes, 8/mes, 16/mes y 23/mes).</li>
+              <li>El cliente debe contar al menos 2 líneas en planes de $13.990, $12.990, $11.990, $10.990 y $9.990 en su cuenta para obtener el beneficio mensual</li>
+              <li>Serán máximo 4 Bonos de 20 GB por RUT</li>
+              <li>El Cliente perderá bono para todas sus líneas de forma automática si realiza una transacción donde deje de cumplir las condiciones comerciales (por out, renuncia, migración APP, cambio de plan a plan fuera del ecosistema Juntos).</li>
+            </ul>
+          </div>
+          <div class="p-3 bg-amber-600 text-white font-extrabold text-center text-xs">
+            PREGUNTA DE ACEPTACIÓN (SOLO PLAN)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p class="font-bold">Por favor, necesito que me contestes con un claro SI ó NO</p>
+            <p class="font-bold text-slate-900">Bien sr. Xxx ¿Tienes clara la información que le acabo de otorgar sobre el plan y acepta sus condiciones comerciales?</p>
+          </div>
+        </div>
+
+        <!-- Bloque 8: Facturación y Ciclos -->
+        <div class="border border-amber-600 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-amber-700 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            FACTURACIÓN
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-3">
+            <p><strong>En caso ya tenga un medio asignado. Indícarle el mismo (Correo o SMS)</strong></p>
+            <p><strong>Envío de boleta:</strong> Mencionarle que la factura se le enviará por mensaje de texto al número móvil xxxxxxxx (solo si el cliente solicita cambiar el medio de facturación a correo electrónico, se realizará el cambio), también podrá revisarla y pagarla en el sitio Mi Entel en www.entel.cl y en la App Entel, la que podrá descargar desde la play store en su teléfono android, o desde la App Store si es Iphone. Para más información de sitios de pago, puede visitar nuestro sitio www.entel.cl</p>
+            <p><strong>Proporcional:</strong> El monto que usted recibirá será por el proporcional del cargo fijo por $xxx aproximado. Indicar el ciclo de facturación de manera correcta.</p>
+            <p class="font-bold text-slate-900 pt-1">Respecto al ciclo de facturación de su boleta, su plan:</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Ciclo 50 (Cliente Antiguo): Inicia el 01 de cada mes y finaliza los 30 o 31 de cada mes. La emisión de su boleta será el 01 de cada mes y la fecha de vencimiento es del 21 y 25 del mismo mes de la emisión.</li>
+              <li>Ciclo 51 (Cliente Antiguo): Inicia el 01 de cada mes y finaliza los 30 o 31 de cada mes. La emisión de su boleta será el 15 de cada mes y la fecha de vencimiento es 05, 08, 13 y 15 del siguiente mes de la emisión.</li>
+              <li>Ciclo 52: Inicia los 8 y finaliza los 07 de cada mes. La emisión de su boleta será el 08 de cada mes y la fecha de vencimiento son los días 28 del mismo mes de emisión.</li>
+              <li>Ciclo 53: Inicia los 16 y finaliza los 15 de cada mes. La emisión de su boleta será el 16 de cada mes y la fecha de vencimiento son los días 06 del mes siguiente a la emisión.</li>
+              <li>Ciclo 54: Inicia los 23 y finaliza los 22 de cada mes. La emisión de su boleta será el 23 de cada mes y la fecha de vencimiento son los días 13 del mes siguiente a la emisión.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloque 9: Gestión de E-SIM y Delivery -->
+        <div class="border border-purple-500 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-purple-700 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            GESTION E-SIM (LEER SOLO EN CASO DE E-SIM)
+          </div>
+          <div class="p-4 bg-purple-50 font-medium space-y-2">
+            <p>(Nombre del cliente), tu(s) línea(s) XXXXXXX , se estarán activando a través de Esim, el correo que me aparece en sistema es XXXXX (mencionar correo ingresado en sistemas), me confirmas si esta OK?. (Esperar respuesta del cliente)</p>
+            <p>(Nombre del cliente), Te estará llegando a tu correo confirmado un código QR para realizar la activación, recuerda que debe ser escaneado desde el dispositivo donde se activará la eSIM. En caso no reciba su código QR, debe revisar la carpeta "Spam" o "Correo no deseado". El remitente es atencionclientes@entel.cl.</p>
+          </div>
+          <div class="bg-amber-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            EXPRESS, EXPRESS PROGRAMADO, DELIVERY REGULAR (GESTIÓN DE DELIVERY)
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>EL delivery te entregara la simcard en la dirección que me indicaste, Al momento de la visita, DEBES:</p>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Mostrar tu cédula de identidad (ÚNICAMENTE TITULAR), con el fin de validar la autenticidad del receptor con la foto que aparece en el documento y con el comprobante de Entrega (POD).</li>
+              <li>Se pedirá una foto de tu cédula de identidad ocultando el número de serie, en caso de negación, se deberá tomar foto de quien recibe (ÚNICAMENTE TITULAR) con el producto en su poder. (Nota Ejecutivo: Importante reforzar al cliente que debe tapar el número de serie en la foto).</li>
+              <li>Debes indicar tu RUT y firmar el "Comprobante de Entrega Delivery" POD.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloque 10: Tratamiento de datos y Cierre -->
+        <div class="border border-slate-700 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-slate-800 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            TRATAMIENTO DE DATOS
+          </div>
+          <div class="p-4 bg-slate-50 font-medium space-y-2">
+            <p>Antes de finalizar, te comento que en Entel estamos comprometidos con la protección de los datos personales de nuestros clientes, es por eso quiero comentarte que usaremos tus datos para mejorar tu experiencia, entregarte el servicio que estás contratando, y para otras finalidades que se detallan en la Política de Privacidad Clientes que puedes revisar en nuestro sitio web www.entel.cl/legales". Además, podrás revisar o descargar una copia de tu contrato desde la sección Mi Perfil/documentos.</p>
+            <p class="font-bold text-slate-900 pt-1">Por favor, necesito que me contestes con un claro SI ó NO</p>
+            <p class="font-bold text-slate-900">¿Autorizas a Entel a usar y tratar tus datos para el envío de comunicaciones comerciales personalizadas y compartirlos con terceros con los que Entel tenga acuerdos?</p>
+            <p class="text-red-600 italic font-bold">Nota asesor/a: Si el cliente no está de acuerdo con la autorización, NO debes registrar consentimiento</p>
+          </div>
+          <div class="bg-orange-600 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            EN CASO DE CONTRATAR MULTILÍNEA - OBLIGATORIO
+          </div>
+          <div class="p-4 bg-orange-50/60 font-medium space-y-2">
+            <p>Para activar y asociar la simcard a cada número móvil, con cada simcard instalada en el equipo deberás llamar 103, señalar opción móvil, luego indicar quiero conocer número móvil, y recibirás en línea a información del número asociado.</p>
+          </div>
+          <div class="bg-slate-800 text-white font-extrabold p-2.5 text-center uppercase tracking-wider text-[11px]">
+            DESPEDIDA Y ENCUESTA
+          </div>
+          <div class="p-4 bg-slate-50 font-medium space-y-2">
+            <p>XXXXX (Nombre del cliente) te doy la bienvenida a Entel y te invito a ingresar a la App para que puedas ver los servicios contratados, disfrutar sus beneficios y pagar de forma fácil. Si tienes alguna consulta lo puedes resolver con nuestro chat Claudia, la encontraras al abrir la App en cualquier momento."</p>
+            <p>En caso de reclamo con respecto al servicio contratado te puedes comunicar desde tu teléfono al 105 o desde red fija y otras compañías 600 3700 105".</p>
+            <p class="pt-1"><strong>ENCUESTA:</strong> Además, te informo que es probable que te contacten dentro de las 48 horas posterior a la activación para responder una breve encuesta sobre la atención del día de hoy, la escala de votación es del 1 al 5. Siendo 5 la nota más alta".</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-4 border-t border-slate-200 flex flex-col md:flex-row gap-3">
+        <button onclick="copyText('Contrato íntegro Plan Gigas 13.990 - Entel')" class="w-full bg-[#002EFF] text-white font-extrabold text-xs py-3 rounded-2xl uppercase tracking-wider shadow-md hover:bg-blue-700 transition-all">
+          Copiar Referencia del Contrato
+        </button>
+        <button onclick="cerrarModalContrato13990()" class="w-full md:w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-3 rounded-2xl">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+      initSelectDias();
+      injectRRSSIcons();
+      calcularProporcional();
+    });
+
+    function injectRRSSIcons() {
+      const template = document.getElementById('rrss-template');
+      if (!template) return;
+      document.querySelectorAll('.rrss-slot').forEach(slot => {
+        slot.innerHTML = '';
+        slot.appendChild(template.content.cloneNode(true));
+      });
+    }
+
+    function initSelectDias() {
+      const selectDia = document.getElementById('calcDiaAct');
+      if (!selectDia) return;
+      selectDia.innerHTML = '';
+      for (let i = 1; i <= 31; i++) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.innerText = `Día ${i}`;
+        if (i === 22) opt.selected = true;
+        selectDia.appendChild(opt);
+      }
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      
+      const topNav = document.getElementById('top-nav');
+      if (tabId === 'home') {
+        topNav.classList.add('hidden');
+      } else {
+        topNav.classList.remove('hidden');
+      }
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-[#002EFF]', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-300');
+      });
+
+      const targetSec = document.getElementById(`sec-${tabId}`);
+      if(targetSec) {
+        targetSec.classList.add('active');
+      }
+      
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      if(activeBtn) {
+        activeBtn.classList.add('bg-[#002EFF]', 'text-white', 'shadow-sm');
+        activeBtn.classList.remove('text-slate-300');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function filterPlanes() {
+      const perfil = document.getElementById('filterPerfil').value;
+      const cards = document.querySelectorAll('.plan-card');
+
+      cards.forEach(card => {
+        const cardPerfil = card.getAttribute('data-perfil');
+        if (perfil === 'todos' || cardPerfil === perfil) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
         }
+      });
+    }
 
-        // FULL LEGAL SCRIPT FOR 13.990 PLAN
-        const script13990 = `
-[INICIO SPEECH OBLIGATORIO CONTRATO PLAN GIGAS $13.990]
+    function verContrato(nombrePlan) {
+      document.getElementById('modalContratoTitulo').innerText = `Contrato: ${nombrePlan}`;
+      document.getElementById('modalContrato').classList.remove('hidden');
+    }
 
-1. VALIDACIÓN BIOMÉTRICA Y VERIFICACIÓN DE IDENTIDAD:
-Estimado/a cliente, para proceder con la contratación del Plan Gigas $13.990, realizaremos la validación de su identidad conforme a la normativa vigente. 
+    function cerrarModalContrato() {
+      document.getElementById('modalContrato').classList.add('hidden');
+    }
 
-2. CONDICIONES DEL PLAN Y OFERTA COMERCIAL:
-Usted está contratando el Plan Gigas $13.990 que incluye:
-- Cuota base de navegación: 200 GB libres en alta velocidad.
-- Bono Juntos: 200 GB adicionales por un periodo de 12 meses, completando 400 GB mensuales.
-- Redes sociales incluidas sin descuento de sus gigas: WhatsApp, Facebook, Instagram, Messenger, Spotify, Apple Music y Twitter.
-- Minutos libres e ilimitados a todo destino nacional.
-- Valor del plan mensual sin promoción: $13.990.
-- Descuento de Portabilidad del 30% aplicado por 6 meses: Precio promocional de $9.793 mensuales.
+    // Funciones específicas para el contrato del Plan 13.990
+    function verContratoPlan13990() {
+      document.getElementById('modalContrato13990').classList.remove('hidden');
+    }
 
-3. COBRO PROPORCIONAL Y CICLOS DE FACTURACIÓN:
-Le recordamos que su primera boleta incluirá el cobro proporcional desde el día de activación hasta el cierre del ciclo asignado, más el valor adelantado del mes entrante.
+    function cerrarModalContrato13990() {
+      document.getElementById('modalContrato13990').classList.add('hidden');
+    }
 
-4. OFRECIMIENTO DE EQUIPOS Y HOGAR:
-¿Desea agregar un equipo en cuotas o revisar la factibilidad para el servicio de Fibra Hogar Entel en su domicilio? (Registrar respuesta del cliente).
+    function calcularProporcional() {
+      const planBase = parseFloat(document.getElementById('calcPlan').value) || 16990;
+      const cantLineas = parseInt(document.getElementById('calcLineas').value) || 0;
+      const pctDscto = parseFloat(document.getElementById('calcDscto').value) || 0;
+      const ciclo = parseInt(document.getElementById('calcCiclo').value) || 53;
+      const diaAct = parseInt(document.getElementById('calcDiaAct').value) || 22;
+      const soloAdicional = document.getElementById('calcSoloAdicional').value === 'si';
 
-5. GESTIÓN DE eSIM O CHIP FÍSICO:
-En caso de eSIM, la activación requerirá conexión a internet y lectura de código QR enviado a su correo electrónico. En caso de SIM física, la entrega se realizará vía Delivery Express o Retiro en Tienda según lo coordinado.
+      let precioLineaAdic = 10990;
+      if (planBase >= 19990) {
+        precioLineaAdic = 11990;
+      }
 
-6. AVISO DE EMERGENCIA SUBTEL (SISTEMA SAE):
-El dispositivo debe estar homologado y ser compatible con la tecnología Multibanda SAE para recibir alertas de emergencia nacional.
+      let cargoPrin = planBase;
+      let cargoAdic = cantLineas * precioLineaAdic;
 
-7. TRATAMIENTO DE DATOS PERSONALES:
-Entel tratará sus datos personales para la prestación y facturación del servicio, resguardando la privacidad de acuerdo a la Ley de Protección de la Vida Privada.
+      if (soloAdicional) {
+        cargoPrin = 0;
+        cargoAdic = Math.max(1, cantLineas) * precioLineaAdic;
+      }
 
-8. PREGUNTA DE ACEPTACIÓN FORMAL:
-¿Acepta la contratación del Plan Gigas $13.990 bajo las condiciones expresadas en esta llamada?
+      const cargoTotal = cargoPrin + cargoAdic;
 
-[FIN DEL SPEECH LEGAL OBLIGATORIO]
-`;
+      const dsctoPrin = Math.round(cargoPrin * pctDscto);
+      const dsctoAdic = Math.round(cargoAdic * pctDscto);
+      const dsctoTotal = dsctoPrin + dsctoAdic;
 
-        // MODAL CONTRACT OPENER
-        function openContractModal(planId, customTitle, customPrice, customGigas) {
-            const modal = document.getElementById('modal-contract');
-            const titleEl = document.getElementById('modal-title');
-            const bodyEl = document.getElementById('modal-body-text');
+      const pagoPrin = cargoPrin - dsctoPrin;
+      const pagoAdic = cargoAdic - dsctoAdic;
+      const pagoTotal = pagoPrin + pagoAdic;
 
-            if(planId === '13990') {
-                titleEl.textContent = 'Contrato Legal Completo - Plan Gigas $13.990';
-                bodyEl.innerText = script13990;
-            } else {
-                titleEl.textContent = `Contrato Legal Completo - ${customTitle}`;
-                bodyEl.innerText = `
-[LECTURA DE CONTRATO OBLIGATORIA - ${customTitle}]
+      document.getElementById('rowCargoPrin').innerText = `$ ${cargoPrin.toLocaleString('es-CL')}`;
+      document.getElementById('rowCargoAdic').innerText = `$ ${cargoAdic.toLocaleString('es-CL')}`;
+      document.getElementById('rowCargoTotal').innerText = `$ ${cargoTotal.toLocaleString('es-CL')}`;
 
-Estimado cliente, se confirma la contratación del ${customTitle} con un valor mensual de ${customPrice} y una cuota de navegación de ${customGigas}.
+      document.getElementById('rowDsctoPrin').innerText = `$ ${dsctoPrin.toLocaleString('es-CL')}`;
+      document.getElementById('rowDsctoAdic').innerText = `$ ${dsctoAdic.toLocaleString('es-CL')}`;
+      document.getElementById('rowDsctoTotal').innerText = `$ ${dsctoTotal.toLocaleString('es-CL')}`;
 
-Condiciones Comerciales:
-- Incluye minutos libres nacionales.
-- Roaming según condiciones de la categoría contratada.
-- Primera factura con prorrateo por días de servicio prestado.
-- Requisito de factibilidad crediticia y validación biométrica.
+      document.getElementById('rowPagoPrin').innerText = `$ ${pagoPrin.toLocaleString('es-CL')}`;
+      document.getElementById('rowPagoAdic').innerText = `$ ${pagoAdic.toLocaleString('es-CL')}`;
+      document.getElementById('rowPagoTotal').innerText = `$ ${pagoTotal.toLocaleString('es-CL')}`;
 
-¿Acepta las condiciones señaladas para proceder con la activación?
-`;
-            }
+      let diasConsumidos = 24;
+      if (ciclo === 50 || ciclo === 51) {
+        diasConsumidos = Math.max(1, 30 - diaAct + 1);
+      } else if (ciclo === 52) {
+        diasConsumidos = (diaAct >= 8) ? (30 - diaAct + 8) : (8 - diaAct);
+      } else if (ciclo === 53) {
+        diasConsumidos = (diaAct >= 16) ? (30 - diaAct + 16) : (16 - diaAct);
+      } else if (ciclo === 54) {
+        diasConsumidos = (diaAct >= 23) ? (30 - diaAct + 23) : (23 - diaAct);
+      }
 
-            modal.classList.remove('hidden');
-        }
+      const valorProporcional = Math.round((pagoTotal / 30) * diasConsumidos);
 
-        function closeContractModal() {
-            document.getElementById('modal-contract').classList.add('hidden');
-        }
+      document.getElementById('resDiasActivos').innerText = `${diasConsumidos} días (Ciclo ${ciclo})`;
+      document.getElementById('resVal1era').innerText = `$ ${valorProporcional.toLocaleString('es-CL')}`;
+      document.getElementById('resVal2da6ta').innerText = `$ ${pagoTotal.toLocaleString('es-CL')}`;
+      document.getElementById('resVal7ma').innerText = `$ ${cargoTotal.toLocaleString('es-CL')}`;
 
-        function copyContractModalText() {
-            const text = document.getElementById('modal-body-text').innerText;
-            navigator.clipboard.writeText(text);
-            alert('Texto del contrato copiado al portapapeles correctamente.');
-        }
+      const totalLineasDesc = soloAdicional ? cantLineas : (cantLineas + 1);
+      const txtSpeech = `Estimado cliente, usted por sus ${totalLineasDesc} líneas pagará un total de $ ${cargoTotal.toLocaleString('es-CL')}, donde el primer mes pagará $ ${valorProporcional.toLocaleString('es-CL')} pesos (monto proporcional), desde el segundo mes hasta el 6to mes pagará $ ${pagoTotal.toLocaleString('es-CL')} pesos, y a partir de la 7ma boleta en adelante pagará $ ${cargoTotal.toLocaleString('es-CL')} pesos.`;
+      
+      document.getElementById('speechBoxText').innerText = `"${txtSpeech}"`;
+    }
 
-        function copyOffer(offerText) {
-            navigator.clipboard.writeText(offerText);
-            alert(`Oferta copiada: "${offerText}"`);
-        }
+    function copiarCalculo() {
+      const speechText = document.getElementById('speechBoxText').innerText.replace(/^"|"$/g, '');
+      copyText(speechText);
+    }
 
-        // PROPORTIONAL CALCULATOR LOGIC
-        function calculateProportional() {
-            const planPrice = parseInt(document.getElementById('calc-plan').value);
-            const teSumoPrice = parseInt(document.getElementById('calc-tesumo').value);
-            const dias = parseInt(document.getElementById('calc-dias').value) || 15;
-
-            const totalPlanBase = planPrice + teSumoPrice;
-            const diario = totalPlanBase / 30;
-            const proporcional = Math.round(diario * dias);
-            const primeraFactura = proporcional + totalPlanBase;
-
-            document.getElementById('res-proporcional').textContent = `$ ${proporcional.toLocaleString('es-CL')}`;
-            document.getElementById('res-primera-factura').textContent = `$ ${primeraFactura.toLocaleString('es-CL')}`;
-
-            document.getElementById('speech-text').textContent = 
-                `"Estimado cliente, su ciclo cobrara ${dias} días de uso por un monto proporcional de $${proporcional.toLocaleString('es-CL')}, por lo que su primer documento tendrá un total estimado de $${primeraFactura.toLocaleString('es-CL')} (Proporcional + mes siguiente)."`;
-        }
-
-        function copySpeech() {
-            const text = document.getElementById('speech-text').textContent;
-            navigator.clipboard.writeText(text);
-            alert('Speech copiado al portapapeles.');
-        }
-
-        // Calculate initial values on load
-        calculateProportional();
-    </script>
+    function copyText(val) {
+      navigator.clipboard.writeText(val);
+      alert("Texto copiado al portapapeles con éxito.");
+    }
+  </script>
 </body>
 </html>
