@@ -9,7 +9,6 @@
   <style>
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    /* Ocultar barra de desplazamiento horizontal */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
@@ -36,7 +35,7 @@
         </div>
       </div>
       
-      <!-- NAV SUPERIOR (Se oculta en el Inicio y aparece solo al entrar a una opción) -->
+      <!-- NAV SUPERIOR (Aparece solo al navegar) -->
       <nav id="top-nav" class="hidden flex space-x-1 bg-slate-900/90 p-1.5 rounded-xl text-xs w-full md:w-auto overflow-x-auto no-scrollbar border border-slate-800">
         <button onclick="switchTab('home')" id="tab-home" class="tab-btn px-2.5 py-1.5 rounded-lg font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-1 whitespace-nowrap">
           <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
@@ -77,10 +76,9 @@
   <!-- CONTENIDO PRINCIPAL -->
   <main class="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
 
-    <!-- PORTAL DE INICIO (MÓDULO CENTRAL PRINCIPAL) -->
+    <!-- PORTAL DE INICIO (HOME CENTRAL) -->
     <section id="sec-home" class="tab-content active space-y-6">
       
-      <!-- BREADCRUMB / HERO DE BIENVENIDA -->
       <div class="bg-gradient-to-r from-[#002EFF] to-blue-900 rounded-3xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row justify-between items-center gap-6">
         <div class="space-y-3 max-w-2xl text-center md:text-left">
           <span class="bg-white/20 text-white font-bold text-xs px-3 py-1 rounded-full border border-white/20">Portal Comercial de Ejecutivos</span>
@@ -105,7 +103,7 @@
               <i data-lucide="calculator" class="w-8 h-8"></i>
             </div>
             <h3 class="font-black text-slate-900 text-xl group-hover:text-[#002EFF] transition-colors">🧮 Calculadora Proporcional</h3>
-            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Calcula de forma exacta el monto proporcional del primer ciclo de facturación y genera la explicación para el cliente.</p>
+            <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">Simulador exacto de planes, líneas adicionales, descuentos, ciclo de facturación y proporcional.</p>
           </div>
           <div class="mt-6 flex items-center text-xs font-extrabold text-[#002EFF] tracking-wide uppercase">
             <span>Acceder a Calculadora</span>
@@ -212,63 +210,143 @@
       </div>
     </section>
 
-    <!-- SECCIÓN: CALCULADORA PROPORCIONAL -->
-    <section id="sec-calculadora" class="tab-content space-y-4">
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-2xl mx-auto space-y-4">
-        <div class="flex items-center space-x-2.5 border-b border-slate-100 pb-3">
-          <div class="p-2 bg-blue-50 text-[#002EFF] rounded-lg">
-            <i data-lucide="calculator" class="w-5 h-5"></i>
+    <!-- SECCIÓN: CALCULADORA PROPORCIONAL (LÓGICA FIEL AL EXCEL) -->
+    <section id="sec-calculadora" class="tab-content space-y-6">
+      <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 shadow-lg max-w-4xl mx-auto space-y-6">
+        
+        <div class="flex items-center space-x-3 border-b border-slate-100 pb-4">
+          <div class="p-3 bg-blue-50 text-[#002EFF] rounded-2xl shadow-sm">
+            <i data-lucide="calculator" class="w-6 h-6"></i>
           </div>
           <div>
-            <h2 class="text-base font-bold text-slate-900">🧮 Calculadora de Cobro Proporcional</h2>
-            <p class="text-xs text-slate-500">Estimación rápida para el primer cobro del cliente en su primera boleta</p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">Cargo Fijo Mensual ($)</label>
-            <input type="number" id="calcBase" value="13990" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
-          </div>
-          <div>
-            <label class="block font-semibold text-slate-700 mb-1">Día de Activación del Servicio</label>
-            <input type="number" id="calcDia" value="12" min="1" max="31" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-center text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+            <h2 class="text-lg font-bold text-slate-900">🧮 Calculadora de Cobro Proporcional</h2>
+            <p class="text-xs text-slate-500">Estimación de planes, descuentos y proporcional según el ciclo de facturación</p>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <!-- FORMULARIO DE ENTRADA -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs font-semibold">
+          
+          <!-- 1. Selecciona el Plan -->
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Días del Mes de Facturación</label>
-            <select id="calcDiasMes" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
-              <option value="30">30 Días</option>
-              <option value="31">31 Días</option>
-              <option value="28">28 Días</option>
+            <label class="block text-slate-700 mb-1.5">Selecciona el Plan ($)</label>
+            <select id="calcPlan" onchange="calcularProporcional()" class="w-full p-3 bg-yellow-300/80 border-2 border-yellow-400 rounded-xl font-extrabold text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+              <option value="12990">$ 12,990</option>
+              <option value="13990">$ 13,990</option>
+              <option value="15990">$ 15,990</option>
+              <option value="16990" selected>$ 16,990</option>
+              <option value="17990">$ 17,990</option>
+              <option value="19990">$ 19,990</option>
+              <option value="20990">$ 20,990</option>
+              <option value="21990">$ 21,990</option>
+              <option value="22990">$ 22,990</option>
+              <option value="23990">$ 23,990</option>
+              <option value="29990">$ 29,990</option>
+              <option value="39990">$ 39,990</option>
             </select>
           </div>
-          <div class="flex items-end">
-            <button onclick="calcularProporcional()" class="w-full bg-[#002EFF] hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition-all shadow-sm">
-              Calcular Proporcional
-            </button>
+
+          <!-- 2. Cantidad de Líneas Adicionales -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Cantidad de líneas adicionales</label>
+            <select id="calcLineas" onchange="calcularProporcional()" class="w-full p-3 bg-yellow-300/80 border-2 border-yellow-400 rounded-xl font-extrabold text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+              <option value="0">0 Líneas Adicionales</option>
+              <option value="1" selected>1 Línea Adicional</option>
+              <option value="2">2 Líneas Adicionales</option>
+              <option value="3">3 Líneas Adicionales</option>
+              <option value="4">4 Líneas Adicionales</option>
+            </select>
           </div>
+
+          <!-- 3. Porcentaje de Descuento -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Porcentaje de Descuento (%)</label>
+            <select id="calcDscto" onchange="calcularProporcional()" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+              <option value="0">Sin Descuento (0%)</option>
+              <option value="0.15" selected>15% Descuento</option>
+              <option value="0.20">20% Descuento</option>
+              <option value="0.30">30% Descuento</option>
+              <option value="0.38">38% Descuento</option>
+              <option value="0.50">50% Descuento</option>
+              <option value="0.75">75% Descuento</option>
+            </select>
+          </div>
+
+          <!-- 4. Ciclo de Facturación -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Ciclo de Facturación</label>
+            <select id="calcCiclo" onchange="calcularProporcional()" class="w-full p-3 bg-yellow-300/80 border-2 border-yellow-400 rounded-xl font-extrabold text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+              <option value="50">Ciclo 50 (Periodo 01 al 30/31)</option>
+              <option value="51">Ciclo 51 (Periodo 01 al 30/31)</option>
+              <option value="52">Ciclo 52 (Periodo 08 al 07)</option>
+              <option value="53" selected>Ciclo 53 (Periodo 16 al 15)</option>
+              <option value="54">Ciclo 54 (Periodo 23 al 22)</option>
+            </select>
+          </div>
+
+          <!-- 5. Fecha / Día de Activación -->
+          <div>
+            <label class="block text-slate-700 mb-1.5">Fecha / Día de Activación</label>
+            <select id="calcDiaAct" onchange="calcularProporcional()" class="w-full p-3 bg-yellow-300/80 border-2 border-yellow-400 rounded-xl font-extrabold text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#002EFF]">
+              <!-- Opciones del 1 al 31 generadas en JS -->
+            </select>
+          </div>
+
         </div>
 
-        <div id="calcResult" class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-xs mt-4">
-          <div class="flex justify-between items-center border-b border-slate-200 pb-2">
-            <span class="text-slate-500">Días Proporcionales:</span>
-            <span id="resDias" class="font-bold text-slate-900">19 días</span>
+        <!-- TABLA DESGLOSE ESTILO EXCEL -->
+        <div class="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm bg-white">
+          <table class="w-full text-center text-xs">
+            <thead>
+              <tr class="bg-sky-500 text-white font-bold uppercase tracking-wider">
+                <th class="p-3 border-r border-sky-400/50">Concepto</th>
+                <th class="p-3 border-r border-sky-400/50">Línea Principal</th>
+                <th class="p-3 border-r border-sky-400/50">Línea(s) Adicional(es)</th>
+                <th class="p-3">Total</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 font-bold text-slate-800">
+              <tr class="bg-blue-50/50">
+                <td class="p-3 bg-sky-500 text-white font-bold text-left border-r border-sky-400/50">Cargo Fijo</td>
+                <td id="rowCargoPrin" class="p-3 border-r border-slate-200">$ 16,990</td>
+                <td id="rowCargoAdic" class="p-3 border-r border-slate-200">$ 10,990</td>
+                <td id="rowCargoTotal" class="p-3 font-extrabold text-slate-900">$ 27,980</td>
+              </tr>
+              <tr>
+                <td class="p-3 bg-sky-500 text-white font-bold text-left border-r border-sky-400/50">Descuento</td>
+                <td id="rowDsctoPrin" class="p-3 border-r border-slate-200 text-emerald-600">$ 2,549</td>
+                <td id="rowDsctoAdic" class="p-3 border-r border-slate-200 text-emerald-600">$ 1,649</td>
+                <td id="rowDsctoTotal" class="p-3 font-extrabold text-emerald-600">$ 4,197</td>
+              </tr>
+              <tr class="bg-emerald-700 text-white font-bold text-sm">
+                <td class="p-3 bg-emerald-800 text-white font-bold text-left border-r border-emerald-600">Pago por Mes</td>
+                <td id="rowPagoPrin" class="p-3 border-r border-emerald-600">$ 14,441</td>
+                <td id="rowPagoAdic" class="p-3 border-r border-emerald-600">$ 9,341</td>
+                <td id="rowPagoTotal" class="p-3 font-extrabold text-white">$ 23,783</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- RESUMEN FINAL DEL PROPORCIONAL Y BOLETA -->
+        <div id="calcResult" class="bg-slate-900 text-white p-5 rounded-2xl space-y-3 text-xs">
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <span class="text-slate-400">Días con Servicio Activo:</span>
+            <span id="resDiasActivos" class="font-bold text-yellow-400 text-sm">24 días</span>
           </div>
-          <div class="flex justify-between items-center border-b border-slate-200 pb-2">
-            <span class="text-slate-500">Valor Proporcional:</span>
-            <span id="resProp" class="font-bold text-slate-900">$8.860</span>
+          <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+            <span class="text-slate-400">Valor Proporcional Estimado:</span>
+            <span id="resValorProp" class="font-bold text-yellow-400 text-sm">$ 19,026</span>
           </div>
           <div class="flex justify-between items-center text-sm pt-1">
-            <span class="font-bold text-slate-900">Total Estimado 1ª Boleta:</span>
-            <span id="resTotal" class="font-extrabold text-[#002EFF] text-base">$22.850</span>
+            <span class="font-bold text-white">Monto Estimado 1ª Boleta:</span>
+            <span id="resTotalPrimeraBoleta" class="font-black text-emerald-400 text-lg">$ 23,783</span>
           </div>
-          <button onclick="copiarCalculo()" class="w-full mt-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2 rounded-lg transition-all flex items-center justify-center gap-1.5">
-            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Explicación para Cliente
+          <button onclick="copiarCalculo()" class="w-full mt-2 bg-[#002EFF] hover:bg-blue-600 text-white font-bold py-2.5 rounded-xl transition-all flex items-center justify-center gap-2">
+            <i data-lucide="copy" class="w-4 h-4"></i> Copiar Explicación para Cliente
           </button>
         </div>
+
       </div>
     </section>
 
@@ -507,32 +585,40 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       lucide.createIcons();
+      initSelectDias();
       calcularProporcional();
     });
 
+    function initSelectDias() {
+      const selectDia = document.getElementById('calcDiaAct');
+      selectDia.innerHTML = '';
+      for (let i = 1; i <= 31; i++) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.innerText = `Día ${i}`;
+        if (i === 22) opt.selected = true;
+        selectDia.appendChild(opt);
+      }
+    }
+
     function switchTab(tabId) {
-      // Ocultar todas las secciones
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       
-      // Control de la barra de navegación superior
       const topNav = document.getElementById('top-nav');
       if (tabId === 'home') {
-        topNav.classList.add('hidden'); // Ocultar totalmente la barra en el inicio
+        topNav.classList.add('hidden');
       } else {
-        topNav.classList.remove('hidden'); // Mostrar barra superior al abrir cualquier modulo
+        topNav.classList.remove('hidden');
       }
 
-      // Desmarcar botones superiores
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('bg-[#002EFF]', 'text-white', 'shadow-sm');
         btn.classList.add('text-slate-300');
       });
 
-      // Activar la sección actual
       const targetSec = document.getElementById(`sec-${tabId}`);
       if(targetSec) targetSec.classList.add('active');
       
-      // Marcar botón activo en la barra superior
       const activeBtn = document.getElementById(`tab-${tabId}`);
       if(activeBtn) {
         activeBtn.classList.add('bg-[#002EFF]', 'text-white', 'shadow-sm');
@@ -557,26 +643,66 @@
     }
 
     function calcularProporcional() {
-      const base = parseFloat(document.getElementById('calcBase').value) || 0;
-      const dia = parseInt(document.getElementById('calcDia').value) || 1;
-      const diasMes = parseInt(document.getElementById('calcDiasMes').value) || 30;
+      const planBase = parseFloat(document.getElementById('calcPlan').value) || 16990;
+      const cantLineas = parseInt(document.getElementById('calcLineas').value) || 0;
+      const pctDscto = parseFloat(document.getElementById('calcDscto').value) || 0;
+      const ciclo = parseInt(document.getElementById('calcCiclo').value) || 53;
+      const diaAct = parseInt(document.getElementById('calcDiaAct').value) || 22;
 
-      const diasRestantes = Math.max(0, diasMes - dia + 1);
-      const valorDia = base / diasMes;
-      const proporcional = Math.round(valorDia * diasRestantes);
-      const totalPrimeraBoleta = proporcional + base;
+      const PRECIO_LINEA_ADIC = 10990;
 
-      document.getElementById('resDias').innerText = `${diasRestantes} días`;
-      document.getElementById('resProp').innerText = `$${proporcional.toLocaleString('es-CL')}`;
-      document.getElementById('resTotal').innerText = `$${totalPrimeraBoleta.toLocaleString('es-CL')}`;
+      // Desglose de cargos
+      const cargoPrin = planBase;
+      const cargoAdic = cantLineas * PRECIO_LINEA_ADIC;
+      const cargoTotal = cargoPrin + cargoAdic;
 
-      document.getElementById('calcResult').classList.remove('hidden');
+      const dsctoPrin = Math.round(cargoPrin * pctDscto);
+      const dsctoAdic = Math.round(cargoAdic * pctDscto);
+      const dsctoTotal = dsctoPrin + dsctoAdic;
+
+      const pagoPrin = cargoPrin - dsctoPrin;
+      const pagoAdic = cargoAdic - dsctoAdic;
+      const pagoTotal = pagoPrin + pagoAdic;
+
+      // Actualizar Tabla
+      document.getElementById('rowCargoPrin').innerText = `$ ${cargoPrin.toLocaleString('es-CL')}`;
+      document.getElementById('rowCargoAdic').innerText = `$ ${cargoAdic.toLocaleString('es-CL')}`;
+      document.getElementById('rowCargoTotal').innerText = `$ ${cargoTotal.toLocaleString('es-CL')}`;
+
+      document.getElementById('rowDsctoPrin').innerText = `$ ${dsctoPrin.toLocaleString('es-CL')}`;
+      document.getElementById('rowDsctoAdic').innerText = `$ ${dsctoAdic.toLocaleString('es-CL')}`;
+      document.getElementById('rowDsctoTotal').innerText = `$ ${dsctoTotal.toLocaleString('es-CL')}`;
+
+      document.getElementById('rowPagoPrin').innerText = `$ ${pagoPrin.toLocaleString('es-CL')}`;
+      document.getElementById('rowPagoAdic').innerText = `$ ${pagoAdic.toLocaleString('es-CL')}`;
+      document.getElementById('rowPagoTotal').innerText = `$ ${pagoTotal.toLocaleString('es-CL')}`;
+
+      // Cálculo de días según Ciclo
+      let diasConsumidos = 24; // Valor por defecto estimado
+      if (ciclo === 50 || ciclo === 51) {
+        diasConsumidos = Math.max(1, 30 - diaAct + 1);
+      } else if (ciclo === 52) {
+        diasConsumidos = (diaAct >= 8) ? (30 - diaAct + 8) : (8 - diaAct);
+      } else if (ciclo === 53) {
+        diasConsumidos = (diaAct >= 16) ? (30 - diaAct + 16) : (16 - diaAct);
+      } else if (ciclo === 54) {
+        diasConsumidos = (diaAct >= 23) ? (30 - diaAct + 23) : (23 - diaAct);
+      }
+
+      const valorProporcional = Math.round((pagoTotal / 30) * diasConsumidos);
+
+      document.getElementById('resDiasActivos').innerText = `${diasConsumidos} días (Ciclo ${ciclo})`;
+      document.getElementById('resValorProp').innerText = `$ ${valorProporcional.toLocaleString('es-CL')}`;
+      document.getElementById('resTotalPrimeraBoleta').innerText = `$ ${valorProporcional.toLocaleString('es-CL')}`;
     }
 
     function copiarCalculo() {
-      const prop = document.getElementById('resProp').innerText;
-      const total = document.getElementById('resTotal').innerText;
-      const txt = `Estimado cliente, su primer cobro incluirá el proporcional de días utilizados (${prop}) más su primer mes de cargo fijo, sumando un total estimado de ${total} en su primera boleta.`;
+      const plan = document.getElementById('calcPlan').options[document.getElementById('calcPlan').selectedIndex].text;
+      const lineas = document.getElementById('calcLineas').value;
+      const prop = document.getElementById('resValorProp').innerText;
+      const ciclo = document.getElementById('calcCiclo').value;
+      
+      const txt = `Estimado cliente, la contratación del plan ${plan} (${lineas} líneas adicionales) asignado al Ciclo ${ciclo} tendrá un cobro estimado proporcional de ${prop} en su primera boleta.`;
       copyText(txt);
     }
 
